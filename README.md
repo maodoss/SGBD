@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -64,3 +65,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# SGBD
+Ce projet porte sur la digitalisation du processus de parrainage des candidatures pour les élections présidentielles au Sénégal. L'objectif est de simplifier et de sécuriser le processus de parrainage en permettant aux citoyens de soutenir leurs candidats en ligne, tout en offrant aux administrateurs un outil complet pour gérer les électeurs, les candidats et les parrainages.
+Ce projet est réalisé par :
+Mame Diariatoula DIENG
+Pape Yatma MBODJ
+Mohamet FALL
+Hyacinthe Soucka SENE
+Maodo Malick Jemil SYLLA
+>>>>>>> 0796ab53015e6e7eb669728631c7d886002a2223
