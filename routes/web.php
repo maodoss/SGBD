@@ -21,6 +21,8 @@ Route::get('/login', [PostController::class, 'login'])->name('login');
 Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
 
 
+Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('dash_candidat');
+
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [PostController::class, 'Upload'])->name('Upload');
 Route::get('traitement_upload', [PostController::class, 'traitement_upload'])->name('traitement_upload');

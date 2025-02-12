@@ -25,4 +25,9 @@ class PostController extends Controller
     {
         return view('Upload');
     }
+
+    public function dash_candidat()
+    {
+        return view('Dash_candidat');
+    }
 }
