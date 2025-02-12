@@ -271,6 +271,16 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+            .service-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.service-link:hover .service-card {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
         }
     </style>
 </head>
@@ -320,11 +330,13 @@
         <div class="container">
             <h3>Services disponibles</h3>
             <div class="services-grid">
+            <a href="{{ route('inscription') }}" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-user"></i>
                     <h4>Créer votre profil</h4>
                     <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                 </div>
+            </a>    
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>
