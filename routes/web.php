@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 //Declaration de la route acceuil
 Route::get('Acceuil', [PostController::class, 'Acceuil'])->name('Acceuil');
+
+Route::get('Upload', [PostController::class, 'Upload'])->name('Upload');
