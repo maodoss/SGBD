@@ -286,17 +286,17 @@
                     </div>
                 </div>
                 <nav class="nav-links">
-                    <a href="/">Accueil</a>
+                    <a href="#Acceuil">Accueil</a>
                     <a href="/candidats">Candidats</a>
                     <a href="/parrainage">Parrainer</a>
-                    <a href="/contact">Contact</a>
+                    <a href="#contact">Contact</a>
                     <a href="/login" class="login-btn">Se connecter</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero" id="Acceuil">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -338,7 +338,7 @@
             </div>
         </div>
     </section>
-
+    <section id="contact">
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -368,5 +368,6 @@
             </div>
         </div>
     </footer>
+</section>
 </body>
 </html>

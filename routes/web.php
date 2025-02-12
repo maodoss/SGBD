@@ -13,11 +13,9 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 //Declaration de la route acceuil
-Route::get('Acceuil', [PostController::class, 'Acceuil'])->name('Acceuil');
+Route::get('/', [PostController::class, 'Acceuil'])->name('Acceuil');
 
 
 //Route pour l'upload de fichier electorale et son traitement 
