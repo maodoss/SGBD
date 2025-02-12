@@ -12,6 +12,14 @@ class PostController extends Controller
         return view('Acceuil');
     }
 
+    public function login()
+    {
+        return view('Login');
+    }
+    public function inscription()
+    {
+        return view('Inscription');
+    }
 
     public function Upload()
     {

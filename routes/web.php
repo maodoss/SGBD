@@ -16,6 +16,9 @@ use App\Http\Controllers\PostController;
 
 //Declaration de la route acceuil
 Route::get('/', [PostController::class, 'Acceuil'])->name('Acceuil');
+//Route qui gere l'inscription et la connexion des electeurs 
+Route::get('/login', [PostController::class, 'login'])->name('login');
+Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
 
 
 //Route pour l'upload de fichier electorale et son traitement 
