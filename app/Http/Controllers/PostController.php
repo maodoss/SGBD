@@ -30,4 +30,8 @@ class PostController extends Controller
     {
         return view('Dash_candidat');
     }
+    public function periode_parrainage()
+    {
+        return view('periode_parrainage');
+    }
 }

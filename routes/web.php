@@ -22,6 +22,7 @@ Route::get('/inscription', [PostController::class, 'inscription'])->name('inscri
 
 
 Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('dash_candidat');
+Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
 
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [PostController::class, 'Upload'])->name('Upload');
