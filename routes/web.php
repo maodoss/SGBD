@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//Declaration de la route acceuil
+Route::get('Acceuil', [PostController::class, 'Acceuil'])->name('Acceuil');
