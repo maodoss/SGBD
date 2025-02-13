@@ -214,7 +214,7 @@
                 </p>
             </a>
 
-            <a href="#" class="dashboard-card">
+            <a href="/periode_parrainage" class="dashboard-card">
                 <h3 class="card-title">Période de Parrainage</h3>
                 <p class="card-description">
                     Définissez les dates de début et de fin de la période de parrainage.
