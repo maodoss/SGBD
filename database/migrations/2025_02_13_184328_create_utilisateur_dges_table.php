@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('ip_address')->nullable();
             $table->timestamps();
+
         });
     }
 

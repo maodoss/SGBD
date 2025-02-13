@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('electeurs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('fichier_electoral_id')->constrained('fichier_electoraux'); // Fichier source
+            $table->string('cin')->unique(); // CIN de l'électeur
+            $table->integer('num_electeur')->unique(); // Numéro d'électeur
+            $table->string('nom');
+            $table->string('prenom');
+            $table->date('date_naissance');
+            $table->string('lieu_naissance');
+            $table->enum('sexe', ['Masculin', 'Feminin']);
+            $table->string('bureau_vote');
+            $table->string('code_auth')->nullable(); // Code d'authentification
             $table->timestamps();
+
         });
     }
 

@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('parrainages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('electeur_id')->constrained('electeurs'); 
+            $table->foreignId('candidat_id')->constrained('candidats'); 
+            $table->dateTime('date_parrainage'); 
             $table->timestamps();
+
         });
     }
 
