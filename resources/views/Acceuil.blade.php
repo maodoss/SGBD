@@ -255,7 +255,6 @@
             gap: 1rem;
         }
 
-        /* Supprimer le soulignement des liens dans .service-link */
         .service-link {
             text-decoration: none;
             color: inherit;
@@ -338,16 +337,20 @@
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>
+                <a href="{{ route('login') }}" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>
                     <p>Consultez les dates importantes du processus de parrainage</p>
                 </div>
+                </a>
+                <a href="{{ route('login') }}" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-sign-in-alt"></i>
                     <h4>Espace personnel</h4>
                     <p>Accédez à votre espace personnel pour gérer vos parrainages</p>
                 </div>
+                </a>
             </div>
         </div>
     </section>

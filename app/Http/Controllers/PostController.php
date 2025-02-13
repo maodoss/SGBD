@@ -34,4 +34,9 @@ class PostController extends Controller
     {
         return view('periode_parrainage');
     }
+
+    public function dashdge()
+    {
+        return view('Dashdge');
+    }
 }
