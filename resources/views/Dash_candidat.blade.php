@@ -152,13 +152,13 @@
 <body>
     <header class="header">
         <div class="container">
-            <a href="/" class="logo-section">
+            <div class="logo-section">
                 <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
                 <div class="logo-text">
                     <h1>République du Sénégal</h1>
                     <p>Système de Parrainage Électoral</p>
                 </div>
-            </a>
+    </div>
 
             <!-- Menu de profil avec icône -->
             <div class="profile-menu">
