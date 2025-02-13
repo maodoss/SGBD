@@ -31,3 +31,4 @@ Route::get('traitement_upload', [PostController::class, 'traitement_upload'])->n
 
 //Dash DGE
 Route::get('/dashdge', [PostController::class, 'dashdge'])->name('dashdge');
+Route::get('/AdminLogin', [PostController::class, 'AdminLogin'])->name('AdminLogin');

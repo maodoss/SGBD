@@ -39,4 +39,8 @@ class PostController extends Controller
     {
         return view('Dashdge');
     }
+    public function AdminLogin()
+    {
+        return view('AdminLogin');
+    }
 }
