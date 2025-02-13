@@ -255,6 +255,17 @@
             gap: 1rem;
         }
 
+        /* Supprimer le soulignement des liens dans .service-link */
+        .service-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .service-link:hover .service-card {
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -271,16 +282,6 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
-            .service-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.service-link:hover .service-card {
-    transform: scale(1.05);
-    transition: 0.3s;
-}
-
         }
     </style>
 </head>
@@ -289,7 +290,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
+                    <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
                     <div class="logo-text">
                         <h1>République du Sénégal</h1>
                         <p>Système de Parrainage Électoral</p>
@@ -297,10 +298,10 @@
                 </div>
                 <nav class="nav-links">
                     <a href="#Acceuil">Accueil</a>
-                    <a href="/candidats">Candidats</a>
-                    <a href="/parrainage">Parrainer</a>
+                    <a href="#service">Services disponibles</a>
                     <a href="#contact">Contact</a>
                     <a href="/login" class="login-btn">Se connecter</a>
+                    <a href="/inscription" class="login-btn">S'inscrire</a>
                 </nav>
             </div>
         </div>
@@ -313,7 +314,7 @@
                     <h2>Plateforme de Parrainage Électoral</h2>
                     <p>Participez au processus démocratique en parrainant votre candidat pour l'élection présidentielle</p>
                     <div class="button-group">
-                        <a href="/parrainage" class="btn btn-primary">
+                        <a href="/login" class="btn btn-primary">
                             Parrainer un candidat
                             <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
                         </a>
@@ -326,17 +327,17 @@
         </div>
     </section>
 
-    <section class="services">
+    <section id="service" class="services">
         <div class="container">
             <h3>Services disponibles</h3>
             <div class="services-grid">
-            <a href="{{ route('inscription') }}" class="service-link">
-                <div class="service-card">
-                    <i class="fas fa-user"></i>
-                    <h4>Créer votre profil</h4>
-                    <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
-                </div>
-            </a>    
+                <a href="{{ route('inscription') }}" class="service-link">
+                    <div class="service-card">
+                        <i class="fas fa-user"></i>
+                        <h4>Créer votre profil</h4>
+                        <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
+                    </div>
+                </a>
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>
@@ -350,36 +351,37 @@
             </div>
         </div>
     </section>
+
     <section id="contact">
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h5>Contact</h5>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <span>+221 33 889 41 50</span>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-section">
+                        <h5>Contact</h5>
+                        <div class="contact-info">
+                            <i class="fas fa-phone"></i>
+                            <span>+221 33 889 41 50</span>
+                        </div>
+                        <p>Direction Générale des Élections</p>
                     </div>
-                    <p>Direction Générale des Élections</p>
-                </div>
-                <div class="footer-section">
-                    <h5>Liens utiles</h5>
-                    <ul>
-                        <li><a href="/faq">FAQ</a></li>
-                        <li><a href="/mentions-legales">Mentions légales</a></li>
-                        <li><a href="/aide">Aide</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h5>Suivez-nous</h5>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/direction.generale.des.elections.Senegal" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="https://twitter.com/DgeSenegal" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                    <div class="footer-section">
+                        <h5>Liens utiles</h5>
+                        <ul>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/mentions-legales">Mentions légales</a></li>
+                            <li><a href="/aide">Aide</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h5>Suivez-nous</h5>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/direction.generale.des.elections.Senegal" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+                            <a href="https://twitter.com/DgeSenegal" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-</section>
+        </footer>
+    </section>
 </body>
 </html>

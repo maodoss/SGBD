@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription Électeur</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-green: #006B3F;
+            --hover-green: #005432;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,10 +20,77 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
-            padding: 20px;
+            padding-top: 80px; /* Ajouté pour éviter que le contenu soit caché sous l'en-tête */
+        }
+
+        /* Styles de l'en-tête */
+        .header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            color: #1A202C;
+            text-decoration: none;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: #4A5568;
+            text-decoration: none;
+        }
+        
+        .logo-section {
+            text-decoration: none;
+        }
+        
+        .logo-section:hover {
+            text-decoration: none;
+        }
+
+
+        .login-btn {
+            background-color: var(--primary-green);
+            color: #ffffff !important;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .login-btn:hover {
+            background-color: var(--hover-green);
+            color: #ffffff;
+        }
+
+        /* Styles du formulaire */
+        .form-container {
             max-width: 500px;
             margin: 0 auto;
             background: white;
@@ -47,7 +120,7 @@
         }
 
         .progress-step.active {
-            background-color:rgb(59, 179, 109);
+            background-color: rgb(59, 179, 109);
         }
 
         .progress-bar::before {
@@ -89,7 +162,7 @@
 
         input:focus {
             outline: none;
-            border-color:rgb(44, 134, 107);
+            border-color: rgb(44, 134, 107);
             box-shadow: 0 0 0 2px rgba(41, 161, 131, 0.2);
         }
 
@@ -109,7 +182,7 @@
         }
 
         button.next {
-            background-color:rgb(61, 151, 109);
+            background-color: rgb(61, 151, 109);
             color: white;
         }
 
@@ -139,8 +212,23 @@
     </style>
 </head>
 <body>
-    <!-- Premier formulaire -->
-    <div class="container form-step active" id="step1">
+    <!-- En-tête -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo-section">
+                    <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
+                    <div class="logo-text">
+                        <h1>République du Sénégal</h1>
+                        <p>Système de Parrainage Électoral</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Formulaire d'inscription -->
+    <div class="form-container form-step active" id="step1">
         <div class="progress-bar">
             <div class="progress-step active">1</div>
             <div class="progress-step">2</div>
@@ -165,7 +253,7 @@
                 <input type="text" id="voting_office" name="voting_office" required>
             </div>
             <div class="button-group">
-            <div class="register-link">
+                <div class="register-link">
                     Vous avez un compte ?<a href="{{ route('login') }}">Se connecter</a>
                 </div>
                 <div></div>
@@ -175,7 +263,7 @@
     </div>
 
     <!-- Deuxième formulaire -->
-    <div class="container form-step" id="step2">
+    <div class="form-container form-step" id="step2">
         <div class="progress-bar">
             <div class="progress-step active">1</div>
             <div class="progress-step active">2</div>
@@ -199,7 +287,7 @@
     </div>
 
     <!-- Troisième formulaire -->
-    <div class="container form-step" id="step3">
+    <div class="form-container form-step" id="step3">
         <div class="progress-bar">
             <div class="progress-step active">1</div>
             <div class="progress-step active">2</div>
