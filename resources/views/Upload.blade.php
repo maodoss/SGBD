@@ -13,14 +13,40 @@
     }
 
     /* En-tête avec logo (optionnel) */
-    header {
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    }
+    .header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-text h1 {
+            font-size: 1.25rem;
+            color: #1A202C;
+            margin-bottom: 0;
+        }
+
+        .logo-text p {
+            font-size: 0.875rem;
+            color: #4A5568;
+            margin-top: 0;
+        }
 
     .logo-section {
             display: flex;
@@ -41,10 +67,10 @@
     /* Conteneur principal */
     .container {
       max-width: 500px;
-      margin: 40px auto;
+      margin: 120px auto 40px; /* Marge supérieure augmentée */
       background: #fff;
       padding: 20px 30px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
     }
 
@@ -80,7 +106,7 @@
     /* Bouton d’import */
     .btn-submit {
       display: inline-block;
-      background: #017e12;
+      background:rgb(62, 150, 74);
       color: #fff;
       font-weight: bold;
       padding: 12px 20px;
@@ -93,7 +119,7 @@
     }
 
     .btn-submit:hover {
-      background: #337ab7;
+      background:rgb(10, 31, 15);
     }
 
     /* Message d’aide */
@@ -106,7 +132,7 @@
     /* Responsif */
     @media (max-width: 600px) {
       .container {
-        margin: 20px;
+        margin: 100px 20px 20px; /* Réduire la marge supérieure sur les petits écrans */
         padding: 15px;
       }
     }
@@ -115,15 +141,17 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo-section">
-        <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
-            <div class="logo-text">
-                <h1>République du Sénégal</h1>
-                <p>Système de Parrainage Électoral</p>
-            </div>
+<header class="header">
+        <div class="header-container">
+            <a href="/dashdge" class="logo-section">
+                <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
+                <div class="logo-text">
+                    <h1>République du Sénégal</h1>
+                    <p>Système de Parrainage Électoral</p>
+                </div>
+            </a>
         </div>
-  </header>
+    </header>
 
   <div class="container">
     <h1>Importer Fichier CSV</h1>

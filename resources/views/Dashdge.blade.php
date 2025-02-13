@@ -200,7 +200,7 @@
         </div>
 
         <div class="dashboard-grid">
-            <a href="#" class="dashboard-card">
+            <a href="Upload" class="dashboard-card">
                 <h3 class="card-title">Import Liste Électorale</h3>
                 <p class="card-description">
                     Importez et validez le fichier CSV contenant la liste des électeurs avec vérification CHECKSUM.
