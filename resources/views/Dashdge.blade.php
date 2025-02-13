@@ -108,7 +108,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: rgb(30, 71, 32);
+            background-color: rgb(51, 133, 55);
             color: white;
             border: none;
             cursor: pointer;
@@ -132,7 +132,7 @@
         }
 
         .logout-btn:hover {
-            background-color: rgb(31, 107, 57);
+            background-color: rgb(3, 26, 11);
         }
 
         .welcome-section {
@@ -186,7 +186,7 @@
                 </div>
                 <div class="header-right">
                     <button class="logout-btn">
-                        <i class="fas fa-power-off"></i>
+                        <i class="fas fa-user"></i>
                     </button>
                 </div>
             </div>
