@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('fichier_electorals', function (Blueprint $table) {
             $table->id();
             $table->string('nom_fichier');
-            $table->string('path'); // Chemin du fichier
+            $table->string('path');
             $table->string('checksum');
             $table->timestamp('date_upload')->useCurrent();
             $table->boolean('est_valide')->default(false);
-            //$table->foreignId('user_dge_id')->constrained('utilisateur_dges');
+            $table->foreignId('user_dge_id')->constrained('utilisateur_dges');
             $table->string('ip_address')->nullable();
             $table->timestamps();
         });
