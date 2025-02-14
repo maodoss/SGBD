@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fichier_electorauxes', function (Blueprint $table) {
+        Schema::create('fichier_electorals', function (Blueprint $table) {
             $table->id();
             $table->string('nom_fichier');
             $table->string('checksum');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fichier_electorauxes');
+        Schema::dropIfExists('fichier_electorals');
     }
 };
