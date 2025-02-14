@@ -156,10 +156,11 @@
   <div class="container">
     <h1>Importer Fichier CSV</h1>
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="traitement_upload" method="POST" enctype="multipart/form-data">
+      @csrf
       <div class="form-group">
         <label for="csv-file">Fichier CSV :</label>
-        <input type="file" id="csv-file" name="csv-file" accept=".csv" required>
+        <input type="file" id="csv-file" name="temp_file" accept=".csv" required>
         <div class="help-text">
           Veuillez sélectionner le fichier CSV des électeurs.
         </div>
