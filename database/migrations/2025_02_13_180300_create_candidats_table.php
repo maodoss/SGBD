@@ -13,20 +13,24 @@ return new class extends Migration
     {
         Schema::create('candidats', function (Blueprint $table) {
             $table->id();
-            $table->string('num_carte_electeur')->unique(); 
-            $table->string('nom');
-            $table->string('prenom');
-            $table->date('date_naissance');
+            
+            $table->foreignId('electeur_id')
+                ->constrained('electeurs')
+                ->unique();
+    
             $table->string('email')->unique();
             $table->string('telephone')->unique();
+            $table->string('code_auth')->unique()->comment('Code de sécurité envoyé par email/SMS');
+    
             $table->string('nom_parti')->nullable();
             $table->string('slogan')->nullable();
-            $table->string('photo')->nullable(); 
-            $table->string('couleur_parti')->nullable(); 
-            $table->string('uri_page')->nullable(); 
+            $table->string('photo')->nullable();
+            $table->string('couleur_parti')->nullable();
+            $table->string('uri_page')->nullable();
+    
             $table->timestamps();
-
         });
+        
     }
 
     /**
