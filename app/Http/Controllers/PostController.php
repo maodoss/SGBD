@@ -57,6 +57,10 @@ class PostController extends Controller
     {
         return view('details_candidat');
     }    
+    public function Parrainage()
+    {
+        return view('Parrainage');
+    } 
 
     //traitement upload 
 

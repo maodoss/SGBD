@@ -37,3 +37,6 @@ Route::get('/AdminLogin', [PostController::class, 'AdminLogin'])->name('AdminLog
 Route::get('Candidature', [PostController::class, 'Candidature'])->name('Candidature');
 Route::get('Liste_candidat', [PostController::class, 'Liste_candidat'])->name('Liste_candidat');
 Route::get('details_candidat', [PostController::class, 'details_candidat'])->name('details_candidat');
+
+//Parainage d'un candidat
+Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
