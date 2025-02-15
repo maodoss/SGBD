@@ -41,7 +41,7 @@
             align-items: center;
             height: 80px;
         }
-
+            /* logo */
         .logo-section {
             display: flex;
             align-items: center;

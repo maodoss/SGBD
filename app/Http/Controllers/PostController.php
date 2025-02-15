@@ -43,4 +43,16 @@ class PostController extends Controller
     {
         return view('AdminLogin');
     }
+    public function Candidature()
+    {
+        return view('Candidature');
+    }
+    public function Liste_candidat()
+    {
+        return view('Liste_candidat');
+    }
+    public function details_candidat()
+    {
+        return view('details_candidat');
+    }
 }

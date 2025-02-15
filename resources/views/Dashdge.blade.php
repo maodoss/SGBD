@@ -207,8 +207,8 @@
                 </p>
             </a>
 
-            <a href="#" class="dashboard-card">
-                <h3 class="card-title">Gestion des Candidats</h3>
+            <a href="Candidature" class="dashboard-card">
+                <h3 class="card-title">Enregistrez des Candidats</h3>
                 <p class="card-description">
                     Enregistrez et gérez les informations des candidats demandant un parrainage.
                 </p>
