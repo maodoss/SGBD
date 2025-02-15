@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class periode_parrainages extends Model
+class PeriodeParrainage extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['date_debut', 'date_fin'];
 }
