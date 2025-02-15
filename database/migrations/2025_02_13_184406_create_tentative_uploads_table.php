@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('tentative_uploads', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_fichier');
             $table->foreignId('user_dge_id')->constrained('utilisateur_dges');
+            $table->string('path');
             $table->string('checksum_utilise');
-            $table->string('ip_address');
+            $table->string('ip_address')->nullable();
             $table->boolean('is_valid')->default(false);
             $table->timestamp('date')->useCurrent();
             $table->timestamps();

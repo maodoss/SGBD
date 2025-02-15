@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\fichier_electoral;
+use App\Models\tentative_uploads;
 
 class PostController extends Controller
 {
@@ -43,16 +45,35 @@ class PostController extends Controller
     {
         return view('AdminLogin');
     }
-    public function Candidature()
+
+
+
+    //traitement upload 
+
+    public function traitement_upload(Request $request)
     {
-        return view('Candidature');
-    }
-    public function Liste_candidat()
-    {
-        return view('Liste_candidat');
-    }
-    public function details_candidat()
-    {
-        return view('details_candidat');
+        $request->validate([
+            'temp_file' => 'required|file|max:2048',
+            'checksum' => 'required'
+        ]);
+        $checksum_dge = $request->checksum;
+        $path = $request->file('temp_file')->store('public/files');
+        $fileName = $request->file('temp_file')->getClientOriginalName();
+
+        $checksum = hash_file('sha256', storage_path('app/' . $path));
+        $file = tentative_uploads::create([
+            'nom_fichier' => $fileName,
+            'path' => $path,
+            'checksum_utilise' => $checksum,
+        ]);
+
+        if ($checksum == $checksum_dge) {
+            $file->is_valid = true;
+            $file->save();
+            return "Les checksums correspondent ";
+        } else {
+            return "Les checksum ne correspondent pas ";
+        }
+>>>>>>> de20051d60afebef3f3575ca9d60f3381fa6c742
     }
 }

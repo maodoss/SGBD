@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('electeurs_temps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fichier_electoral_id')->constrained('fichier_electorals');
+            $table->foreignId('tentative_upload_id')->constrained('tentative_uploads');
             $table->string('cin');
             $table->integer('num_electeur');
-            $table->string('nature_probleme')->nullable();
+            $table->text('nature_probleme')->nullable();
             $table->timestamps();
         });
     }
