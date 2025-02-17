@@ -32,6 +32,7 @@ Route::post('traitement_upload', [PostController::class, 'traitement_upload'])->
 //Dash DGE
 Route::get('/dashdge', [PostController::class, 'dashdge'])->name('dashdge');
 Route::get('/AdminLogin', [PostController::class, 'AdminLogin'])->name('AdminLogin');
+Route::post('/traitement_login', [PostController::class, 'traitement_login'])->name('traitement_login');
 
 //Liste_candidat
 Route::get('Candidature', [PostController::class, 'Candidature'])->name('Candidature');

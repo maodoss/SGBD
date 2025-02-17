@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\utilisateur_dges;
 use Illuminate\Http\Request;
 use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
@@ -45,6 +46,30 @@ class PostController extends Controller
     {
         return view('AdminLogin');
     }
+
+    public function traitement_login()
+    {
+        validator(request()->all(), [
+            'email' => ['required'],
+            'password' => ['required']
+
+        ])->validate();
+        $user = utilisateur_dges::where('email', request('email'))->first();
+
+        if ($user && $user->password === request('password')) {
+            // Authentifier manuellement l'utilisateur
+            auth()->login($user);
+
+            return view('dashdge');
+        } else {
+            return "Connexion non réussie";
+        }
+        // if (auth()->attempt(request()->only(['email', 'password']))) {
+        //     return ("Connexion reussie");
+        // } else {
+        //     return ("Connexion non reussie");
+        // }
+    }
     public function Candidature()
     {
         return view('Candidature');
@@ -56,7 +81,7 @@ class PostController extends Controller
     public function details_candidat()
     {
         return view('details_candidat');
-    }    
+    }
 
     //traitement upload 
 

@@ -125,10 +125,11 @@
 
   <div class="container">
     <h1>Connexion Admin</h1>
-    <form action="#" method="POST">
+    <form action="traitement_login" method="POST">
+      @csrf
       <div class="form-group">
         <label for="username">Login :</label>
-        <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+        <input type="text" id="username" name="email" placeholder="Entrez votre nom d'utilisateur" required>
       </div>
       <div class="form-group">
         <label for="password">Mot de passe :</label>

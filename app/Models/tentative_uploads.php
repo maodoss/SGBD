@@ -10,11 +10,17 @@ class TentativeUpload extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom_fichier', 'user_dge_id', 'path', 'checksum_utilise', 'ip_address', 'is_valid', 'date'
+        'nom_fichier',
+        'user_dge_id',
+        'path',
+        'checksum_utilise',
+        'ip_address',
+        'is_valid',
+        'date'
     ];
 
     public function utilisateurDge()
     {
-        return $this->belongsTo(UtilisateurDge::class, 'user_dge_id');
+        return $this->belongsTo(utilisateur_dges::class, 'user_dge_id');
     }
 }

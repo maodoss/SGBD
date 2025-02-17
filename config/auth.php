@@ -18,6 +18,13 @@ return [
         'passwords' => 'users',
     ],
 
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\utilisateur_dges::class, // Utilisation de ton modèle
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -62,7 +69,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\utilisateur_dges::class,
         ],
 
         // 'users' => [
