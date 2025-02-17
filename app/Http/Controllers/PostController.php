@@ -81,7 +81,15 @@ class PostController extends Controller
     public function details_candidat()
     {
         return view('details_candidat');
+<<<<<<< HEAD
     }
+=======
+    }    
+    public function Parrainage()
+    {
+        return view('Parrainage');
+    } 
+>>>>>>> 3a98ed2d561aac6482c7cde74ba728443f0682a2
 
     //traitement upload 
 
