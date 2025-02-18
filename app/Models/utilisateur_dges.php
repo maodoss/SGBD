@@ -11,5 +11,5 @@ class  utilisateur_dges extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['nom', 'email', 'password', 'ip_address'];
+    protected $fillable = ['id', 'nom', 'email', 'password', 'ip_address'];
 }
