@@ -29,10 +29,10 @@ Route::get('Upload', [PostController::class, 'Upload'])->name('Upload');
 Route::post('traitement_upload', [PostController::class, 'traitement_upload'])->name('traitement_upload');
 
 
-//Dash DGE
-Route::get('/dashdge', [PostController::class, 'dashdge'])->name('dashdge');
-Route::get('/AdminLogin', [PostController::class, 'AdminLogin'])->name('AdminLogin');
-Route::post('/traitement_login', [PostController::class, 'traitement_login'])->name('traitement_login');
+//Utilisateur Dge  UtilisateurDge
+Route::get('/dashdge', [UtilisateurDge::class, 'dashdge'])->name('dashdge');
+Route::get('/AdminLogin', [UtilisateurDge::class, 'AdminLogin'])->name('AdminLogin');
+Route::post('/traitement_login', [UtilisateurDge::class, 'traitement_login'])->name('traitement_login');
 
 //Liste_candidat
 Route::get('Candidature', [PostController::class, 'Candidature'])->name('Candidature');
