@@ -25,8 +25,8 @@ Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('da
 Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
 
 //Route pour l'upload de fichier electorale et son traitement 
-Route::get('Upload', [PostController::class, 'Upload'])->name('Upload');
-Route::post('traitement_upload', [PostController::class, 'traitement_upload'])->name('traitement_upload');
+Route::get('Upload', [UtilisateurDges::class, 'Upload'])->name('Upload');
+Route::post('traitement_upload', [UtilisateurDges::class, 'traitement_upload'])->name('traitement_upload');
 
 
 //Utilisateur Dge  UtilisateurDge
