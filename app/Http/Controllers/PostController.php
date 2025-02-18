@@ -96,7 +96,7 @@ class PostController extends Controller
         $checksum_dge = $request->checksum;
         $path = $request->file('temp_file')->store('public/files');
         $fileName = $request->file('temp_file')->getClientOriginalName();
-        $user_dge_id = utilisateur_dges::find(Auth::id())->id; 
+        $user_dge_id = utilisateur_dges::find(Auth::id())->id;
 
         $checksum = hash_file('sha256', storage_path('app/' . $path));
         $file = tentative_uploads::create([
@@ -111,7 +111,7 @@ class PostController extends Controller
             $file->save();
             return "Les checksums correspondent ";
         } else {
-            return "Les checksum ne correspondent pas ";
+            return redirect()->back()->with('status', "ERREUR!! Le Checksum ne correspond pas");
         }
     }
 }
