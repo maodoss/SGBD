@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TentativeUploads extends Model
+class tentative_uploads extends Model
 {
     use HasFactory;
 
@@ -18,9 +18,8 @@ class TentativeUploads extends Model
         'is_valid',
         'date'
     ];
-
-    public function utilisateurDge()
+    public function utilisateur_dges()
     {
-        return $this->belongsTo(utilisateur_dges::class, 'user_dge_id');
+        return $this->belongsTo(utilisateur_dges::class, 'user_dge_id'); 
     }
 }
