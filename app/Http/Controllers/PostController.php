@@ -106,12 +106,27 @@ class PostController extends Controller
             'user_dge_id' => $user_dge_id,
         ]);
 
-        if ($checksum == $checksum_dge) {
+        $path = storage_path('app/' . $file->path);
+        $content = file_get_contents($path);
+
+        // S'il y'a une erreur "not permitted" sur laravel executer la commande en dessous sur votre terminal en tant qu'admin .
+        // icacls "C:\Users\Mouha\OneDrive\Bureau\SGBD\SGBD\storage\app\public\files\*" /grant Everyone:F
+
+
+
+        // Détecter l'encodage
+        $encoding = mb_detect_encoding($content, ['UTF-8', 'ISO-8859-1', 'Windows-1252', 'ASCII'], true);
+
+        if ($encoding != "UTF-8") {
+            return redirect()->back()->with('status', "ERREUR!! Le type de caractere doit etre UTF-8");
+        }
+        if ($checksum != $checksum_dge) {
+            return redirect()->back()->with('status', "ERREUR!! Le checksum ne correspond pas");
+        }
+        if ($checksum == $checksum_dge && $encoding == "UTF-8") {
             $file->is_valid = true;
             $file->save();
-            return "Les checksums correspondent ";
-        } else {
-            return redirect()->back()->with('status', "ERREUR!! Le Checksum ne correspond pas");
+            return "Le checksum et le type de caractere correspondent ";
         }
     }
 }
