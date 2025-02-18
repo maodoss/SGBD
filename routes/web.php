@@ -19,8 +19,6 @@ Route::get('/', [PostController::class, 'Acceuil'])->name('Acceuil');
 //Route qui gere l'inscription et la connexion des electeurs 
 Route::get('/login', [PostController::class, 'login'])->name('login');
 Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
-
-
 Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('dash_candidat');
 Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
 
