@@ -21,6 +21,6 @@ class FichierElectoral extends Model
 
     public function utilisateurDge()
     {
-        return $this->belongsTo(utilisateur_dges::class, 'user_dge_id');
+        return $this->belongsTo(UtilisateurDge::class, 'user_dge_id'); 
     }
 }

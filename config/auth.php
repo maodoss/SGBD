@@ -21,7 +21,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\utilisateur_dges::class, // Utilisation de ton modèle
+            'model' => App\Models\UtilisateurDge::class, // Utilisation de ton modèle
         ],
     ],
 
