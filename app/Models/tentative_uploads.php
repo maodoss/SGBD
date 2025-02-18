@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TentativeUpload extends Model
+class TentativeUploads extends Model
 {
     use HasFactory;
 

@@ -6,6 +6,8 @@ use App\Models\utilisateur_dges;
 use Illuminate\Http\Request;
 use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
+use App\Models\TentativeUploads;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -98,12 +100,14 @@ class PostController extends Controller
         $checksum_dge = $request->checksum;
         $path = $request->file('temp_file')->store('public/files');
         $fileName = $request->file('temp_file')->getClientOriginalName();
+        $user_dge_id = utilisateur_dges::find(Auth::id())->id;
 
         $checksum = hash_file('sha256', storage_path('app/' . $path));
-        $file = tentative_uploads::create([
+        $file = TentativeUploads::create([
             'nom_fichier' => $fileName,
             'path' => $path,
             'checksum_utilise' => $checksum,
+            'user_dge_id' => $user_dge_id,
         ]);
 
         if ($checksum == $checksum_dge) {
