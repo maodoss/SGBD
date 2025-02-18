@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class  UtilisateurDge extends Authenticatable
+class  utilisateur_dges extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['nom', 'email', 'password', 'ip_address'];
+    protected $fillable = ['id', 'nom', 'email', 'password', 'ip_address'];
 }
