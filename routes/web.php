@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UtilisateurDges;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +29,9 @@ Route::post('traitement_upload', [UtilisateurDges::class, 'traitement_upload'])-
 
 
 //Utilisateur Dge  UtilisateurDge
-Route::get('/dashdge', [UtilisateurDge::class, 'dashdge'])->name('dashdge');
-Route::get('/AdminLogin', [UtilisateurDge::class, 'AdminLogin'])->name('AdminLogin');
-Route::post('/traitement_login', [UtilisateurDge::class, 'traitement_login'])->name('traitement_login');
+Route::get('/dashdge', [UtilisateurDges::class, 'dashdge'])->name('dashdge');
+Route::get('/AdminLogin', [UtilisateurDges::class, 'AdminLogin'])->name('AdminLogin');
+Route::post('/traitement_login', [UtilisateurDges::class, 'traitement_login'])->name('traitement_login');
 
 //Liste_candidat
 Route::get('Candidature', [PostController::class, 'Candidature'])->name('Candidature');

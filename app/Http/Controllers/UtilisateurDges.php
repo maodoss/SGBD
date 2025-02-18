@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\utilisateur_dges;
+// use App\Models\fichier_electorals;
+use App\Models\FichierElectoral;
+use App\Models\tentative_uploads;
+use Illuminate\Support\Facades\Auth;
 
 class UtilisateurDges extends Controller
 {
+
     public function dashdge()
     {
         return view('Dashdge');
@@ -38,9 +44,12 @@ class UtilisateurDges extends Controller
         //     return ("Connexion non reussie");
         // }
     }
-    
-    //traitement upload 
 
+    //traitement upload 
+    public function Upload()
+    {
+        return view('Upload');
+    } //renvoie le formulaire 
     public function traitement_upload(Request $request)
     {
         $request->validate([
@@ -80,6 +89,14 @@ class UtilisateurDges extends Controller
         if ($checksum == $checksum_dge && $encoding == "UTF-8") {
             $file->is_valid = true;
             $file->save();
+            //On fait la copie car le fichier est valide 
+            $filevalid = FichierElectoral::create([
+                'nom_fichier' => $file->nom_fichier,
+                'path' => $file->path,
+                'checksum_utilise' => $file->checksum,
+                'user_dge_id' => $file->user_dge_id,
+            ]);
+            $filevalid->save();
             return "Le checksum et le type de caractere correspondent ";
         }
     }

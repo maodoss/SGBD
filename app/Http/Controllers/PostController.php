@@ -26,10 +26,7 @@ class PostController extends Controller
         return view('Inscription');
     }
 
-    public function Upload()
-    {
-        return view('Upload');
-    }
+
 
     public function dash_candidat()
     {
@@ -40,7 +37,7 @@ class PostController extends Controller
         return view('periode_parrainage');
     }
 
-    
+
     public function Candidature()
     {
         return view('Candidature');
@@ -53,5 +50,4 @@ class PostController extends Controller
     {
         return view('details_candidat');
     }
-
 }
