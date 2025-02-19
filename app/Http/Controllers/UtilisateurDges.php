@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\utilisateur_dges;
-// use App\Models\fichier_electorals;
-use App\Models\FichierElectoral;
+use App\Models\fichier_electoral;
+// use App\Models\FichierElectoral;
 use App\Models\tentative_uploads;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,22 +81,22 @@ class UtilisateurDges extends Controller
         $encoding = mb_detect_encoding($content, ['UTF-8', 'ISO-8859-1', 'Windows-1252', 'ASCII'], true);
 
         if ($encoding != "UTF-8") {
-            return redirect()->back()->with('status', "ERREUR!! Le type de caractere doit etre UTF-8");
+            return redirect()->back()->with('error', "ERREUR!! Le type de caractere doit etre UTF-8");
         }
         if ($checksum != $checksum_dge) {
-            return redirect()->back()->with('status', "ERREUR!! Le checksum ne correspond pas");
+            return redirect()->back()->with('error', "ERREUR!! Le checksum ne correspond pas");
         }
         if ($checksum == $checksum_dge && $encoding == "UTF-8") {
             $file->is_valid = true;
             $file->save();
             //On fait la copie car le fichier est valide 
-            // $filevalid = FichierElectoral::create([
-            //     'nom_fichier' => $file->nom_fichier,
-            //     'path' => $file->path,
-            //     'checksum_utilise' => $file->checksum,
-            //     'user_dge_id' => $file->user_dge_id,
-            // ]);
-            // $filevalid->save();
+            $filevalid = fichier_electoral::create([
+                'nom_fichier' => $file->nom_fichier,
+                'path' => $file->path,
+                'checksum' => $file->checksum_utilise,
+                'user_dge_id' => $file->user_dge_id,
+            ]);
+            $filevalid->save();
             return redirect()->back()->with('status', "Le fichier a ete soumis");
         }
     }

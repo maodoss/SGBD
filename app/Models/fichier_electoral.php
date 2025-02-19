@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FichierElectoral extends Model
+class fichier_electoral extends Model
 {
     use HasFactory;
 
@@ -19,8 +19,8 @@ class FichierElectoral extends Model
         'ip_address'
     ];
 
-    public function utilisateurDge()
+    public function utilisateur_dges()
     {
-        return $this->belongsTo(UtilisateurDge::class, 'user_dge_id'); 
+        return $this->belongsTo(utilisateur_dges::class, 'user_dge_id');
     }
 }
