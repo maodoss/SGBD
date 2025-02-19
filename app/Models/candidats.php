@@ -10,12 +10,19 @@ class Candidat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'electeur_id', 'email', 'telephone', 'code_auth', 
-        'nom_parti', 'slogan', 'photo', 'couleur_parti', 'uri_page'
+        'electeur_id',
+        'email',
+        'telephone',
+        'code_auth',
+        'nom_parti',
+        'slogan',
+        'photo',
+        'couleur_parti',
+        'uri_page'
     ];
 
     public function electeur()
     {
-        return $this->belongsTo(Electeur::class);
+        return $this->belongsTo(electeurs::class);
     }
 }

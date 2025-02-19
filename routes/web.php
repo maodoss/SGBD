@@ -33,9 +33,11 @@ Route::get('/dashdge', [UtilisateurDges::class, 'dashdge'])->name('dashdge');
 Route::get('/AdminLogin', [UtilisateurDges::class, 'AdminLogin'])->name('AdminLogin');
 Route::post('/traitement_login', [UtilisateurDges::class, 'traitement_login'])->name('traitement_login');
 
+Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('Verif_electeur');
+Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
+
 
 //Liste_candidat
-Route::get('Verif_electeur', [PostController::class, 'Verif_electeur'])->name('Verif_electeur');
 Route::get('saisie_candidat', [PostController::class, 'saisie_candidat'])->name('saisie_candidat');
 Route::get('Liste_candidat', [PostController::class, 'Liste_candidat'])->name('Liste_candidat');
 Route::get('details_candidat', [PostController::class, 'details_candidat'])->name('details_candidat');

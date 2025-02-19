@@ -8,6 +8,7 @@ use App\Models\utilisateur_dges;
 use App\Models\fichier_electoral;
 // use App\Models\FichierElectoral;
 use App\Models\tentative_uploads;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 
 class UtilisateurDges extends Controller
@@ -138,5 +139,27 @@ class UtilisateurDges extends Controller
 
             return redirect()->back()->with('status', "Le fichier a ete soumis. Les electeurs sont enregistres");
         }
+    }
+
+    public function Verif_electeur()
+    {
+        return view('UtilisateurDge/Verif_electeur');
+    }
+    public function saisie_candidat()
+    {
+        return view('UtilisateurDge/saisie_candidat');
+    }
+
+    public function Verif_traitement(Request $request)
+    {
+        $request->validate([
+            'numero_electeur' => ['required'],
+        ]);
+        $numero  = $request->numero_electeur;
+        // dd($numero);
+
+        $candidat = electeurs::where('num_electeur', $numero)->first();
+        return $candidat->nom;
+        // return view('UtilisateurDge/saisie_candidat', compact('candidat'));
     }
 }

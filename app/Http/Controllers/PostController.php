@@ -38,7 +38,7 @@ class PostController extends Controller
     }
 
 
-    
+
     public function Liste_candidat()
     {
         return view('Liste_candidat');
@@ -46,13 +46,5 @@ class PostController extends Controller
     public function details_candidat()
     {
         return view('UtilisateurDge/details_candidat');
-    }
-    public function Verif_electeur()
-    {
-        return view('UtilisateurDge/Verif_electeur');
-    }
-    public function saisie_candidat()
-    {
-        return view('UtilisateurDge/saisie_candidat');
     }
 }

@@ -134,7 +134,7 @@
     }
   </style>
 
-  <script>
+  {{-- <script>
     function verifierNumeroElecteur() {
       var numElecteur = document.getElementById('numero-electeur').value;
       
@@ -148,7 +148,7 @@
         alert("Veuillez entrer un numéro d'électeur valide !");
       }
     }
-  </script>
+  </script> --}}
 </head>
 
 <body>
@@ -174,14 +174,15 @@
 
   <div class="container">
     <h1>Vérification du Numéro d'Électeur</h1>
-    
+    <form action="/Verif_traitement" method="POST" >
+      @csrf
     <div class="form-group">
       <label for="numero-electeur">Numéro d'électeur :</label>
-      <input type="text" id="numero-electeur" name="numero-electeur" placeholder="Entrez le numéro d'électeur" required>
-      <button type="button" class="btn-check" onclick="verifierNumeroElecteur()">
-        Vérifier
-      </button>
+      <input type="text" id="numero-electeur" name="numero_electeur" placeholder="Entrez le numéro d'électeur" required>
+      <input class="btn-check" type="submit" value="Vérifier">
+     
     </div>
+  </form>
   </div>
 </body>
 </html>
