@@ -23,24 +23,24 @@ class PostController extends Controller
     }
     public function inscription()
     {
-        return view('Inscription');
+        return view('Electeurs/Inscription');
     }
 
 
 
     public function dash_candidat()
     {
-        return view('Dash_candidat');
+        return view('Candidat/Dash_candidat');
     }
     public function periode_parrainage()
     {
-        return view('periode_parrainage');
+        return view('UtilisateurDge/periode_parrainage');
     }
 
 
     public function Candidature()
     {
-        return view('Candidature');
+        return view('UtilisateurDge/Candidature');
     }
     public function Liste_candidat()
     {
@@ -48,6 +48,6 @@ class PostController extends Controller
     }
     public function details_candidat()
     {
-        return view('details_candidat');
+        return view('UtilisateurDge/details_candidat');
     }
 }

@@ -14,11 +14,11 @@ class UtilisateurDges extends Controller
 
     public function dashdge()
     {
-        return view('Dashdge');
+        return view('UtilisateurDge/Dashdge');
     }
     public function AdminLogin()
     {
-        return view('AdminLogin');
+        return view('UtilisateurDge/AdminLogin');
     }
 
     public function traitement_login()
@@ -34,7 +34,7 @@ class UtilisateurDges extends Controller
             // Authentifier manuellement l'utilisateur
             auth()->login($user);
 
-            return view('dashdge');
+            return view('UtilisateurDge/dashdge');
         } else {
             return "Connexion non réussie";
         }
@@ -48,7 +48,7 @@ class UtilisateurDges extends Controller
     //traitement upload 
     public function Upload()
     {
-        return view('Upload');
+        return view('UtilisateurDge/Upload');
     } //renvoie le formulaire 
     public function traitement_upload(Request $request)
     {
@@ -90,14 +90,14 @@ class UtilisateurDges extends Controller
             $file->is_valid = true;
             $file->save();
             //On fait la copie car le fichier est valide 
-            $filevalid = FichierElectoral::create([
-                'nom_fichier' => $file->nom_fichier,
-                'path' => $file->path,
-                'checksum_utilise' => $file->checksum,
-                'user_dge_id' => $file->user_dge_id,
-            ]);
-            $filevalid->save();
-            return "Le checksum et le type de caractere correspondent ";
+            // $filevalid = FichierElectoral::create([
+            //     'nom_fichier' => $file->nom_fichier,
+            //     'path' => $file->path,
+            //     'checksum_utilise' => $file->checksum,
+            //     'user_dge_id' => $file->user_dge_id,
+            // ]);
+            // $filevalid->save();
+            return redirect()->back()->with('status', "Le fichier a ete soumis");
         }
     }
 }
