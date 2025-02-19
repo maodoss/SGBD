@@ -207,7 +207,7 @@
                 </p>
             </a>
 
-            <a href="Candidature" class="dashboard-card">
+            <a href="/Verif_electeur" class="dashboard-card">
                 <h3 class="card-title">Enregistrez des Candidats</h3>
                 <p class="card-description">
                     Enregistrez et gérez les informations des candidats demandant un parrainage.

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Saisie d'un Candidat</title>
+  <title>Saisie des Informations du Candidat</title>
   <style>
     /* Style global */
     body {
@@ -70,31 +70,26 @@
     }
 
     .logout-btn {
-      background-color: #038d1a; 
-      color: #fff; 
+      background-color: #038d1a;
+      color: #fff;
       padding: 0.75rem 1.5rem;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 500;
       transition: background-color 0.3s ease;
-      white-space: nowrap;
-    }
-    .logout-btn:hover {
-      background-color: #038d1a;
-      color: #fff;
     }
 
-    /* Conteneur principal du formulaire (margin-top compensé pour l'en-tête fixe) */
+    /* Conteneur principal */
     .container {
       max-width: 600px;
-      margin: 120px auto 40px; /* On laisse un espace en haut pour l'en-tête */
+      margin: 120px auto 40px;
       background: #fff;
       padding: 20px 30px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       border-radius: 6px;
     }
 
-    /* Titre principal */
+    /* Titre */
     .container h1 {
       text-align: center;
       margin-bottom: 30px;
@@ -102,7 +97,7 @@
       font-size: 24px;
     }
 
-    /* Groupes de champs */
+    /* Formulaire */
     .form-group {
       margin-bottom: 20px;
     }
@@ -125,14 +120,11 @@
       border-radius: 4px;
     }
 
-    /* Champs en lecture seule */
     .readonly-field {
       background-color: #e9ecef;
       cursor: not-allowed;
     }
 
-    /* Boutons du formulaire (même vert) */
-    .btn-check,
     .btn-submit {
       display: inline-block;
       background: #038d1a;
@@ -145,54 +137,32 @@
       text-align: center;
       font-size: 16px;
       margin-top: 10px;
-      text-decoration: none;
     }
-    .btn-check:hover,
     .btn-submit:hover {
       background: #026b13;
     }
-
-    /* Bloc caché */
-    .hidden {
-      display: none;
-    }
-
-    /* Responsivité */
-    @media (max-width: 600px) {
-      .container {
-        margin: 100px 20px 20px;
-        padding: 15px;
-      }
-      .nav-links {
-        display: none; /* On masque la barre de navigation sur mobile si besoin */
-      }
-    }
   </style>
 
-  <!-- Script : simulation de vérification du numéro d'électeur -->
   <script>
-    function verifierNumeroElecteur() {
-      // Récupère la valeur du numéro d'électeur
-      var numElecteur = document.getElementById('numero-electeur').value;
-
-      // Simule la vérification (en réalité, requête serveur ou base de données)
-      if (numElecteur.trim() !== "") {
-        // Affiche le bloc "infosCandidat"
-        document.getElementById('infosCandidat').classList.remove('hidden');
-        // Simule le remplissage des champs
+    window.onload = function() {
+      // Récupérer le numéro d'électeur depuis l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const numElecteur = urlParams.get('numero');
+      
+      // Simuler une requête au serveur pour obtenir les informations
+      // En production, ceci serait une vraie requête AJAX
+      if (numElecteur) {
+        // Remplir les champs avec les données simulées
         document.getElementById('nom').value = "NDIAYE";
         document.getElementById('prenom').value = "Abdou";
         document.getElementById('dateNaiss').value = "1981-07-01";
         document.getElementById('lieuNaiss').value = "Dakar";
-      } else {
-        alert("Numéro d'électeur introuvable ou invalide !");
       }
-    }
+    };
   </script>
 </head>
 
 <body>
-
   <!-- En-tête fixe -->
   <div class="header">
     <div class="containerh">
@@ -214,21 +184,10 @@
   </div>
 
   <div class="container">
-    <h1>Saisie d'un Candidat</h1>
+    <h1>Saisie des Informations du Candidat</h1>
 
-    <!-- 1. Formulaire initial pour saisir le numéro d'électeur -->
-    <div class="form-group">
-      <label for="numero-electeur">Numéro d'électeur :</label>
-      <input type="text" id="numero-electeur" name="numero-electeur" placeholder="Entrez le numéro d'électeur" required>
-      <button type="button" class="btn-check" onclick="verifierNumeroElecteur()">
-        Vérifier
-      </button>
-    </div>
-
-    <!-- 2. Bloc caché qui apparaît après vérification du n° d'électeur -->
-    <form id="infosCandidat" class="hidden" action="#" method="POST" enctype="multipart/form-data">
-      
-      <!-- Champs récupérés (lecture seule) -->
+    <form action="#" method="POST" enctype="multipart/form-data">
+      <!-- Informations de l'électeur (en lecture seule) -->
       <div class="form-group">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" class="readonly-field" readonly>
@@ -246,7 +205,7 @@
         <input type="text" id="lieuNaiss" name="lieuNaiss" class="readonly-field" readonly>
       </div>
 
-      <!-- Informations complémentaires du candidat -->
+      <!-- Informations complémentaires -->
       <div class="form-group">
         <label for="email">Adresse Email :</label>
         <input type="email" id="email" name="email" placeholder="Entrez votre adresse email" required>
@@ -276,10 +235,33 @@
         <input type="url" id="urlInfos" name="urlInfos" placeholder="https://votresite.com">
       </div>
 
-      <!-- Bouton final pour soumettre la candidature (vert) -->
+      <!-- Bouton de soumission -->
       <button type="submit" class="btn-submit">Enregistrer la Candidature</button>
     </form>
   </div>
 
+  <script>
+    // Fonction pour gérer la soumission du formulaire
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Ici, vous ajouteriez la logique pour envoyer les données au serveur
+      // Par exemple, avec fetch() ou XMLHttpRequest
+      
+      // Exemple de validation basique
+      const email = document.getElementById('email').value;
+      const telephone = document.getElementById('telephone').value;
+      
+      if (!email || !telephone) {
+        alert('Veuillez remplir tous les champs obligatoires');
+        return;
+      }
+      
+      // Simulation d'envoi réussi
+      alert('Candidature enregistrée avec succès !');
+      // Redirection vers la liste des candidats
+      window.location.href = '/Liste_candidat';
+    });
+  </script>
 </body>
 </html>
