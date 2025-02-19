@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\electeurs;
 use Illuminate\Http\Request;
 use App\Models\utilisateur_dges;
 use App\Models\fichier_electoral;
@@ -97,7 +98,45 @@ class UtilisateurDges extends Controller
                 'user_dge_id' => $file->user_dge_id,
             ]);
             $filevalid->save();
-            return redirect()->back()->with('status', "Le fichier a ete soumis");
+
+            //test
+            $file = $filevalid->path;
+            // $path = $filevalid->getRealPath();
+            // Ouvrir le fichier CSV
+            $handle = fopen($path, 'r');
+
+            $header = true; // Pour ignorer la première ligne (titres des colonnes)
+
+            while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if ($header) {
+                    $header = false;
+                    continue;
+                }
+
+                // Insérer les données dans la table electeurs
+                electeurs::create([
+                    'cin'                 => $row[0],
+                    'num_electeur'        => $row[1],
+                    'nom'                 => $row[2],
+                    'prenom'              => $row[3],
+                    'date_naissance'      => $row[4],
+                    'lieu_naissance'      => $row[5],
+                    'sexe'                => $row[6],
+                    'bureau_vote'         => $row[7],
+                    'email'               => $row[8],
+                    'telephone'           => $row[9],
+                    'code_auth'           => $row[10],
+                    'fichier_electoral_id' => $filevalid->id,
+
+                    // 'fichier_electoral_id' => $row[11],
+                ]);
+            }
+
+            fclose($handle);
+
+            //fintest
+
+            return redirect()->back()->with('status', "Le fichier a ete soumis. Les electeurs sont enregistres");
         }
     }
 }
