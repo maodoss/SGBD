@@ -173,7 +173,7 @@
         const tdAction = document.createElement('td');
         // On crée un lien avec le paramètre numeroElecteur dans l’URL
         const lienDetail = document.createElement('a');
-        lienDetail.href = `detail_candidat.html?numeroElecteur=${cand.numeroElecteur}`;
+        lienDetail.href = `/details_candidat?numeroElecteur=${cand.numeroElecteur}`;
         lienDetail.textContent = "Voir détails";
         lienDetail.className = "btn-detail";
         tdAction.appendChild(lienDetail);
