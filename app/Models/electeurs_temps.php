@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ElecteurTemp extends Model
+class electeurs_temps extends Model
 {
     use HasFactory;
 
@@ -13,13 +13,13 @@ class ElecteurTemp extends Model
         'fichier_electoral_id', 'tentative_upload_id', 'cin', 'num_electeur', 'nature_probleme'
     ];
 
-    public function fichierElectoral()
+    public function fichier_electoral()
     {
-        return $this->belongsTo(FichierElectoral::class);
+        return $this->belongsTo(fichier_electoral::class);
     }
 
-    public function tentativeUpload()
+    public function tentative_upload()
     {
-        return $this->belongsTo(TentativeUpload::class);
+        return $this->belongsTo(tentative_uploads::class);
     }
 }

@@ -24,7 +24,7 @@ class electeurs extends Model
         'fichier_electoral_id'
     ];
 
-    public function fichierElectoral()
+    public function fichier_electoral()
     {
         return $this->belongsTo(fichier_electoral::class);
     }

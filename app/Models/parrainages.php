@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parrainage extends Model
+class parrainages extends Model
 {
     use HasFactory;
 
@@ -15,16 +15,16 @@ class Parrainage extends Model
 
     public function electeur()
     {
-        return $this->belongsTo(Electeur::class);
+        return $this->belongsTo(electeurs::class);
     }
 
     public function candidat()
     {
-        return $this->belongsTo(Candidat::class);
+        return $this->belongsTo(candidats::class);
     }
 
     public function periode()
     {
-        return $this->belongsTo(PeriodeParrainage::class, 'periode_id');
+        return $this->belongsTo(periode_parrainages::class, 'periode_id');
     }
 }

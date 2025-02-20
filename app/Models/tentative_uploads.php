@@ -18,6 +18,7 @@ class tentative_uploads extends Model
         'is_valid',
         'date'
     ];
+
     public function utilisateur_dges()
     {
         return $this->belongsTo(utilisateur_dges::class, 'user_dge_id'); 
