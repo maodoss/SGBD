@@ -159,7 +159,28 @@ class UtilisateurDges extends Controller
         // dd($numero);
 
         $candidat = electeurs::where('num_electeur', $numero)->first();
-        return $candidat->nom;
-        // return view('UtilisateurDge/saisie_candidat', compact('candidat'));
+        // return $candidat->nom;
+        return view('UtilisateurDge/saisie_candidat', compact('candidat'));
+    }
+
+    public function traitement_saisie_candidat(Request $request)
+    {
+        $request->validate([
+            'email' => ['required'],
+            'telephone' => ['required'],
+            'parti' => ['required'],
+            'slogan' => ['required'],
+            'photo' => ['required'],
+            'couleurs' => ['required'],
+            'urlInfos' => ['required'],
+        ]);
+
+        $email = $request->email;
+        $telephone = $request->telephone;
+        $parti = $request->parti;
+        $slogan = $request->slogan;
+        $photo = $request->photo;
+        $couleur = $request->couleur;
+        $urlInfos = $request->urlInfos;
     }
 }

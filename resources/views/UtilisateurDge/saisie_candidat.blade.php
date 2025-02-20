@@ -143,7 +143,7 @@
     }
   </style>
 
-  <script>
+  {{-- <script>
     window.onload = function() {
       // Récupérer le numéro d'électeur depuis l'URL
       const urlParams = new URLSearchParams(window.location.search);
@@ -159,7 +159,7 @@
         document.getElementById('lieuNaiss').value = "Dakar";
       }
     };
-  </script>
+  </script> --}}
 </head>
 
 <body>
@@ -185,24 +185,30 @@
 
   <div class="container">
     <h1>Saisie des Informations du Candidat</h1>
-
-    <form action="#" method="POST" enctype="multipart/form-data">
+    {{-- @if(isset($candidat))
+    <p><strong>Nom :</strong> {{ $candidat->nom }}</p>
+    <p><strong>Prénom :</strong> {{ $candidat->prenom }}</p>
+@else
+    <p>Aucun candidat trouvé.</p>
+@endif --}}
+    <form action="traitement_saisie_candidat" method="POST" enctype="multipart/form-data">
+      @csrf
       <!-- Informations de l'électeur (en lecture seule) -->
       <div class="form-group">
         <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" class="readonly-field" readonly>
+        <input type="text" id="nom" value="{{ $candidat->nom}}" name="nom" class="readonly-field" readonly>
       </div>
       <div class="form-group">
         <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" class="readonly-field" readonly>
+        <input type="text" id="prenom" value="{{ $candidat->prenom }}" name="prenom" class="readonly-field" readonly>
       </div>
       <div class="form-group">
         <label for="dateNaiss">Date de Naissance :</label>
-        <input type="text" id="dateNaiss" name="dateNaiss" class="readonly-field" readonly>
+        <input type="text" id="dateNaiss" value="{{ $candidat->date_naissance }}" name="dateNaiss" class="readonly-field" readonly>
       </div>
       <div class="form-group">
         <label for="lieuNaiss">Lieu de Naissance :</label>
-        <input type="text" id="lieuNaiss" name="lieuNaiss" class="readonly-field" readonly>
+        <input type="text" id="lieuNaiss" value="{{ $candidat->lieu_naissance }}" name="lieuNaiss" class="readonly-field" readonly>
       </div>
 
       <!-- Informations complémentaires -->
@@ -240,7 +246,7 @@
     </form>
   </div>
 
-  <script>
+  {{-- <script>
     // Fonction pour gérer la soumission du formulaire
     document.querySelector('form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -262,6 +268,6 @@
       // Redirection vers la liste des candidats
       window.location.href = '/Liste_candidat';
     });
-  </script>
+  </script> --}}
 </body>
 </html>

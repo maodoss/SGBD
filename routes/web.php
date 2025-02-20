@@ -36,9 +36,11 @@ Route::post('/traitement_login', [UtilisateurDges::class, 'traitement_login'])->
 Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('Verif_electeur');
 Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
 
+Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
+Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
+
 
 //Liste_candidat
-Route::get('saisie_candidat', [PostController::class, 'saisie_candidat'])->name('saisie_candidat');
 Route::get('Liste_candidat', [PostController::class, 'Liste_candidat'])->name('Liste_candidat');
 Route::get('details_candidat', [PostController::class, 'details_candidat'])->name('details_candidat');
 
