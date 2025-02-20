@@ -10,6 +10,7 @@ use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
+use App\Models\candidats;
 
 class UtilisateurDges extends Controller
 {
@@ -145,10 +146,10 @@ class UtilisateurDges extends Controller
     {
         return view('UtilisateurDge/Verif_electeur');
     }
-    public function saisie_candidat()
-    {
-        return view('UtilisateurDge/saisie_candidat');
-    }
+    // public function saisie_candidat()
+    // {
+    //     return view('UtilisateurDge/saisie_candidat');
+    // }
 
     public function Verif_traitement(Request $request)
     {
@@ -160,6 +161,10 @@ class UtilisateurDges extends Controller
 
         $candidat = electeurs::where('num_electeur', $numero)->first();
         // return $candidat->nom;
+        //dd($candidat);
+        if (!$candidat) {
+            return redirect()->back()->with('error', 'Aucun électeur trouvé avec ce numéro.');
+        }
         return view('UtilisateurDge/saisie_candidat', compact('candidat'));
     }
 
@@ -174,13 +179,37 @@ class UtilisateurDges extends Controller
             'couleurs' => ['required'],
             'urlInfos' => ['required'],
         ]);
+        // $electeur = electeurs::where('id', $id)->first();
 
         $email = $request->email;
+        // return "{{$email}}";
+
         $telephone = $request->telephone;
         $parti = $request->parti;
         $slogan = $request->slogan;
         $photo = $request->photo;
         $couleur = $request->couleur;
         $urlInfos = $request->urlInfos;
+        $num_electeur = $request->num_electeur;
+        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        // dd($electeur);
+        $electeur_id = $electeur->id;
+        $code_auth = 0000;
+        // dd($electeur);
+
+        $candidats = candidats::create([
+            'email' => $email,
+            'telephone' => $telephone,
+            'nom_parti' => $parti,
+            'slogan' => $slogan,
+            'photo' => $photo,
+            'couleur_parti' => $couleur,
+            'uri_page' => $urlInfos,
+            'electeur_id' => $electeur_id,
+            'code_auth' => $code_auth,
+
+        ]);
+        $candidats->save();
+        return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
     }
 }

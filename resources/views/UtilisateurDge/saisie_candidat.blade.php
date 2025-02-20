@@ -194,6 +194,15 @@
     <form action="traitement_saisie_candidat" method="POST" enctype="multipart/form-data">
       @csrf
       <!-- Informations de l'électeur (en lecture seule) -->
+      @if (session('status'))
+    <div class="alert alert-success">
+        {{session('status')}} 
+    </div>
+    @endif
+      <div class="form-group">
+        <label for="nom">Numero Electeur :</label>
+        <input type="text" id="num_electeur" value="{{ $candidat->num_electeur}}" name="num_electeur" class="readonly-field" readonly>
+      </div>
       <div class="form-group">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" value="{{ $candidat->nom}}" name="nom" class="readonly-field" readonly>
@@ -240,9 +249,9 @@
         <label for="urlInfos">URL de vos informations (site web ou page) :</label>
         <input type="url" id="urlInfos" name="urlInfos" placeholder="https://votresite.com">
       </div>
-
+      <input type="submit" class="btn-submit" value="Enregistrer">
       <!-- Bouton de soumission -->
-      <button type="submit" class="btn-submit">Enregistrer la Candidature</button>
+      {{-- <button type="submit" class="btn-submit">Enregistrer la Candidature</button> --}}
     </form>
   </div>
 
