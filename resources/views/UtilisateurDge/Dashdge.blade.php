@@ -104,36 +104,30 @@
             gap: 1rem;
         }
 
-        .logout-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgb(51, 133, 55);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+        .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #4A5568;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #038d1a;
+    }
 
-        .logout-btn:hover::after {
-            content: 'Se déconnecter';
-            position: absolute;
-            right: 50px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-
-        .logout-btn:hover {
-            background-color: rgb(3, 26, 11);
-        }
+    .logout-btn {
+      background-color: #038d1a;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
 
         .welcome-section {
             background: linear-gradient(135deg, rgb(48, 167, 137), rgb(31, 107, 57));
@@ -185,9 +179,7 @@
                     </div>
                 </div>
                 <div class="header-right">
-                    <button class="logout-btn">
-                        <i class="fas fa-user"></i>
-                    </button>
+                <a href="/AdminLogin" class="logout-btn">Se déconnecter</a>
                 </div>
             </div>
         </div>
