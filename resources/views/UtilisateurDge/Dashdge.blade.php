@@ -116,11 +116,11 @@
       transition: color 0.3s ease;
     }
     .nav-links a:hover {
-      color: #038d1a;
+      color:rgb(7, 61, 16);
     }
 
     .logout-btn {
-      background-color: #038d1a;
+      background-color:rgb(7, 95, 22);
       color: #fff;
       padding: 0.75rem 1.5rem;
       border-radius: 8px;

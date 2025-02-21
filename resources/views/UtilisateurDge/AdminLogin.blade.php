@@ -33,6 +33,7 @@
         .logo-text h1 {
             font-size: 1.25rem;
             color: #1A202C;
+            margin-bottom: 0;
             text-decoration: none; /* Assure que le texte n'est pas souligné */
         }
 

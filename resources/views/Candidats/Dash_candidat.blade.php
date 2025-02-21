@@ -166,7 +166,7 @@
                     <i class="fas fa-user"></i> <!-- Icône de bonhomme -->
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <a href="#">Se déconnecter</a>
+                    <a href="/login">Se déconnecter</a>
                 </div>
             </div>
         </div>
