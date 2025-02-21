@@ -235,7 +235,8 @@
             <div class="progress-step">3</div>
         </div>
         <h2>Informations de contact</h2>
-        <form action="/register" method="POST">
+        <form action="/sendmail" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="phone">Numéro de téléphone</label>
                 <input type="tel" id="phone" name="phone" required>
@@ -245,8 +246,9 @@
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="button-group">
-                <button type="button" class="previous" onclick="window.location.href='inscription'">Précédent</button>
-                <button type="button" class="next" onclick="window.location.href='Inscription3'">Suivant</button>
+                {{-- <button type="button" class="previous" onclick="window.location.href='inscription'">Précédent</button> --}}
+                <input type="submit" class="next" value="Suivant">
+                {{-- <button type="button" class="next" onclick="window.location.href='Inscription3'">Suivant</button> --}}
             </div>
         </form>
     </div>

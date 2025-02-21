@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\electeurs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class Candidats extends Controller
 {
@@ -89,10 +91,33 @@ class Candidats extends Controller
             (string) $nom === (string) $electeur->nom &&
             (string) $bureau_vote === (string) $electeur->bureau_vote
         ) {
+            // dd($electeur);
             return view('Electeurs/Inscription2');
         } else {
             // dd($electeur);
             return "erreur";
         }
+    }
+
+
+    public function sendmail(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+            'email' => 'required',
+
+
+        ]);
+
+        $phone = $request->phone;
+        $mail = $request->email;
+        $details = [
+            'name' => 'Direction Des Elections ',
+            'subject' => 'Envoi de code de validation',
+            'message' => 'Votre Code est Fee24 ',
+        ];
+        Mail::to($mail)->send(new TestMail($details));
+
+        return (view('Electeurs/Inscription3'));
     }
 }
