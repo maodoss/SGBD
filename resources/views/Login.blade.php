@@ -200,7 +200,6 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <a href="/forgot-password" class="forgot-password">Mot de passe oublié ?</a>
                 <button type="submit" class="submit-btn">Se connecter</button>
                 <div class="register-link">
                     Vous n'avez pas de compte ?<a href="{{ route('inscription') }}">S'inscrire</a>

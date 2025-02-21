@@ -20,7 +20,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
-            padding-top: 80px; /* Ajouté pour éviter que le contenu soit caché sous l'en-tête */
+            padding-top: 100px; /* Ajouté pour éviter que le contenu soit caché sous l'en-tête */
         }
 
         /* Styles de l'en-tête */
@@ -93,6 +93,7 @@
         .form-container {
             max-width: 500px;
             margin: 0 auto;
+            margin-top: 20px;
             background: white;
             padding: 30px;
             border-radius: 8px;
@@ -209,6 +210,24 @@
             margin-top: 20px;
             font-size: 14px;
         }
+        .register-link {
+            text-align: left; /* Pour éviter l'alignement avec le bouton */
+            margin-top: 1rem; /* Ajuste l’espace */
+            padding-top: 0; /* Supprime le padding */
+            border-top: none;
+        }
+
+        .register-link a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.25rem;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
     </style>
 </head>
 <body>
@@ -257,52 +276,7 @@
                     Vous avez un compte ?<a href="{{ route('login') }}">Se connecter</a>
                 </div>
                 <div></div>
-                <button type="button" class="next" onclick="window.location.href='form2.html'">Suivant</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Deuxième formulaire -->
-    <div class="form-container form-step" id="step2">
-        <div class="progress-bar">
-            <div class="progress-step active">1</div>
-            <div class="progress-step active">2</div>
-            <div class="progress-step">3</div>
-        </div>
-        <h2>Informations de contact</h2>
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="phone">Numéro de téléphone</label>
-                <input type="tel" id="phone" name="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Adresse email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="button-group">
-                <button type="button" class="previous" onclick="window.location.href='form1.html'">Précédent</button>
-                <button type="button" class="next" onclick="window.location.href='form3.html'">Suivant</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Troisième formulaire -->
-    <div class="form-container form-step" id="step3">
-        <div class="progress-bar">
-            <div class="progress-step active">1</div>
-            <div class="progress-step active">2</div>
-            <div class="progress-step active">3</div>
-        </div>
-        <h2>Vérification</h2>
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="auth_code">Code d'authentification</label>
-                <input type="text" id="auth_code" name="auth_code" required>
-            </div>
-            <p class="message">Un code d'authentification a été envoyé sur votre téléphone et email.</p>
-            <div class="button-group">
-                <button type="button" class="previous" onclick="window.location.href='form2.html'">Précédent</button>
-                <button type="submit" class="next">Finaliser l'inscription</button>
+                <button type="button" class="next" onclick="window.location.href='/Inscription2'">Suivant</button>
             </div>
         </form>
     </div>
