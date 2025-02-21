@@ -254,7 +254,8 @@
             <div class="progress-step">3</div>
         </div>
         <h2>Informations d'identification</h2>
-        <form action="/register" method="POST">
+        <form action="/verification" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="voter_card">Numéro de carte d'électeur</label>
                 <input type="text" id="voter_card" name="voter_card" required>
@@ -276,7 +277,8 @@
                     Vous avez un compte ?<a href="{{ route('login') }}">Se connecter</a>
                 </div>
                 <div></div>
-                <button type="button" class="next" onclick="window.location.href='/Inscription2'">Suivant</button>
+                <input type="submit" value="Suivant" class="next">
+                {{-- <button type="button" class="next" onclick="window.location.href='/Inscription2'">Suivant</button> --}}
             </div>
         </form>
     </div>

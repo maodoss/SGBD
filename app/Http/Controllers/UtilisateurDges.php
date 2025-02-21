@@ -146,10 +146,10 @@ class UtilisateurDges extends Controller
     {
         return view('UtilisateurDge/Verif_electeur');
     }
-    public function saisie_candidat()
-    {
-        return view('UtilisateurDge/saisie_candidat');
-    }
+    // public function saisie_candidat()
+    // {
+    //     return view('UtilisateurDge/saisie_candidat');
+    // }
 
     public function Verif_traitement(Request $request)
     {
@@ -161,6 +161,10 @@ class UtilisateurDges extends Controller
 
         $candidat = electeurs::where('num_electeur', $numero)->first();
         // return $candidat->nom;
+        if (!$candidat) {
+            return view('UtilisateurDge/Verif_electeur');
+            # code...
+        }
         return view('UtilisateurDge/saisie_candidat', compact('candidat'));
     }
 
@@ -181,7 +185,7 @@ class UtilisateurDges extends Controller
         $parti = $request->parti;
         $slogan = $request->slogan;
         $photo = $request->photo;
-        $couleur = $request->couleur;
+        $couleur = $request->couleurs;
         $urlInfos = $request->urlInfos;
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();

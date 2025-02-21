@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Candidats;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UtilisateurDges;
@@ -43,8 +44,8 @@ Route::get('/logout', [UtilisateurDges::class, 'logout'])->name('logout');
 Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('Verif_electeur');
 Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
 
-Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
-Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
+// Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
+Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'traitement_saisie_candidat'])->name('traitement_saisie_candidat');
 
 
 //Liste_candidat
@@ -52,3 +53,5 @@ Route::get('Liste_candidat', [PostController::class, 'Liste_candidat'])->name('L
 Route::get('details_candidat', [PostController::class, 'details_candidat'])->name('details_candidat');
 
 
+//electeur
+Route::post('/verification', [Candidats::class, 'verification'])->name('verification');
