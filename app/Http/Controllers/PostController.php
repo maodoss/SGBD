@@ -25,6 +25,14 @@ class PostController extends Controller
     {
         return view('Electeurs/Inscription');
     }
+    public function Inscription2()
+    {
+        return view('Electeurs/Inscription2');
+    }
+    public function Inscription3()
+    {
+        return view('Electeurs/Inscription3');
+    }
     public function Parrainage()
     {
         return view('Electeurs/Parrainage');
