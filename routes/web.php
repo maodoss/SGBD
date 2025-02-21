@@ -32,12 +32,14 @@ Route::post('traitement_upload', [UtilisateurDges::class, 'traitement_upload'])-
 Route::get('/dashdge', [UtilisateurDges::class, 'dashdge'])->name('dashdge');
 Route::get('/AdminLogin', [UtilisateurDges::class, 'AdminLogin'])->name('AdminLogin');
 Route::post('/traitement_login', [UtilisateurDges::class, 'traitement_login'])->name('traitement_login');
+Route::post('/periode_parrainage', [UtilisateurDges::class, 'setPeriodeParrainage'])->name('setPeriode');
+Route::get('/logout', [UtilisateurDges::class, 'logout'])->name('logout');
 
 Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('Verif_electeur');
 Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
 
-// Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
-Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'traitement_saisie_candidat'])->name('traitement_saisie_candidat');
+Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
+Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
 
 
 //Liste_candidat

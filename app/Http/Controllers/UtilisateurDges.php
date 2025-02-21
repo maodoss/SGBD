@@ -3,213 +3,95 @@
 namespace App\Http\Controllers;
 
 use App\Models\electeurs;
+use App\Models\candidats;
+use App\Models\periode_parrainages;
 use Illuminate\Http\Request;
 use App\Models\utilisateur_dges;
 use App\Models\fichier_electoral;
-// use App\Models\FichierElectoral;
 use App\Models\tentative_uploads;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
-use App\Models\candidats;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UtilisateurDges extends Controller
 {
+    // ... Les méthodes existantes (dashdge, AdminLogin, Upload, etc.) ...
 
-    public function dashdge()
-    {
-        return view('UtilisateurDge/Dashdge');
-    }
-    public function AdminLogin()
-    {
-        return view('UtilisateurDge/AdminLogin');
-    }
-
-    public function traitement_login()
-    {
-        validator(request()->all(), [
-            'email' => ['required'],
-            'password' => ['required']
-
-        ])->validate();
-        $user = utilisateur_dges::where('email', request('email'))->first();
-
-        if ($user && $user->password === request('password')) {
-            // Authentifier manuellement l'utilisateur
-            auth()->login($user);
-
-            return view('UtilisateurDge/dashdge');
-        } else {
-            return "Connexion non réussie";
-        }
-        // if (auth()->attempt(request()->only(['email', 'password']))) {
-        //     return ("Connexion reussie");
-        // } else {
-        //     return ("Connexion non reussie");
-        // }
-    }
-
-    //traitement upload 
-    public function Upload()
-    {
-        return view('UtilisateurDge/Upload');
-    } //renvoie le formulaire 
-    public function traitement_upload(Request $request)
+    public function traitement_login(Request $request)
     {
         $request->validate([
-            'temp_file' => 'required|file|max:2048',
-            'checksum' => 'required'
-        ]);
-        $checksum_dge = $request->checksum;
-        $path = $request->file('temp_file')->store('public/files');
-        $fileName = $request->file('temp_file')->getClientOriginalName();
-        $user_dge_id = utilisateur_dges::find(Auth::id())->id;
-
-        $checksum = hash_file('sha256', storage_path('app/' . $path));
-        $file = tentative_uploads::create([
-            'nom_fichier' => $fileName,
-            'path' => $path,
-            'checksum_utilise' => $checksum,
-            'user_dge_id' => $user_dge_id,
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
-        $path = storage_path('app/' . $file->path);
-        $content = file_get_contents($path);
+        $user = utilisateur_dges::where('email', $request->email)->first();
 
-        // S'il y'a une erreur "not permitted" sur laravel executer la commande en dessous sur votre terminal en tant qu'admin .
-        // icacls "C:\Users\Mouha\OneDrive\Bureau\SGBD\SGBD\storage\app\public\files\*" /grant Everyone:F
-
-
-
-        // Détecter l'encodage
-        $encoding = mb_detect_encoding($content, ['UTF-8', 'ISO-8859-1', 'Windows-1252', 'ASCII'], true);
-
-        if ($encoding != "UTF-8") {
-            return redirect()->back()->with('error', "ERREUR!! Le type de caractere doit etre UTF-8");
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            return redirect()->route('dashdge');
         }
-        if ($checksum != $checksum_dge) {
-            return redirect()->back()->with('error', "ERREUR!! Le checksum ne correspond pas");
-        }
-        if ($checksum == $checksum_dge && $encoding == "UTF-8") {
-            $file->is_valid = true;
-            $file->save();
-            //On fait la copie car le fichier est valide 
-            $filevalid = fichier_electoral::create([
-                'nom_fichier' => $file->nom_fichier,
-                'path' => $file->path,
-                'checksum' => $file->checksum_utilise,
-                'user_dge_id' => $file->user_dge_id,
-            ]);
-            $filevalid->save();
 
-            //test
-            $file = $filevalid->path;
-            // $path = $filevalid->getRealPath();
-            // Ouvrir le fichier CSV
-            $handle = fopen($path, 'r');
-
-            $header = true; // Pour ignorer la première ligne (titres des colonnes)
-
-            while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                if ($header) {
-                    $header = false;
-                    continue;
-                }
-
-                // Insérer les données dans la table electeurs
-                electeurs::create([
-                    'cin'                 => $row[0],
-                    'num_electeur'        => $row[1],
-                    'nom'                 => $row[2],
-                    'prenom'              => $row[3],
-                    'date_naissance'      => $row[4],
-                    'lieu_naissance'      => $row[5],
-                    'sexe'                => $row[6],
-                    'bureau_vote'         => $row[7],
-                    'email'               => $row[8],
-                    'telephone'           => $row[9],
-                    'code_auth'           => $row[10],
-                    'fichier_electoral_id' => $filevalid->id,
-
-                    // 'fichier_electoral_id' => $row[11],
-                ]);
-            }
-
-            fclose($handle);
-
-            //fintest
-
-            return redirect()->back()->with('status', "Le fichier a ete soumis. Les electeurs sont enregistres");
-        }
+        return redirect()->back()->with('error', 'Identifiants incorrects !');
     }
 
-    public function Verif_electeur()
-    {
-        return view('UtilisateurDge/Verif_electeur');
-    }
-    // public function saisie_candidat()
-    // {
-    //     return view('UtilisateurDge/saisie_candidat');
-    // }
-
-    public function Verif_traitement(Request $request)
-    {
-        $request->validate([
-            'numero_electeur' => ['required'],
-        ]);
-        $numero  = $request->numero_electeur;
-        // dd($numero);
-
-        $candidat = electeurs::where('num_electeur', $numero)->first();
-        // return $candidat->nom;
-        //dd($candidat);
-        if (!$candidat) {
-            return redirect()->back()->with('error', 'Aucun électeur trouvé avec ce numéro.');
-        }
-        return view('UtilisateurDge/saisie_candidat', compact('candidat'));
-    }
-
+    /**
+     * Enregistrement d'un candidat
+     */
     public function traitement_saisie_candidat(Request $request)
     {
         $request->validate([
-            'email' => ['required'],
-            'telephone' => ['required'],
-            'parti' => ['required'],
-            'slogan' => ['required'],
-            'photo' => ['required'],
-            'couleurs' => ['required'],
-            'urlInfos' => ['required'],
+            'electeur_id' => 'required|exists:electeurs,id',
+            'email' => 'required|email|unique:candidats,email',
+            'telephone' => 'required|unique:candidats,telephone',
+            'nom_parti' => 'nullable|string|max:255',
+            'slogan' => 'nullable|string|max:255',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'couleurs' => 'required|string|max:100',
+            'urlInfos' => 'nullable|url'
         ]);
-        // $electeur = electeurs::where('id', $id)->first();
 
-        $email = $request->email;
-        // return "{{$email}}";
+        // Gestion de l'upload de la photo
+        $photoPath = $request->file('photo')->store('public/candidats');
 
-        $telephone = $request->telephone;
-        $parti = $request->parti;
-        $slogan = $request->slogan;
-        $photo = $request->photo;
-        $couleur = $request->couleur;
-        $urlInfos = $request->urlInfos;
-        $num_electeur = $request->num_electeur;
-        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
-        // dd($electeur);
-        $electeur_id = $electeur->id;
-        $code_auth = 0000;
-        // dd($electeur);
-
-        $candidats = candidats::create([
-            'email' => $email,
-            'telephone' => $telephone,
-            'nom_parti' => $parti,
-            'slogan' => $slogan,
-            'photo' => $photo,
-            'couleur_parti' => $couleur,
-            'uri_page' => $urlInfos,
-            'electeur_id' => $electeur_id,
-            'code_auth' => $code_auth,
-
+        candidats::create([
+            'electeur_id' => $request->electeur_id,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'nom_parti' => $request->nom_parti,
+            'slogan' => $request->slogan,
+            'photo' => Storage::url($photoPath),
+            'couleur_parti' => $request->couleurs,
+            'uri_page' => $request->urlInfos,
+            'code_auth' => substr(md5(uniqid()), 0, 8) // Génération d'un code aléatoire
         ]);
-        $candidats->save();
-        return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
+
+        return redirect()->route('Liste_candidat')->with('success', 'Candidat enregistré avec succès !');
+    }
+
+    /**
+     * Gestion de la période de parrainage
+     */
+    public function setPeriodeParrainage(Request $request)
+    {
+        $request->validate([
+            'date_debut' => 'required|date|after:+6 months',
+            'date_fin' => 'required|date|after:date_debut'
+        ]);
+
+        periode_parrainages::updateOrCreate(
+            ['id' => 1], // Assume une seule période active
+            $request->only(['date_debut', 'date_fin'])
+        );
+
+        return redirect()->back()->with('success', 'Période mise à jour !');
+    }
+
+    /**
+     * Logout
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('AdminLogin');
     }
 }
