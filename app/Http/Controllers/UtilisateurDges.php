@@ -10,6 +10,7 @@ use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
+use App\Models\candidats;
 
 class UtilisateurDges extends Controller
 {
@@ -182,5 +183,26 @@ class UtilisateurDges extends Controller
         $photo = $request->photo;
         $couleur = $request->couleur;
         $urlInfos = $request->urlInfos;
+        $num_electeur = $request->num_electeur;
+        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        // dd($electeur);
+        $electeur_id = $electeur->id;
+        $code_auth = 0000;
+        // dd($electeur);
+
+        $candidats = candidats::create([
+            'email' => $email,
+            'telephone' => $telephone,
+            'nom_parti' => $parti,
+            'slogan' => $slogan,
+            'photo' => $photo,
+            'couleur_parti' => $couleur,
+            'uri_page' => $urlInfos,
+            'electeur_id' => $electeur_id,
+            'code_auth' => $code_auth,
+
+        ]);
+        $candidats->save();
+        return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
     }
 }
