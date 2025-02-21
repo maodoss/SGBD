@@ -199,9 +199,9 @@
           </div>
         </a>
         <nav class="nav-links">
-          <a href="UtilisateurDge/dashdge">Dashboard</a>
+          <a href="/dashdge">Dashboard</a>
           <a href="/Liste_candidat">Liste des candidats</a>
-          <a href="UtilisateurDge/AdminLogin" class="logout-btn">Se déconnecter</a>
+          <a href="/AdminLogin" class="logout-btn">Se déconnecter</a>
         </nav>
       </div>
     </div>
