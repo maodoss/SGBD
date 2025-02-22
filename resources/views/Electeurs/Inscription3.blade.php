@@ -235,7 +235,8 @@
             <div class="progress-step active">3</div>
         </div>
         <h2>Vérification</h2>
-        <form action="#" method="POST">
+        <form action="/verifcode" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="auth_code">Code d'authentification</label>
                 <input type="text" id="auth_code" name="auth_code" required>
@@ -243,7 +244,8 @@
             <p class="message">Un code d'authentification a été envoyé sur votre téléphone et email.</p>
             <div class="button-group">
                 <button type="button" class="previous" onclick="window.location.href='/Inscription2'">Précédent</button>
-                <button type="submit" class="next">Finaliser l'inscription</button>
+                <input type="submit" value="Finaliser l'incription">
+                {{-- <button type="submit" class="next">Finaliser l'inscription</button> --}}
             </div>
         </form>
     </div>

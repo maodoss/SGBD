@@ -120,4 +120,23 @@ class Candidats extends Controller
 
         return (view('Electeurs/Inscription3'));
     }
+
+    public function verifcode(Request $request)
+    {
+
+        $request->validate([
+            'auth_code' => 'required',
+        ]);
+
+        $code = $request->auth_code;
+
+        if ($code == "Fee24") {
+            return (view('Electeurs/Parrainage'));
+        }
+    }
+
+    public function parrainer()
+    {
+        return (view('Electeurs/Parrainage'));
+    }
 }

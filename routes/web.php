@@ -56,6 +56,10 @@ Route::get('details_candidat', [PostController::class, 'details_candidat'])->nam
 //electeur
 Route::post('/verification', [Candidats::class, 'verification'])->name('verification');
 Route::post('/sendmail', [Candidats::class, 'sendmail'])->name('sendmail');
+Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
+
+Route::get('parrainer', [Candidats::class, 'parrainer'])->name('parrainer');
+
 
 
 //mail

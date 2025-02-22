@@ -313,7 +313,7 @@
                     <h2>Plateforme de Parrainage Électoral</h2>
                     <p>Participez au processus démocratique en parrainant votre candidat pour l'élection présidentielle</p>
                     <div class="button-group">
-                        <a href="/login" class="btn btn-primary">
+                        <a href="/parrainer" class="btn btn-primary">
                             Parrainer un candidat
                             <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
                         </a>

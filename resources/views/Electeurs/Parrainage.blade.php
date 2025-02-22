@@ -256,10 +256,10 @@
         <p><strong>Date de naissance:</strong> <span id="date-naissance"></span></p>
         <p><strong>Bureau de vote:</strong> <span id="bureau-vote"></span></p>
       </div>
-      <div class="form-group">
+      {{-- <div class="form-group">
         <label for="code-auth">Code d'authentification</label>
         <input type="text" id="code-auth" required>
-      </div>
+      </div> --}}
       <button class="btn" onclick="verifierAuthentification()">Valider</button>
     </div>
 
