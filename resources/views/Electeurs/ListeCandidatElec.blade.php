@@ -1,8 +1,9 @@
+<!-- selection.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Identification de l'électeur pour parrainer</title>
+    <title>Sélection du candidat - République du Sénégal</title>
     <link rel="stylesheet" href="style.css">
     <style>
       /* style.css */
@@ -211,7 +212,7 @@ body {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/dash_electeur" class="logo-section">
+            <a href="/" class="logo-section">
                 <img src="image/presi.jpg" alt="Logo République du Sénégal" width="50" height="50" />
                 <div class="logo-text">
                     <h1>République du Sénégal</h1>
@@ -223,21 +224,31 @@ body {
 
     <main class="main-container">
         <div class="step-container">
-            <h2 class="step-title">Identification de l'électeur</h2>
-            <form action="confirmation.html" method="GET">
-                <div class="form-group">
-                    <label for="num-electeur">Numéro de carte d'électeur</label>
-                    <input type="text" id="num-electeur" name="num-electeur" required>
-                </div>
-                <div class="form-group">
-                    <label for="num-cni">Numéro de carte d'identité nationale</label>
-                    <input type="text" id="num-cni" name="num-cni" required>
-                </div>
-                <input type="submit" value="Suivant" class="btn">
-                {{-- <button type="button" class="btn" onclick="window.location.href='/Parrainage2'">Vérifier</button> --}}
-            </form>
+            <h2 class="step-title">Sélection du candidat</h2>
+            <div class="candidate-grid">
+                <form action="validation.html" method="POST">
+                    <div class="candidate-card" onclick="this.querySelector('input').checked = true">
+                        <img src="/api/placeholder/250/200" alt="Candidat 1">
+                        <div class="candidate-info">
+                            <h3>Candidat 1</h3>
+                            <p>Pour un Sénégal meilleur</p>
+                            <p><small>Couleurs: Vert, Jaune, Rouge</small></p>
+                            <input type="radio" name="candidat" value="1" required>
+                        </div>
+                    </div>
+                    <div class="candidate-card" onclick="this.querySelector('input').checked = true">
+                        <img src="/api/placeholder/250/200" alt="Candidat 2">
+                        <div class="candidate-info">
+                            <h3>Candidat 2</h3>
+                            <p>Ensemble pour l'avenir</p>
+                            <p><small>Couleurs: Bleu, Blanc, Rouge</small></p>
+                            <input type="radio" name="candidat" value="2" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Valider la sélection</button>
+                </form>
+            </div>
         </div>
     </main>
 </body>
 </html>
-
