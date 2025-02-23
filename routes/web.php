@@ -19,15 +19,17 @@ use App\Http\Controllers\UtilisateurDges;
 //Declaration de la route acceuil
 Route::get('/', [PostController::class, 'Acceuil'])->name('Acceuil');
 //Route qui gere l'inscription et la connexion des electeurs 
-Route::get('/login', [PostController::class, 'login'])->name('login');
-Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
-Route::get('/Inscription2', [PostController::class, 'Inscription2'])->name('Inscription2');
-Route::get('/Inscription3', [PostController::class, 'Inscription3'])->name('Inscription3');
+// Route::get('/login', [PostController::class, 'login'])->name('login');
+// Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
+// Route::get('/Inscription2', [PostController::class, 'Inscription2'])->name('Inscription2');
+// Route::get('/Inscription3', [PostController::class, 'Inscription3'])->name('Inscription3');
 Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('dash_candidat');
 Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
 
 //Parainage d'un candidat
 Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
+Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
+Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [UtilisateurDges::class, 'Upload'])->name('Upload');
@@ -62,5 +64,5 @@ Route::get('parrainer', [Candidats::class, 'parrainer'])->name('parrainer');
 
 
 
-//mail
-// Route::get('/test-email', [Candidats::class, 'envoyerEmail']);
+//traitement login candidat
+Route::post('/traitement_login_candidat', [Candidats::class, 'traitement_login_candidat'])->name('traitement_login_candidat');

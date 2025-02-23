@@ -11,6 +11,8 @@ use App\Models\tentative_uploads;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use App\Models\candidats;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class UtilisateurDges extends Controller
 {
@@ -189,6 +191,7 @@ class UtilisateurDges extends Controller
         $urlInfos = $request->urlInfos;
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        $cin = $electeur->cin;
         // dd($electeur);
         $electeur_id = $electeur->id;
         $code_auth = 0000;
@@ -207,6 +210,13 @@ class UtilisateurDges extends Controller
 
         ]);
         $candidats->save();
+        $details = [
+            'name' => 'Direction Des Elections ',
+            'subject' => 'Envoi information de connexion sur votre compte candidat',
+            'message' => 'Votre mdp est ' . $cin . '' . $parti  . ' . Bonne chance',
+        ];
+        Mail::to($email)->send(new TestMail($details));
+
         return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
     }
 }

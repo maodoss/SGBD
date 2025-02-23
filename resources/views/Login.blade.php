@@ -190,7 +190,7 @@
                 <h2>Connexion</h2>
                 <p>Accédez à votre espace personnel</p>
             </div>
-            <form action="/login" method="POST">
+            <form action="/traitement_login_candidat" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">Adresse email</label>
@@ -200,7 +200,8 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <button type="submit" class="submit-btn">Se connecter</button>
+                <input type="submit" class="submit-btn" value="Se connecter">
+                {{-- <button type="submit" class="submit-btn">Se connecter</button> --}}
                 <div class="register-link">
                     Vous n'avez pas de compte ?<a href="{{ route('inscription') }}">S'inscrire</a>
                 </div>

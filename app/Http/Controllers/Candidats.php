@@ -139,4 +139,19 @@ class Candidats extends Controller
     {
         return (view('Electeurs/Parrainage'));
     }
+
+
+
+    //traitement connexion candidats
+
+    public function traitement_login_candidat(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+
+        ]);
+        $email = $request->email;
+        $password = $request->password;
+    }
 }
