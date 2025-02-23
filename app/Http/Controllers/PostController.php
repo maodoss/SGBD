@@ -37,6 +37,18 @@ class PostController extends Controller
     {
         return view('Electeurs/Parrainage');
     }
+    public function Parrainage2()
+    {
+        return view('Electeurs/Parrainage2');
+    }
+    public function Parrainage3()
+    {
+        return view('Electeurs/Parrainage3');
+    }
+    public function dash_electeur()
+    {
+        return view('Electeurs/dash_electeur');
+    }
 
 
 

@@ -29,7 +29,10 @@ Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])
 //Parainage d'un candidat
 Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
 Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
+Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
+Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
+
 
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [UtilisateurDges::class, 'Upload'])->name('Upload');
