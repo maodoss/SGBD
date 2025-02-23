@@ -330,21 +330,21 @@
         <div class="container">
             <h3>Services disponibles</h3>
             <div class="services-grid">
-                <a href="{{ route('inscription') }}" class="service-link">
+                <a href="inscription" class="service-link">
                     <div class="service-card">
                         <i class="fas fa-user"></i>
                         <h4>Créer votre profil</h4>
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>
-                <a href="{{ route('login') }}" class="service-link">
+                <a href="login" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>
                     <p>Consultez les dates importantes du processus de parrainage</p>
                 </div>
                 </a>
-                <a href="{{ route('login') }}" class="service-link">
+                <a href="login" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-sign-in-alt"></i>
                     <h4>Espace personnel</h4>
