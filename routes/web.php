@@ -28,8 +28,11 @@ Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])
 
 //Parainage d'un candidat
 Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
+Route::post('verification_parrain', [PostController::class, 'verification_parrain'])->name('verification_parrain');
+
 Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
-Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
+Route::get('ListeCandidatElec', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
+
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
 
@@ -63,7 +66,7 @@ Route::post('/verification', [Candidats::class, 'verification'])->name('verifica
 Route::post('/sendmail', [Candidats::class, 'sendmail'])->name('sendmail');
 Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
-Route::get('parrainer', [Candidats::class, 'parrainer'])->name('parrainer');
+// Route::get('parrainer', [Candidats::class, 'parrainer'])->name('parrainer');
 
 
 

@@ -225,13 +225,13 @@ body {
         <div class="step-container">
             <h2 class="step-title">Confirmation d'identité</h2>
             <div class="info-display">
-                <p><strong>Nom:</strong> <span id="nom">DIOP</span></p>
-                <p><strong>Prénom:</strong> <span id="prenom">Mamadou</span></p>
-                <p><strong>Date de naissance:</strong> <span id="date-naissance">15/03/1980</span></p>
-                <p><strong>Bureau de vote:</strong> <span id="bureau-vote">Centre de vote de Dakar</span></p>
+                <p><strong>Nom:</strong> <span id="nom">{{$electeur->nom}}</span></p>
+                <p><strong>Prénom:</strong> <span id="prenom">{{$electeur->prenom}}</span></p>
+                <p><strong>Date de naissance:</strong> <span id="date-naissance">{{$electeur->date_naissance}}</span></p>
+                <p><strong>Bureau de vote:</strong> <span id="bureau-vote">{{$electeur->bureau_vote}}</span></p>
             </div>
-            <input type="submit" value="Suivant" class="btn">
-            {{-- <button type="button" class="btn" onclick="window.location.href='/Parrainage3'">Vérifier</button> --}}
+            {{-- <input type="submit" value="Suivant" class="btn"> --}}
+            <button type="button" class="btn" onclick="window.location.href='/ListeCandidatElec'">Vérifier</button>
         </div>
     </main>
 </body>

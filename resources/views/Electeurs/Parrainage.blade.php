@@ -224,14 +224,15 @@ body {
     <main class="main-container">
         <div class="step-container">
             <h2 class="step-title">Identification de l'électeur</h2>
-            <form action="confirmation.html" method="GET">
+            <form action="verification_parrain" method="POST">
+                @csrf
                 <div class="form-group">
                     <label for="num-electeur">Numéro de carte d'électeur</label>
-                    <input type="text" id="num-electeur" name="num-electeur" required>
+                    <input type="text" id="num-electeur" name="num_electeur" required>
                 </div>
                 <div class="form-group">
                     <label for="num-cni">Numéro de carte d'identité nationale</label>
-                    <input type="text" id="num-cni" name="num-cni" required>
+                    <input type="text" id="num-cni" name="num_cni" required>
                 </div>
                 <input type="submit" value="Suivant" class="btn">
                 {{-- <button type="button" class="btn" onclick="window.location.href='/Parrainage2'">Vérifier</button> --}}

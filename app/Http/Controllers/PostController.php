@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
 use Illuminate\Support\Facades\Auth;
+use App\Models\electeurs;
 
 
 class PostController extends Controller
@@ -37,6 +38,32 @@ class PostController extends Controller
     {
         return view('Electeurs/Parrainage');
     }
+
+    public function verification_parrain(Request $request)
+    {
+        // dd();
+        $request->validate([
+            'num_electeur' => 'required',
+            'num_cni' => 'required',
+
+        ]);
+
+        $num_electeur = $request->num_electeur;
+        $num_cni = $request->num_cni;
+
+        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        // dd($electeur, $num_cni, $num_electeur);
+        if ($electeur->cni === $num_cni) {
+            return ("erreur");
+        }
+        return (view('Electeurs/Parrainage2', compact('electeur')));
+    }
+
+    public function ListeCandidatElec()
+    {
+        return (view('Electeurs/ListeCandidatElec'));
+    }
+
     public function Parrainage2()
     {
         return view('Electeurs/Parrainage2');
