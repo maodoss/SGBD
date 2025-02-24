@@ -227,25 +227,32 @@ body {
             <h2 class="step-title">Sélection du candidat</h2>
             <div class="candidate-grid">
                 <form action="validation.html" method="POST">
+                    @foreach($candidats as $candidat)
+
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
                         <img src="/api/placeholder/250/200" alt="Candidat 1">
                         <div class="candidate-info">
-                            <h3>Candidat 1</h3>
-                            <p>Pour un Sénégal meilleur</p>
-                            <p><small>Couleurs: Vert, Jaune, Rouge</small></p>
+                            <h3>{{ $candidat->nom }}</h3>
+                            <h3>{{ $candidat->prenom }}</h3>
+
+                            <p>{{ $candidat->slogan }}</p>
+                            <p><small>{{ $candidat->couleur_parti }}</small></p>
+                            <p><small>{{ $candidat->nom_parti }}</small></p>
+
                             <input type="radio" name="candidat" value="1" required>
                         </div>
                     </div>
-                    <div class="candidate-card" onclick="this.querySelector('input').checked = true">
-                        <img src="/api/placeholder/250/200" alt="Candidat 2">
-                        <div class="candidate-info">
-                            <h3>Candidat 2</h3>
-                            <p>Ensemble pour l'avenir</p>
-                            <p><small>Couleurs: Bleu, Blanc, Rouge</small></p>
-                            <input type="radio" name="candidat" value="2" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn">Valider la sélection</button>
+                    @endforeach
+
+                    {{-- @foreach($candidats as $candidat)
+                    <tr>
+                        <td>{{ $candidat->id }}</td>
+                        <td>{{ $candidat->nom }}</td>
+                        <td>{{ $candidat->email }}</td>
+                        <td>{{ $candidat->telephone }}</td>
+                    </tr> --}}
+                    {{-- @endforeach --}}
+                   
                 </form>
             </div>
         </div>

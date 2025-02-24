@@ -57,8 +57,8 @@ Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'traitement_s
 
 
 //Liste_candidat
-Route::get('Liste_candidat', [PostController::class, 'Liste_candidat'])->name('Liste_candidat');
-Route::get('details_candidat', [PostController::class, 'details_candidat'])->name('details_candidat');
+Route::get('Liste_candidat', [UtilisateurDges::class, 'Liste_candidat'])->name('Liste_candidat');
+Route::get('details_candidat', [UtilisateurDges::class, 'details_candidat'])->name('details_candidat');
 
 
 //electeur

@@ -153,5 +153,6 @@ class Candidats extends Controller
         ]);
         $email = $request->email;
         $password = $request->password;
+        //je dois avoir l'attribut password pour avance 
     }
 }

@@ -129,62 +129,6 @@
       background: #337ab7;
     }
   </style>
-
-  <script>
-    // Liste d’exemple. En pratique, ces données seraient reçues d’un serveur
-    const candidats = [
-      {
-        numeroElecteur: "100000001",
-        nom: "NDIAYE",
-        prenom: "Abdou",
-        dateNaissance: "1981-07-01",
-        lieuNaissance: "Dakar"
-      },
-      {
-        numeroElecteur: "100000002",
-        nom: "BA",
-        prenom: "Fatou",
-        dateNaissance: "1982-04-12",
-        lieuNaissance: "Thies"
-      }
-    ];
-
-    function chargerListe() {
-      const tbody = document.getElementById('candidatsBody');
-      candidats.forEach((cand) => {
-        const tr = document.createElement('tr');
-
-        // Colonne Numéro Électeur
-        const tdNum = document.createElement('td');
-        tdNum.textContent = cand.numeroElecteur;
-        tr.appendChild(tdNum);
-
-        // Colonne Nom
-        const tdNom = document.createElement('td');
-        tdNom.textContent = cand.nom;
-        tr.appendChild(tdNom);
-
-        // Colonne Prénom
-        const tdPrenom = document.createElement('td');
-        tdPrenom.textContent = cand.prenom;
-        tr.appendChild(tdPrenom);
-
-        // Colonne Action (lien vers detail_candidat.html)
-        const tdAction = document.createElement('td');
-        // On crée un lien avec le paramètre numeroElecteur dans l’URL
-        const lienDetail = document.createElement('a');
-        lienDetail.href = `/details_candidat?numeroElecteur=${cand.numeroElecteur}`;
-        lienDetail.textContent = "Voir détails";
-        lienDetail.className = "btn-detail";
-        tdAction.appendChild(lienDetail);
-
-        tr.appendChild(tdAction);
-        tbody.appendChild(tr);
-      });
-    }
-
-    window.onload = chargerListe;
-  </script>
 </head>
 <body>
   <!-- En-tête fixe -->
@@ -221,7 +165,14 @@
         </tr>
       </thead>
       <tbody id="candidatsBody">
-        <!-- Le tableau sera rempli par JS -->
+      @foreach($candidats as $candidat)
+                    <tr>
+                        <td>{{ $candidat->email }}</td>
+                        <td>{{ $candidat->nom_parti}}</td>
+                        <td>{{ $candidat->uri_page }}</td>
+                        <td><button>avoir un new code</button></td>
+                    </tr>
+                    @endforeach
       </tbody>
     </table>
   </div>

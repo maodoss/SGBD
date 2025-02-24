@@ -191,6 +191,9 @@ class UtilisateurDges extends Controller
         $urlInfos = $request->urlInfos;
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        if (!$electeur) {
+            return ("Erreur le numero ne correspond pas ");
+        }
         $cin = $electeur->cin;
         // dd($electeur);
         $electeur_id = $electeur->id;
@@ -218,5 +221,19 @@ class UtilisateurDges extends Controller
         Mail::to($email)->send(new TestMail($details));
 
         return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
+    }
+
+    public function Liste_candidat()
+    {
+        $candidats = candidats::all();
+        if (!$candidats) {
+            return ("Il y'a pas encore de candidats "); //a gerer apres
+        }
+        return view('Liste_candidat', compact('candidats'));
+    }
+
+    public function details_candidat()
+    {
+        return view('UtilisateurDge/details_candidat');
     }
 }

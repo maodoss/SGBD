@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\candidats;
 use App\Models\utilisateur_dges;
 use Illuminate\Http\Request;
 use App\Models\fichier_electoral;
@@ -52,6 +53,9 @@ class PostController extends Controller
         $num_cni = $request->num_cni;
 
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        if (!$electeur) {
+            return ("Erreur le numero ne correspond pas ");
+        }
         // dd($electeur, $num_cni, $num_electeur);
         if ($electeur->cni === $num_cni) {
             return ("erreur");
@@ -61,7 +65,8 @@ class PostController extends Controller
 
     public function ListeCandidatElec()
     {
-        return (view('Electeurs/ListeCandidatElec'));
+        $candidats = candidats::all();
+        return (view('Electeurs/ListeCandidatElec', compact('candidats')));
     }
 
     public function Parrainage2()
