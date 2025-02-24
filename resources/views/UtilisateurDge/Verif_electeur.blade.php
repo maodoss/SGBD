@@ -178,6 +178,13 @@
         {{session('status')}} 
     </div>
     @endif
+    @if (session('error'))
+    <div class="alert alert-danger">
+      {{-- {{ $errors->first('error') }} --}}
+      {{ session('error') }}
+    </div>
+    @endif
+  
     <h1>Vérification du Numéro d'Électeur</h1>
     <form action="/Verif_traitement" method="POST" >
       @csrf

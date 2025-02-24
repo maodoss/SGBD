@@ -225,6 +225,18 @@ body {
     <main class="main-container">
         <div class="step-container">
             <h2 class="step-title">Sélection du candidat</h2>
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{session('status')}} 
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+              {{-- {{ $errors->first('error') }} --}}
+              {{ session('error') }}
+            </div>
+            @endif
+          
             <div class="candidate-grid">
                 <form action="validation.html" method="POST">
                     @foreach($candidats as $candidat)

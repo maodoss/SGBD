@@ -220,6 +220,18 @@
                 <div class="logo-text">
                     <h1>République du Sénégal</h1>
                     <p>Système de Parrainage Électoral</p>
+                    @if (session('status'))
+                    <div class="alert alert-success">
+                        {{session('status')}} 
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                      {{-- {{ $errors->first('error') }} --}}
+                      {{ session('error') }}
+                    </div>
+                    @endif
+                  
                 </div>
             </a>
             <div class="user-actions">

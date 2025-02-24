@@ -195,10 +195,17 @@
       @csrf
       <!-- Informations de l'électeur (en lecture seule) -->
       @if (session('status'))
-    <div class="alert alert-success">
-        {{session('status')}} 
-    </div>
-    @endif
+      <div class="alert alert-success">
+          {{session('status')}} 
+      </div>
+      @endif
+      @if (session('error'))
+      <div class="alert alert-danger">
+        {{-- {{ $errors->first('error') }} --}}
+        {{ session('error') }}
+      </div>
+      @endif
+    
       <div class="form-group">
         <label for="nom">Numero Electeur :</label>
         <input type="text" id="num_electeur" value="{{ $candidat->num_electeur}}" name="num_electeur" class="readonly-field" readonly>

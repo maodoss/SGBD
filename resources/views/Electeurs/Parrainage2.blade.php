@@ -224,6 +224,18 @@ body {
     <main class="main-container">
         <div class="step-container">
             <h2 class="step-title">Confirmation d'identité</h2>
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{session('status')}} 
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+              {{-- {{ $errors->first('error') }} --}}
+              {{ session('error') }}
+            </div>
+            @endif
+          
             <div class="info-display">
                 <p><strong>Nom:</strong> <span id="nom">{{$electeur->nom}}</span></p>
                 <p><strong>Prénom:</strong> <span id="prenom">{{$electeur->prenom}}</span></p>

@@ -235,6 +235,18 @@
             <div class="progress-step active">3</div>
         </div>
         <h2>Vérification</h2>
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{session('status')}} 
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+          {{-- {{ $errors->first('error') }} --}}
+          {{ session('error') }}
+        </div>
+        @endif
+      
         <form action="/verifcode" method="POST">
             @csrf
             <div class="form-group">
