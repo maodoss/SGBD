@@ -19,6 +19,8 @@ class electeurs extends Model
         'sexe',
         'bureau_vote',
         'email',
+        'aVote',         
+        'aUnCompte',
         'telephone',
         'code_auth',
         'fichier_electoral_id'

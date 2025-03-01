@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('lieu_naissance');
             $table->enum('sexe', ['Masculin', 'Feminin']);
             $table->string('bureau_vote');
-            $table->string('email')->unique()->nullable(); 
+            $table->string('email')->unique()->nullable();
+            $table->boolean('aVote')->default(false);       
+            $table->boolean('aUnCompte')->default(false);    
+            $table->timestamps(); 
             $table->string('telephone')->unique()->nullable();
             $table->string('code_auth')->nullable();
             $table->timestamps();
