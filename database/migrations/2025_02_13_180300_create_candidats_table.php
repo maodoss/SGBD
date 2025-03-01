@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('couleur_parti')->nullable();
             $table->string('uri_page')->nullable();
+            $table->unsignedInteger('nbr_vote')->default(0);
     
             $table->timestamps();
         });
