@@ -14,6 +14,7 @@ class candidats extends Model
         'email',
         'telephone',
         'code_auth',
+        'nbr_vote',
         'nom_parti',
         'slogan',
         'photo',
@@ -24,5 +25,9 @@ class candidats extends Model
     public function electeur()
     {
         return $this->belongsTo(electeurs::class);
+    }
+    public function parrainages()
+    {
+        return $this->hasMany(parrainages::class);
     }
 }
