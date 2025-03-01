@@ -54,13 +54,16 @@ class PostController extends Controller
 
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
         if (!$electeur) {
-            return ("Erreur le numero ne correspond pas ");
+            // return ("Erreur le numero ne correspond pas ");
+            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
         // dd($electeur, $num_cni, $num_electeur);
-        if ($electeur->cni === $num_cni) {
-            return ("erreur");
+        if ($electeur->cin === $num_cni) {
+            return (view('Electeurs/Parrainage2', compact('electeur')));
+        } else {
+            // return ("erreur");
+            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
-        return (view('Electeurs/Parrainage2', compact('electeur')));
     }
 
     public function ListeCandidatElec()

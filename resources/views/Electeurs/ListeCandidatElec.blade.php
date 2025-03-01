@@ -242,7 +242,10 @@ body {
                     @foreach($candidats as $candidat)
 
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
-                        <img src="/api/placeholder/250/200" alt="Candidat 1">
+                        {{-- <img src="/api/placeholder/250/200" alt="Candidat 1"> --}}
+                        <img src="{{ asset('storage/' . $candidat->photo) }}" alt="Photo du candidat">
+{{-- si ca ne s'affiche pas faire php artisan storage:link --}}
+
                         <div class="candidate-info">
                             <h3>{{ $candidat->nom }}</h3>
                             <h3>{{ $candidat->prenom }}</h3>

@@ -311,6 +311,17 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h2>Plateforme de Parrainage Électoral</h2>
+                    @if (session('status'))
+                    <div class="alert alert-success">
+                        {{session('status')}} 
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                      {{-- {{ $errors->first('error') }} --}}
+                      {{ session('error') }}
+                    </div>
+                    @endif
                     <p>Participez au processus démocratique en parrainant votre candidat pour l'élection présidentielle</p>
                     <div class="button-group">
                         <a href="Parrainage" class="btn btn-primary">

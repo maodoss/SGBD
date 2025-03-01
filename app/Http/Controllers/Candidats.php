@@ -131,7 +131,8 @@ class Candidats extends Controller
         $code = $request->auth_code;
 
         if ($code == "Fee24") {
-            return (view('Electeurs/Parrainage'));
+            // return (view('Electeurs/Parrainage'));
+            return view('Acceuil')->with('status', "Votre compte a ete enregistre Vous pouvez maintenant vous connecter ");
         }
     }
 

@@ -177,22 +177,27 @@ class UtilisateurDges extends Controller
             'telephone' => ['required'],
             'parti' => ['required'],
             'slogan' => ['required'],
-            'photo' => ['required'],
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'couleurs' => ['required'],
             'urlInfos' => ['required'],
         ]);
 
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('candidats', 'public');
+        } else {
+            return back()->withErrors(['photo' => 'Une erreur est survenue lors du téléchargement de la photo.']);
+        }
         $email = $request->email;
         $telephone = $request->telephone;
         $parti = $request->parti;
         $slogan = $request->slogan;
-        $photo = $request->photo;
+        // $photo = $request->photo;
         $couleur = $request->couleurs;
         $urlInfos = $request->urlInfos;
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
         if (!$electeur) {
-            return ("Erreur le numero ne correspond pas ");
+            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
         $cin = $electeur->cin;
         // dd($electeur);
@@ -205,7 +210,8 @@ class UtilisateurDges extends Controller
             'telephone' => $telephone,
             'nom_parti' => $parti,
             'slogan' => $slogan,
-            'photo' => $photo,
+            'photo' => $photoPath, // On stocke le chemin de l'image, pas l'objet
+
             'couleur_parti' => $couleur,
             'uri_page' => $urlInfos,
             'electeur_id' => $electeur_id,

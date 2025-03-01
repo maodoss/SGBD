@@ -243,7 +243,8 @@ body {
                 <p><strong>Bureau de vote:</strong> <span id="bureau-vote">{{$electeur->bureau_vote}}</span></p>
             </div>
             {{-- <input type="submit" value="Suivant" class="btn"> --}}
-            <button type="button" class="btn" onclick="window.location.href='/ListeCandidatElec'">Vérifier</button>
+            {{-- <button type="button" class="btn" onclick="window.location.href='/ListeCandidatElec'">Vérifier</button> --}}
+            <a href="ListeCandidatElec" class="btn" >Suivant</a>
         </div>
     </main>
 </body>
