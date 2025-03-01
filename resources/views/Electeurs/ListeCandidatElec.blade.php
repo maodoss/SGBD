@@ -264,10 +264,31 @@ body {
                         <td>{{ $candidat->telephone }}</td>
                     </tr> --}}
                     {{-- @endforeach --}}
-                   
+
+                    <button type="submit" class="btn">Parrainer ce candidat</button>
+
                 </form>
             </div>
         </div>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll("input[name='candidat']");
+            const submitButton = document.querySelector("button[type='submit']");
+
+            // Désactiver le bouton au chargement
+            submitButton.disabled = true;
+            submitButton.style.opacity = "0.5";
+
+            // Écouter le changement de sélection
+            radioButtons.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    submitButton.disabled = false;
+                    submitButton.style.opacity = "1";
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
