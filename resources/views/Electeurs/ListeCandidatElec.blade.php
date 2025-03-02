@@ -238,43 +238,31 @@ body {
             @endif
           
             <div class="candidate-grid">
-                <form action="validation.html" method="POST">
+                <form action="vote" method="POST">
+                    @csrf
                     @foreach($candidats as $candidat)
-
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
-                        {{-- <img src="/api/placeholder/250/200" alt="Candidat 1"> --}}
                         <img src="{{ asset('storage/' . $candidat->photo) }}" alt="Photo du candidat">
 {{-- si ca ne s'affiche pas faire php artisan storage:link --}}
-
                         <div class="candidate-info">
-                            <h3>{{ $candidat->nom }}</h3>
-                            <h3>{{ $candidat->prenom }}</h3>
-
+                                    <h3>{{ $candidat->electeur->nom ?? 'Nom inconnu' }}</h3>
+                                    <h3>{{ $candidat->electeur->prenom ?? 'Prenom inconnu' }}</h3>                             
                             <p>{{ $candidat->slogan }}</p>
                             <p><small>{{ $candidat->couleur_parti }}</small></p>
                             <p><small>{{ $candidat->nom_parti }}</small></p>
-
-                            <input type="radio" name="candidat" value="1" required>
+                            <input type="radio" name="candidat" value="{{ $candidat->id }}" required>
+                            {{-- <input type="radio" name="candidat" value="1" required> --}}
                         </div>
                     </div>
                     @endforeach
-
-                    {{-- @foreach($candidats as $candidat)
-                    <tr>
-                        <td>{{ $candidat->id }}</td>
-                        <td>{{ $candidat->nom }}</td>
-                        <td>{{ $candidat->email }}</td>
-                        <td>{{ $candidat->telephone }}</td>
-                    </tr> --}}
-                    {{-- @endforeach --}}
-
-                    <button type="submit" class="btn">Parrainer ce candidat</button>
+                    <input type="submit" class="btn" value="Parrainer ce candidat">
+                    {{-- <button type="submit" class="btn">Parrainer ce candidat</button> --}}
 
                 </form>
             </div>
         </div>
     </main>
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const radioButtons = document.querySelectorAll("input[name='candidat']");
             const submitButton = document.querySelector("button[type='submit']");
@@ -291,7 +279,7 @@ body {
                 });
             });
         });
-    </script>
+    </script> --}}
 
 </body>
 </html>

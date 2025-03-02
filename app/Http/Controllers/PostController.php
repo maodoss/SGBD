@@ -66,10 +66,24 @@ class PostController extends Controller
         }
     }
 
+
+
     public function ListeCandidatElec()
     {
         $candidats = candidats::all();
-        return (view('Electeurs/ListeCandidatElec', compact('candidats')));
+        $electeurs = electeurs::all();
+        return (view('Electeurs/ListeCandidatElec', compact('candidats', 'electeurs')));
+    }
+
+    public function vote(Request $request, $id)
+    {
+
+        $request->validate([
+            'candidat' => 'required',
+        ]);
+        $id_can = $request->candidat;
+        dd($id);
+        // dd($electeur_id);
     }
 
     public function Parrainage2()

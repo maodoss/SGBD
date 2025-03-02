@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\candidats;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use PhpParser\Node\Stmt\Foreach_;
 
 class UtilisateurDges extends Controller
 {
@@ -160,8 +161,15 @@ class UtilisateurDges extends Controller
         ]);
         $numero  = $request->numero_electeur;
         // dd($numero);
+        // $cantidat_test = candidats::where('num_electeur', $numero)->first();
+
 
         $candidat = electeurs::where('num_electeur', $numero)->first();
+        $testid = $candidat->id;
+        $cantidat_test = candidats::where('electeur_id', $testid)->first();
+        if ($cantidat_test) {
+            return redirect()->back()->with('error', "Le candidat est deja enregistre");
+        }
         // return $candidat->nom;
         if (!$candidat) {
             return view('UtilisateurDge/Verif_electeur');
@@ -202,7 +210,7 @@ class UtilisateurDges extends Controller
         $cin = $electeur->cin;
         // dd($electeur);
         $electeur_id = $electeur->id;
-        $code_auth = 0000;
+        $code_auth = $electeur->code_auth;
         // dd($electeur);
 
         $candidats = candidats::create([
@@ -222,7 +230,7 @@ class UtilisateurDges extends Controller
         $details = [
             'name' => 'Direction Des Elections ',
             'subject' => 'Envoi information de connexion sur votre compte candidat',
-            'message' => 'Votre mdp est ' . $cin . '' . $parti  . ' . Bonne chance',
+            'message' => 'Votre mdp est ' . $code_auth  . ' . Bonne chance',
         ];
         Mail::to($email)->send(new TestMail($details));
 

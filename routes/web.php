@@ -4,7 +4,8 @@ use App\Http\Controllers\Candidats;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UtilisateurDges;
-use App\Http\Controllers\PeriodeParrainageController; 
+use App\Http\Controllers\PeriodeParrainageController;
+use App\Http\Controllers\ParrainageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +33,9 @@ Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainag
 Route::post('verification_parrain', [PostController::class, 'verification_parrain'])->name('verification_parrain');
 
 Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
-Route::get('ListeCandidatElec', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
+Route::get('ListeCandidatElec/{id}', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
+Route::post('vote', [PostController::class, 'vote'])->name('vote');
+
 
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
@@ -54,7 +57,7 @@ Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('
 Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
 
 // Période de parrainage
-Route::post('/periode-parrainage', [PeriodeParrainageController::class, 'setPeriode']) ->name('periode.store');
+Route::post('/periode-parrainage', [PeriodeParrainageController::class, 'setPeriode'])->name('periode.store');
 
 
 

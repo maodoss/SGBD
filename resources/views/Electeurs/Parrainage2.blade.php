@@ -237,14 +237,15 @@ body {
             @endif
           
             <div class="info-display">
-                <p><strong>Nom:</strong> <span id="nom">{{$electeur->nom}}</span></p>
+                <p><strong>Nom:</strong> <span id="nom" >{{$electeur->nom}}</span></p>
+                {{-- <input type="text" name="nom" value={{$electeur->nom}}> --}}
                 <p><strong>Prénom:</strong> <span id="prenom">{{$electeur->prenom}}</span></p>
                 <p><strong>Date de naissance:</strong> <span id="date-naissance">{{$electeur->date_naissance}}</span></p>
                 <p><strong>Bureau de vote:</strong> <span id="bureau-vote">{{$electeur->bureau_vote}}</span></p>
             </div>
             {{-- <input type="submit" value="Suivant" class="btn"> --}}
             {{-- <button type="button" class="btn" onclick="window.location.href='/ListeCandidatElec'">Vérifier</button> --}}
-            <a href="ListeCandidatElec" class="btn" >Suivant</a>
+            <a href="ListeCandidatElec/{{$electeur->id}}" class="btn" >Suivant</a>
         </div>
     </main>
 </body>
