@@ -4,6 +4,7 @@ use App\Http\Controllers\Candidats;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UtilisateurDges;
+use App\Http\Controllers\PeriodeParrainageController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +53,11 @@ Route::get('/logout', [UtilisateurDges::class, 'logout'])->name('logout');
 Route::get('Verif_electeur', [UtilisateurDges::class, 'Verif_electeur'])->name('Verif_electeur');
 Route::post('Verif_traitement', [UtilisateurDges::class, 'Verif_traitement'])->name('Verif_traitement');
 
+// Période de parrainage
+Route::post('/periode-parrainage', [PeriodeParrainageController::class, 'setPeriode']) ->name('periode.store');
+
+
+
 // Route::get('saisie_candidat', [UtilisateurDges::class, 'saisie_candidat'])->name('saisie_candidat');
 Route::post('traitement_saisie_candidat', [UtilisateurDges::class, 'traitement_saisie_candidat'])->name('traitement_saisie_candidat');
 
@@ -72,3 +78,6 @@ Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
 //traitement login candidat
 Route::post('/traitement_login_candidat', [Candidats::class, 'traitement_login_candidat'])->name('traitement_login_candidat');
+
+// Parrainage
+Route::post('/parrainer', [ParrainageController::class, 'store'])->name('parrainer');

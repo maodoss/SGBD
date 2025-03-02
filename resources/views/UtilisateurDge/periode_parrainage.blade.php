@@ -177,11 +177,13 @@
     <main>
         <div class="form-container">
             <h1 class="form-title">Ouverture de la Période de Parrainage</h1>
-            <form id="periodeParrainageForm">
+            <!-- Formulaire avec action et méthode -->
+            <form action="{{ route('periode.store') }}" method="POST" id="periodeParrainageForm">
+                @csrf
                 <div class="form-group">
                     <label for="start-date">Date de Début</label>
                     <div class="date-input-wrapper">
-                        <input type="date" id="start-date" name="start-date" class="form-control" required>
+                        <input type="date" id="start-date" name="date_debut" class="form-control" required>
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <div class="help-text">La date doit être au moins 6 mois après la date actuelle</div>
@@ -191,7 +193,7 @@
                 <div class="form-group">
                     <label for="end-date">Date de Fin</label>
                     <div class="date-input-wrapper">
-                        <input type="date" id="end-date" name="end-date" class="form-control" required>
+                        <input type="date" id="end-date" name="date_fin" class="form-control" required>
                         <i class="fas fa-calendar-alt"></i>
                     </div>
                     <div class="help-text">Doit être postérieure à la date de début</div>
@@ -245,8 +247,7 @@
 
                 if (!startDateError.textContent && !endDateError.textContent) {
                     // Soumission du formulaire si tout est valide
-                    console.log('Formulaire valide, envoi des données...');
-                    // Ajouter ici le code pour envoyer les données au serveur
+                    form.submit(); // Soumission du formulaire
                 }
             });
         });
