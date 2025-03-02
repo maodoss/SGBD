@@ -118,7 +118,6 @@ class UtilisateurDges extends Controller
                     continue;
                 }
 
-                // Insérer les données dans la table electeurs
                 electeurs::create([
                     'cin'                 => $row[0],
                     'num_electeur'        => $row[1],
@@ -133,13 +132,11 @@ class UtilisateurDges extends Controller
                     'code_auth'           => $row[10],
                     'fichier_electoral_id' => $filevalid->id,
 
-                    // 'fichier_electoral_id' => $row[11],
                 ]);
             }
 
             fclose($handle);
 
-            //fintest
 
             return redirect()->back()->with('status', "Le fichier a ete soumis. Les electeurs sont enregistres");
         }
@@ -149,10 +146,7 @@ class UtilisateurDges extends Controller
     {
         return view('UtilisateurDge/Verif_electeur');
     }
-    // public function saisie_candidat()
-    // {
-    //     return view('UtilisateurDge/saisie_candidat');
-    // }
+
 
     public function Verif_traitement(Request $request)
     {
@@ -160,11 +154,10 @@ class UtilisateurDges extends Controller
             'numero_electeur' => ['required'],
         ]);
         $numero  = $request->numero_electeur;
-        // dd($numero);
-        // $cantidat_test = candidats::where('num_electeur', $numero)->first();
-
-
         $candidat = electeurs::where('num_electeur', $numero)->first();
+        if (!$candidat) {
+            return redirect()->back()->with('error', "Erreur sur le numero electeur");
+        }
         $testid = $candidat->id;
         $cantidat_test = candidats::where('electeur_id', $testid)->first();
         if ($cantidat_test) {
@@ -199,7 +192,6 @@ class UtilisateurDges extends Controller
         $telephone = $request->telephone;
         $parti = $request->parti;
         $slogan = $request->slogan;
-        // $photo = $request->photo;
         $couleur = $request->couleurs;
         $urlInfos = $request->urlInfos;
         $num_electeur = $request->num_electeur;
@@ -208,10 +200,8 @@ class UtilisateurDges extends Controller
             return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
         $cin = $electeur->cin;
-        // dd($electeur);
         $electeur_id = $electeur->id;
         $code_auth = $electeur->code_auth;
-        // dd($electeur);
 
         $candidats = candidats::create([
             'email' => $email,
@@ -219,7 +209,6 @@ class UtilisateurDges extends Controller
             'nom_parti' => $parti,
             'slogan' => $slogan,
             'photo' => $photoPath, // On stocke le chemin de l'image, pas l'objet
-
             'couleur_parti' => $couleur,
             'uri_page' => $urlInfos,
             'electeur_id' => $electeur_id,
