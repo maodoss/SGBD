@@ -20,7 +20,7 @@ return new class extends Migration
     
             $table->string('email')->unique();
             $table->string('telephone')->unique();
-            $table->string('code_auth')->unique()->comment('Code de sécurité envoyé par email/SMS');
+            $table->string('code_auth');
     
             $table->string('nom_parti')->nullable();
             $table->string('slogan')->nullable();
