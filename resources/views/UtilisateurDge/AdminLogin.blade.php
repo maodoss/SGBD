@@ -115,7 +115,7 @@
 <body>
 
   <header>
-    <a href="/" class="logo-section">
+    <a href="#" class="logo-section">
         <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
         <div class="logo-text">
             <h1>République du Sénégal</h1>

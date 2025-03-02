@@ -156,7 +156,7 @@
   <div class="header">
     <div class="containerh">
       <div class="header-content">
-        <a href="/" class="logo-section">
+        <a href="/dashdge" class="logo-section">
           <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
           <div class="logo-text">
             <h1>République du Sénégal</h1>

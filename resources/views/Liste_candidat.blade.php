@@ -84,7 +84,7 @@
 
     /* Conteneur principal (avec marge-top pour éviter chevauchement) */
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 120px auto 40px; /* 120px en haut pour ne pas être derrière l'en-tête fixe */
       background: #fff;
       padding: 20px 30px;
@@ -135,7 +135,7 @@
   <div class="header">
     <div class="containerh">
       <div class="header-content">
-        <a href="/" class="logo-section">
+        <a href="/dashdge" class="logo-section">
           <img src="{{ asset('image/presi.jpg') }}" alt="Logo République du Sénégal" width="50" height="50">
           <div class="logo-text">
             <h1>République du Sénégal</h1>
@@ -156,7 +156,7 @@
         </a>
         <nav class="nav-links">
           <a href="/dashdge">Dashboard</a>
-          <a href="/Liste_candidat">Liste des candidats</a>
+          <a href="/Verif_electeur">Verifier electeur</a>
           <a href="/AdminLogin" class="logout-btn">Se déconnecter</a>
         </nav>
       </div>
@@ -166,23 +166,28 @@
   <!-- Conteneur principal -->
   <div class="container">
     <h1>Liste des Candidats Enregistrés</h1>
-
     <table>
       <thead>
         <tr>
           <th>Numéro Électeur</th>
           <th>Nom</th>
           <th>Prénom</th>
+          <th>E-mail</th>
+          <th>Telephone</th>
+          <th>Nom parti</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody id="candidatsBody">
       @foreach($candidats as $candidat)
                     <tr>
+                        <td>{{ $candidat->electeur->num_electeur }}</td>
+                        <td>{{ $candidat->electeur->nom}}</td>
+                        <td>{{ $candidat->electeur->prenom }}</td>
                         <td>{{ $candidat->email }}</td>
-                        <td>{{ $candidat->nom_parti}}</td>
-                        <td>{{ $candidat->uri_page }}</td>
-                        <td><button>avoir un new code</button></td>
+                        <td>{{ $candidat->telephone }}</td>
+                        <td>{{ $candidat->nom_parti }}</td>
+                        <td><button>Generer un nouveau</button></td>
                     </tr>
                     @endforeach
       </tbody>
