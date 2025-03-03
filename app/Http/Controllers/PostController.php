@@ -9,7 +9,8 @@ use App\Models\fichier_electoral;
 use App\Models\tentative_uploads;
 use Illuminate\Support\Facades\Auth;
 use App\Models\electeurs;
-
+use App\Models\parrainages;
+use Illuminate\Support\Carbon;
 
 class PostController extends Controller
 {
@@ -57,6 +58,9 @@ class PostController extends Controller
             // return ("Erreur le numero ne correspond pas ");
             return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
+        if ($electeur->aUncompte === 0) {
+            return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
+        }
         // dd($electeur, $num_cni, $num_electeur);
         if ($electeur->cin === $num_cni) {
             return (view('Electeurs/Parrainage2', compact('electeur')));
@@ -68,22 +72,44 @@ class PostController extends Controller
 
 
 
-    public function ListeCandidatElec()
+    public function ListeCandidatElec($id)
     {
         $candidats = candidats::all();
         $electeurs = electeurs::all();
-        return (view('Electeurs/ListeCandidatElec', compact('candidats', 'electeurs')));
+        return (view('Electeurs/ListeCandidatElec', compact('candidats', 'electeurs', 'id')));
     }
 
     public function vote(Request $request, $id)
     {
-
+        // dd($id);
         $request->validate([
             'candidat' => 'required',
         ]);
         $id_can = $request->candidat;
-        dd($id);
-        // dd($electeur_id);
+        $electeur = electeurs::where('id', $id)->first();
+
+        if ($electeur->aVote === 1) {
+            return redirect()->back()->with('error', 'Vous avez deja vote');
+        }
+        // dd($id);
+        $parrainage = parrainages::create([
+            'electeur_id' => $id,
+            'candidat_id' => $id_can,
+            'date_parrainage' =>  Carbon::now(),
+            'periode_id' => 1,
+        ]);
+        $candidat = candidats::where('id', $id_can)->first();
+        $candidat->nbr_vote++;
+
+
+
+        $electeur = electeurs::where('id', $id)->first();
+        $electeur->aVote = 1;
+
+        $electeur->save();
+        $candidat->save();
+        $parrainage->save();
+        return redirect()->back()->with('status', 'Votre vote a ete enregistré ');
     }
 
     public function Parrainage2()

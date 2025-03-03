@@ -6,6 +6,7 @@ use App\Models\electeurs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Session;
 
 class Candidats extends Controller
 {
@@ -92,6 +93,8 @@ class Candidats extends Controller
             (string) $bureau_vote === (string) $electeur->bureau_vote
         ) {
             // dd($electeur);
+            Session::put('id', $electeur->id);
+
             return view('Electeurs/Inscription2');
         } else {
             // dd($electeur);
@@ -108,7 +111,14 @@ class Candidats extends Controller
 
 
         ]);
-
+        // $electeur_id = Session::get('id', 'Aucun id sélectionné');
+        // $electeur = electeurs::where('id', $electeur_id)->first();
+        // if (!$electeur) {
+        //     return redirect()->back()->with('error', "Vous n'etes pas connecter ");
+        // }
+        // dd($electeur);
+        // $electeur->aUncompte = 1;
+        // $electeur->save();
         $phone = $request->phone;
         $mail = $request->email;
         $details = [
@@ -129,9 +139,18 @@ class Candidats extends Controller
         ]);
 
         $code = $request->auth_code;
+        $electeur_id = Session::get('id', 'Aucun id sélectionné');
+        $electeur = electeurs::where('id', $electeur_id)->first();
+
+        if ($electeur->aUncompte === 1) {
+            return redirect()->back()->with('error', 'Vous avez deja un compte ');
+        }
 
         if ($code == "Fee24") {
             // return (view('Electeurs/Parrainage'));
+
+            $electeur->aUncompte = 1;
+            $electeur->save();
             return view('Acceuil')->with('status', "Votre compte a ete enregistre Vous pouvez maintenant vous connecter ");
         }
     }

@@ -34,7 +34,7 @@ Route::post('verification_parrain', [PostController::class, 'verification_parrai
 
 Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
 Route::get('ListeCandidatElec/{id}', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
-Route::post('vote', [PostController::class, 'vote'])->name('vote');
+Route::post('/vote/{id}', [PostController::class, 'vote'])->name('vote');
 
 
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');

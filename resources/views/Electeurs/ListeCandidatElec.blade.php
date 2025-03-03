@@ -265,7 +265,7 @@
             @endif
 
             <div class="candidate-grid">
-                <form action="vote" method="POST">
+                <form action="/vote/{{$id}}" method="POST">
                     @csrf
                     @foreach($candidats as $candidat)
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
@@ -287,7 +287,7 @@
     </main>
 
     <!-- Notification de succès -->
-    <div class="notification" id="notification">
+    {{-- <div class="notification" id="notification">
         Votre parrainage est un succès !
     </div>
 
@@ -322,6 +322,6 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 </body>
 </html>
