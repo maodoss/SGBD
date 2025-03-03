@@ -58,7 +58,7 @@ class PostController extends Controller
             // return ("Erreur le numero ne correspond pas ");
             return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
-        if ($electeur->aUncompte === 0) {
+        if ($electeur->aUnCompte === 0) {
             return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
         }
         // dd($electeur, $num_cni, $num_electeur);
