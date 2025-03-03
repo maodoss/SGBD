@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Vote;
 use App\Models\Election;
+use App\Models\Candidat;
+use App\Models\Electeur;
 use App\Models\User;
 use Validator;
 
@@ -23,7 +24,7 @@ class VoteController extends Controller
     }
 
     /**
-     * Enregistrer un vote
+     * Enregistrer un vote en utilisant les modèles Candidat et Electeur
      *
      * @param Request $request
      * @param int $election_id
@@ -33,27 +34,30 @@ class VoteController extends Controller
     {
         // Validation des données
         $validator = Validator::make($request->all(), [
-            'candidate_id' => 'required|exists:candidates,id',
+            'candidate_id' => 'required|exists:candidats,id',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Vérifier si l'utilisateur a déjà voté
         $user = auth()->user();
-        $existingVote = Vote::where('user_id', $user->id)->where('election_id', $election_id)->first();
+
+        // Vérifier si l'utilisateur a déjà voté dans cette élection
+        $existingVote = Electeur::where('user_id', $user->id)
+                                ->where('election_id', $election_id)
+                                ->first();
 
         if ($existingVote) {
             return redirect()->back()->with('error', 'Vous avez déjà voté dans cette élection.');
         }
 
-        // Enregistrer le vote
-        $vote = new Vote();
-        $vote->user_id = $user->id;
-        $vote->election_id = $election_id;
-        $vote->candidate_id = $request->candidate_id;
-        $vote->save();
+        // Enregistrer le vote en créant une nouvelle instance d'Electeur
+        $electeur = new Electeur();
+        $electeur->user_id = $user->id;
+        $electeur->election_id = $election_id;
+        $electeur->candidate_id = $request->candidate_id;
+        $electeur->save();
 
         return redirect()->route('election.show', ['election_id' => $election_id])
                          ->with('success', 'Votre vote a été enregistré.');
@@ -68,8 +72,12 @@ class VoteController extends Controller
     public function showResults($election_id)
     {
         $election = Election::findOrFail($election_id);
-        $votes = $election->votes()->with('candidate')->get();
+        // Récupérer les votes via le modèle Electeur et charger les informations du candidat
+        $votes = Electeur::where('election_id', $election_id)
+                         ->with('candidate')
+                         ->get();
 
         return view('vote.results', compact('election', 'votes'));
     }
 }
+
