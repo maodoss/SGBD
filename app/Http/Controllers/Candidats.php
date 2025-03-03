@@ -69,91 +69,103 @@ class Candidats extends Controller
     //verification des infos pour l'inscription
     public function verification(Request $request)
     {
+    $request->validate([
+        'voter_card' => 'required',
+        'national_id' => 'required',
+        'family_name' => 'required',
+        'voting_office' => 'required',
+    ]);
 
-        $request->validate([
-            'voter_card' => 'required',
-            'national_id' => 'required',
-            'family_name' => 'required',
-            'voting_office' => 'required',
-        ]);
+    $num_electeur = $request->voter_card;
+    $cin = $request->national_id;
+    $nom = $request->family_name;
+    $bureau_vote = $request->voting_office;
+    $electeur = electeurs::where('num_electeur', $num_electeur)->first();
 
-        $num_electeur = $request->voter_card;
-        $cin = $request->national_id;
-        $nom = $request->family_name;
-        $bureau_vote = $request->voting_office;
-        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
-        // dd($num_electeur, $cin, $nom, $bureau_vote, $electeur);
+    if (!$electeur) {
+        return back()->withErrors(['error' => 'Aucun électeur trouvé avec ce numéro.']);
+    }
 
-        if (!$electeur) {
-            return back()->withErrors(['error' => 'Aucun électeur trouvé avec ce numéro.']);
-        }
-        if (
-            $cin ==  $electeur->cin &&
-            (string) $nom === (string) $electeur->nom &&
-            (string) $bureau_vote === (string) $electeur->bureau_vote
-        ) {
-            // dd($electeur);
-            Session::put('id', $electeur->id);
+    
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $code_auth = substr(str_shuffle($characters), 0, 8);
 
-            return view('Electeurs/Inscription2');
-        } else {
-            // dd($electeur);
-            return "erreur";
-        }
+    // Mise à jour de l'électeur
+    $electeur->update([
+        'code_auth' => $code_auth,
+        'aUnCompte' => true
+    ]);
+
+    if (
+        $cin ==  $electeur->cin &&
+        (string) $nom === (string) $electeur->nom &&
+        (string) $bureau_vote === (string) $electeur->bureau_vote
+    ) {
+        Session::put('id', $electeur->id);
+        return view('Electeurs/Inscription2');
+    } else {
+        return "Erreur de validation des informations";
+    }
     }
 
 
     public function sendmail(Request $request)
     {
-        $request->validate([
-            'phone' => 'required',
-            'email' => 'required',
+    $request->validate([
+        'phone' => 'required',
+        'email' => 'required',
+    ]);
 
+    $electeur_id = Session::get('id');
+    $electeur = electeurs::find($electeur_id);
+    
+    if (!$electeur) {
+        return redirect()->back()->with('error', "Vous n'êtes pas connecté");
+    }
 
-        ]);
-        // $electeur_id = Session::get('id', 'Aucun id sélectionné');
-        // $electeur = electeurs::where('id', $electeur_id)->first();
-        // if (!$electeur) {
-        //     return redirect()->back()->with('error', "Vous n'etes pas connecter ");
-        // }
-        // dd($electeur);
-        // $electeur->aUncompte = 1;
-        // $electeur->save();
-        $phone = $request->phone;
-        $mail = $request->email;
-        $details = [
-            'name' => 'Direction Des Elections ',
-            'subject' => 'Envoi de code de validation',
-            'message' => 'Votre Code est Fee24 ',
-        ];
-        Mail::to($mail)->send(new TestMail($details));
+    
+    $code = $electeur->code_auth;
 
-        return (view('Electeurs/Inscription3'));
+    $details = [
+        'name' => 'Direction Des Elections',
+        'subject' => 'Envoi de code de validation',
+        'message' => 'Votre Code est ' . $code,
+    ];
+
+    Mail::to($request->email)->send(new TestMail($details));
+
+    return view('Electeurs/Inscription3');
     }
 
     public function verifcode(Request $request)
-    {
+{
+    $request->validate([
+        'auth_code' => 'required',
+    ]);
 
-        $request->validate([
-            'auth_code' => 'required',
-        ]);
+    $code = $request->auth_code;
+    $electeur_id = Session::get('id');
+    
+    // Récupérer l'électeur avec le code d'authentification
+    $electeur = electeurs::find($electeur_id);
 
-        $code = $request->auth_code;
-        $electeur_id = Session::get('id', 'Aucun id sélectionné');
-        $electeur = electeurs::where('id', $electeur_id)->first();
-
-        if ($electeur->aUncompte === 1) {
-            return redirect()->back()->with('error', 'Vous avez deja un compte ');
-        }
-
-        if ($code == "Fee24") {
-            // return (view('Electeurs/Parrainage'));
-
-            $electeur->aUncompte = 1;
-            $electeur->save();
-            return view('Acceuil')->with('status', "Votre compte a ete enregistre Vous pouvez maintenant vous connecter ");
-        }
+    if (!$electeur) {
+        return redirect()->back()->with('error', 'Session invalide');
     }
+
+    if ($electeur->aUnCompte == 1) { // Correction du nom de colonne (case-sensitive)
+        return redirect()->back()->with('error', 'Vous avez déjà un compte');
+    }
+
+    // Vérifier si le code saisi correspond au code généré
+    if ($code === $electeur->code_auth) { 
+        $electeur->aUnCompte = 1;
+        $electeur->save();
+        return redirect()->route('Acceuil')->with('status', 'Votre compte a été enregistré !');
+    }
+
+    return redirect()->back()->with('error', 'Code invalide');
+}
 
     public function parrainer()
     {
