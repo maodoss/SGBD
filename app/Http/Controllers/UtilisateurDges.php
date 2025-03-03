@@ -201,7 +201,8 @@ class UtilisateurDges extends Controller
         }
         $cin = $electeur->cin;
         $electeur_id = $electeur->id;
-        $code_auth = $electeur->code_auth;
+        $characters = 'ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789';
+        $code_auth = substr(str_shuffle($characters), 0, 8);
 
         $candidats = candidats::create([
             'email' => $email,
@@ -239,4 +240,24 @@ class UtilisateurDges extends Controller
     {
         return view('UtilisateurDge/details_candidat');
     }
+    public function regenerateCode($id)
+{
+    $candidat = candidats::findOrFail($id);
+    
+    // Génération du nouveau code
+    $characters = 'ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789';
+    $new_code = substr(str_shuffle($characters), 0, 8);
+
+    // Mise à jour du code
+    $candidat->update(['code_auth' => $new_code]);
+
+    // Envoi du mail
+    Mail::to($candidat->email)->send(new TestMail([
+        'name' => 'Direction Des Elections',
+        'subject' => 'Nouveau code d\'authentification',
+        'message' => 'Votre nouveau code est : ' . $new_code
+    ]));
+
+    return redirect()->back()->with('status', 'Nouveau code envoyé avec succès !');
+}
 }

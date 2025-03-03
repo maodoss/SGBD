@@ -187,7 +187,10 @@
                         <td>{{ $candidat->email }}</td>
                         <td>{{ $candidat->telephone }}</td>
                         <td>{{ $candidat->nom_parti }}</td>
-                        <td><button>Generer un nouveau</button></td>
+                        <td><form action="{{ route('candidats.regenerate', $candidat->id) }}" method="POST">
+                             @csrf
+                            <button type="submit" class="btn-detail">Générer nouveau code</button></form>
+                        </td>
                     </tr>
                     @endforeach
       </tbody>
