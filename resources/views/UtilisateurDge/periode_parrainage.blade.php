@@ -145,6 +145,61 @@
             display: none;
         }
 
+        /* Styles pour la notification de succès */
+        .notification-box {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: rgb(48, 167, 137);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1100;
+            transform: translateX(120%);
+            transition: transform 0.4s ease-in-out;
+            max-width: 350px;
+        }
+
+        .notification-box.show {
+            transform: translateX(0);
+        }
+
+        .notification-box i {
+            font-size: 1.5rem;
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notification-message {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .form-container {
                 margin: 20px;
@@ -157,6 +212,12 @@
 
             .form-title {
                 font-size: 1.5rem;
+            }
+
+            .notification-box {
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
             }
         }
     </style>
@@ -208,6 +269,18 @@
         </div>
     </main>
 
+    <!-- Notification box -->
+    <div class="notification-box" id="successNotification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <div class="notification-title">Succès!</div>
+            <div class="notification-message">La période de parrainage a été enregistrée avec succès.</div>
+        </div>
+        <button class="notification-close" id="closeNotification">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('periodeParrainageForm');
@@ -215,6 +288,8 @@
             const endDate = document.getElementById('end-date');
             const startDateError = document.getElementById('start-date-error');
             const endDateError = document.getElementById('end-date-error');
+            const successNotification = document.getElementById('successNotification');
+            const closeNotification = document.getElementById('closeNotification');
 
             // Calculer la date minimum (6 mois à partir d'aujourd'hui)
             const today = new Date();
@@ -227,6 +302,11 @@
             });
 
             endDate.addEventListener('change', validateDates);
+            
+            // Fermer la notification
+            closeNotification.addEventListener('click', function() {
+                successNotification.classList.remove('show');
+            });
 
             function validateDates() {
                 const start = new Date(startDate.value);
@@ -241,15 +321,37 @@
                 }
             }
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                validateDates();
+            // Si on reçoit un paramètre success dans l'URL, afficher la notification
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                showSuccessNotification();
+            }
 
-                if (!startDateError.textContent && !endDateError.textContent) {
-                    // Soumission du formulaire si tout est valide
-                    form.submit(); // Soumission du formulaire
+            form.addEventListener('submit', function(e) {
+                // Pour démonstration seulement - dans un environnement réel, vous utiliseriez la redirection côté serveur
+                // avec un paramètre success=true dans l'URL après la soumission et le traitement du formulaire
+                if (startDate.value && endDate.value) {
+                    if (e.submitter === form.querySelector('.btn-submit')) {
+                        e.preventDefault(); // Prévenir la soumission réelle pour démonstration
+                        
+                        // Simulation d'une soumission réussie
+                        setTimeout(function() {
+                            showSuccessNotification();
+                            // Réinitialiser le formulaire après "soumission"
+                            form.reset();
+                        }, 500);
+                    }
                 }
             });
+
+            function showSuccessNotification() {
+                successNotification.classList.add('show');
+                
+                // Masquer la notification après 5 secondes
+                setTimeout(function() {
+                    successNotification.classList.remove('show');
+                }, 5000);
+            }
         });
     </script>
 </body>

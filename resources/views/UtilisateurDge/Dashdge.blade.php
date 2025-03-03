@@ -224,6 +224,13 @@
                     Définissez les dates de début et de fin de la période de parrainage.
                 </p>
             </a>
+
+            <a href="Liste_candidat" class="dashboard-card">
+                <h3 class="card-title">Liste des candidats</h3>
+                <p class="card-description">
+                    Trouvez ici les candidats voulant se présenter à l'élection.
+                </p>
+            </a>
         </div>
     </main>
 </body>
