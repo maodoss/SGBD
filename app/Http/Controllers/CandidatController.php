@@ -99,13 +99,13 @@ class CandidatController extends Controller
 
         if (
             $cin ==  $electeur->cin &&
-            (string) $nom === (string) $electeur->nom &&
+            (string) $nom === (string) $electeur->prenom &&
             (string) $bureau_vote === (string) $electeur->bureau_vote
         ) {
             Session::put('id', $electeur->id);
             return view('Electeurs/Inscription2');
         } else {
-            return "Erreur de validation des informations";
+            return redirect()->back()->with('error', 'Information incorrecte');
         }
     }
 
