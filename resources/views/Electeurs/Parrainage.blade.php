@@ -247,6 +247,8 @@ body {
                     <input type="text" id="num-cni" name="num_cni" required>
                 </div>
                 <input type="submit" value="Suivant" class="btn">
+                <label for="creer-compte">Vous n'avez pas de compte ?</label>
+                <a href="/inscription">S'inscrire</a>
                 {{-- <button type="button" class="btn" onclick="window.location.href='/Parrainage2'">Vérifier</button> --}}
             </form>
         </div>

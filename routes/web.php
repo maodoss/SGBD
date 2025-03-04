@@ -32,11 +32,11 @@ Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainag
 Route::post('verification_parrain', [PostController::class, 'verification_parrain'])->name('verification_parrain');
 
 Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
-Route::get('ListeCandidatElec', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
-
+Route::get('ListeCandidatElec/{id}', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
+Route::post('/vote/{id}', [PostController::class, 'vote'])->name('vote');
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
-
+Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [UtilisateurDges::class, 'Upload'])->name('Upload');

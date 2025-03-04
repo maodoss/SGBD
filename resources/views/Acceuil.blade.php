@@ -299,8 +299,8 @@
                     <a href="#Acceuil">Accueil</a>
                     <a href="#service">Services disponibles</a>
                     <a href="#contact">Contact</a>
-                    <a href="/login" class="login-btn">Se connecter</a>
-                    <a href="/inscription" class="login-btn">S'inscrire</a>
+                    {{-- <a href="/login" class="login-btn">Se connecter</a>
+                    <a href="/inscription" class="login-btn">S'inscrire</a> --}}
                 </nav>
             </div>
         </div>
@@ -348,7 +348,7 @@
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>
-                <a href="login" class="service-link">
+                <a href="#" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>
@@ -358,8 +358,8 @@
                 <a href="login" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-sign-in-alt"></i>
-                    <h4>Espace personnel</h4>
-                    <p>Accédez à votre espace personnel pour gérer vos parrainages</p>
+                    <h4>Espace Candidat</h4>
+                    <p>Accédez à votre espace personnel pour gérer vos parrainages si vous etes un candidat</p>
                 </div>
                 </a>
             </div>

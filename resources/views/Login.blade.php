@@ -202,9 +202,9 @@
                 </div>
                 <input type="submit" class="submit-btn" value="Se connecter">
                 {{-- <button type="submit" class="submit-btn">Se connecter</button> --}}
-                <div class="register-link">
+                {{-- <div class="register-link">
                     Vous n'avez pas de compte ?<a href="{{ route('inscription') }}">S'inscrire</a>
-                </div>
+                </div> --}}
             </form>
         </div>
     </main>

@@ -285,12 +285,11 @@
                 <input type="text" id="voting_office" name="voting_office" required>
             </div>
             <div class="button-group">
-                <div class="register-link">
+                {{-- <div class="register-link">
                     Vous avez un compte ?<a href="{{ route('login') }}">Se connecter</a>
-                </div>
-                <div></div>
+                </div> --}}
+                
                 <input type="submit" value="Suivant" class="next">
-                {{-- <button type="button" class="next" onclick="window.location.href='/Inscription2'">Suivant</button> --}}
             </div>
         </form>
     </div>
