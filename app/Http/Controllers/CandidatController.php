@@ -86,6 +86,9 @@ class CandidatController extends Controller
         if (!$electeur) {
             return back()->withErrors(['error' => 'Aucun électeur trouvé avec ce numéro.']);
         }
+        if ($electeur->aUnCompte === 1) {
+            return back()->with('error', 'Vous avez deja un compte ');
+        }
 
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -132,6 +135,9 @@ class CandidatController extends Controller
             'subject' => 'Envoi de code de validation',
             'message' => 'Votre Code est ' . $code,
         ];
+        $electeur->telephone = $request->phone;
+        $electeur->email = $request->email;
+        $electeur->save();
 
         Mail::to($request->email)->send(new TestMail($details));
 

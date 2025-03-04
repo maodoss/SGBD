@@ -197,7 +197,17 @@ class UtilisateurDges extends Controller
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
         if (!$electeur) {
-            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+            return redirect()->route('Verif_electeur')->with('status', 'Erreur le numero n\'est pas dans la base de donnee ');
+
+            // return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+        }
+        $candidatsverif1 = candidats::where('email', $email);
+        if ($candidatsverif1) {
+            return redirect()->route('Verif_electeur')->with('error', "Erreur l'adresse mail est deja utilise  ");
+        }
+        $candidatsverif2 = candidats::where('telephone', $telephone);
+        if ($candidatsverif2) {
+            return redirect()->route('Verif_electeur')->with('error', "Erreur le numero de telephone est deja utilise  ");
         }
         $cin = $electeur->cin;
         $electeur_id = $electeur->id;
@@ -216,7 +226,12 @@ class UtilisateurDges extends Controller
             'code_auth' => $code_auth,
 
         ]);
+
+
+
         $candidats->save();
+
+
         $details = [
             'name' => 'Direction Des Elections ',
             'subject' => 'Envoi information de connexion sur votre compte candidat',
@@ -242,23 +257,23 @@ class UtilisateurDges extends Controller
     }
     // Génération du nouveau code
     public function regenerateCode($id)
-{
-    $candidat = candidats::findOrFail($id);
-    
-    
-    $characters = 'ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789';
-    $new_code = substr(str_shuffle($characters), 0, 8);
+    {
+        $candidat = candidats::findOrFail($id);
 
-    
-    $candidat->update(['code_auth' => $new_code]);
 
-    
-    Mail::to($candidat->email)->send(new TestMail([
-        'name' => 'Direction Des Elections',
-        'subject' => 'Nouveau code d\'authentification',
-        'message' => 'Votre nouveau code est : ' . $new_code
-    ]));
+        $characters = 'ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789';
+        $new_code = substr(str_shuffle($characters), 0, 8);
 
-    return redirect()->back()->with('status', 'Nouveau code envoyé avec succès !');
-}
+
+        $candidat->update(['code_auth' => $new_code]);
+
+
+        Mail::to($candidat->email)->send(new TestMail([
+            'name' => 'Direction Des Elections',
+            'subject' => 'Nouveau code d\'authentification',
+            'message' => 'Votre nouveau code est : ' . $new_code
+        ]));
+
+        return redirect()->back()->with('status', 'Nouveau code envoyé avec succès !');
+    }
 }
