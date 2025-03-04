@@ -152,20 +152,19 @@ class CandidatController extends Controller
         $electeur = electeurs::where('id', $electeur_id)->first();
 
         if (!$electeur) {
-            return view('Electeurs.Inscription3');
+            return redirect()->route('/')->with('status', 'Utilisateur non trouve');
         }
-        // Correction du nom de colonne (case-sensitive)
-        // dd($electeur->nom);
-        if ($electeur->aUnCompte === 0) {
-            return view('Electeurs.Inscription3');
+
+        if ($electeur->aUnCompte === 1) {
+            return redirect()->route('Parrainage')->with('status', 'Vous avez déjà un compte');
         }
 
         if ($code === $electeur->code_auth) {
             $electeur->aUnCompte = 1;
             $electeur->save();
-            return view('Electeurs.Inscription3');
+            return redirect()->route('Parrainage')->with('status', 'Insciption reussi');
         }
-        return view('Electeurs.Inscription3');
+        // return view('Electeurs.Inscription3');
     }
 
     public function parrainer()
@@ -179,21 +178,21 @@ class CandidatController extends Controller
 
     public function traitement_login_candidat(Request $request)
     {
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    // Utilisation explicite du modèle avec namespace
-    $candidat = \App\Models\candidats::where('email', $request->email)
-                                     ->where('code_auth', $request->password)
-                                     ->first();
+        // Utilisation explicite du modèle avec namespace
+        $candidat = \App\Models\candidats::where('email', $request->email)
+            ->where('code_auth', $request->password)
+            ->first();
 
-    if ($candidat) {
-        Session::put('candidat_id', $candidat->id);
-        return redirect()->route('dash_candidat');
-    }
+        if ($candidat) {
+            Session::put('candidat_id', $candidat->id);
+            return redirect()->route('dash_candidat');
+        }
 
-    return back()->withErrors(['error' => 'Email ou mot de passe incorrect.']);
+        return back()->withErrors(['error' => 'Email ou mot de passe incorrect.']);
     }
 }

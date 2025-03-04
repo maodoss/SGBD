@@ -38,7 +38,7 @@ Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrain
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
 
 
-//Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
+// Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
 //Route pour l'upload de fichier electorale et son traitement 
 Route::get('Upload', [UtilisateurDges::class, 'Upload'])->name('Upload');

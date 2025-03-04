@@ -222,20 +222,21 @@ body {
     </header>
 
     <main class="main-container">
-        @if (session('status'))
-        <div class="alert alert-success">
-            {{session('status')}} 
-        </div>
-        @endif
-        @if (session('error'))
-        <div class="alert alert-danger">
-          {{-- {{ $errors->first('error') }} --}}
-          {{ session('error') }}
-        </div>
-        @endif
+       
       
         <div class="step-container">
             <h2 class="step-title">Identification de l'électeur</h2>
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{session('status')}} 
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+              {{-- {{ $errors->first('error') }} --}}
+              {{ session('error') }}
+            </div>
+            @endif
             <form action="verification_parrain" method="POST">
                 @csrf
                 <div class="form-group">

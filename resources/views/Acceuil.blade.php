@@ -308,6 +308,16 @@
 
     <section class="hero" id="Acceuil">
         <div class="container">
+            @if (session('status'))
+            <div class="alert alert-success">
+                {{session('status')}} 
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
             <div class="hero-content">
                 <div class="hero-text">
                     <h2>Plateforme de Parrainage Électoral</h2>
