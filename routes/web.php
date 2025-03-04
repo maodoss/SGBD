@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Candidats;
+use App\Http\Controllers\CandidatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UtilisateurDges;
@@ -36,7 +36,7 @@ Route::get('ListeCandidatElec/{id}', [PostController::class, 'ListeCandidatElec'
 Route::post('/vote/{id}', [PostController::class, 'vote'])->name('vote');
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
-Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
+
 
 //Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
@@ -73,16 +73,16 @@ Route::get('details_candidat', [UtilisateurDges::class, 'details_candidat'])->na
 
 
 //electeur
-Route::post('/verification', [Candidats::class, 'verification'])->name('verification');
-Route::post('/sendmail', [Candidats::class, 'sendmail'])->name('sendmail');
-Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
+Route::post('/verification', [CandidatController::class, 'verification'])->name('verification');
+Route::post('/sendmail', [CandidatController::class, 'sendmail'])->name('sendmail');
+Route::post('/verifcode', [CandidatController::class, 'verifcode'])->name('verifcode');
 
 // Route::get('parrainer', [Candidats::class, 'parrainer'])->name('parrainer');
 
 
 
 //traitement login candidat
-Route::post('/traitement_login_candidat', [Candidats::class, 'traitement_login_candidat'])->name('traitement_login_candidat');
+Route::post('/traitement_login_candidat', [CandidatController::class, 'traitement_login_candidat'])->name('traitement_login_candidat');
 
 // Parrainage
 Route::post('/parrainer', [ParrainageController::class, 'store'])->name('parrainer');

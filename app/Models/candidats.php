@@ -24,7 +24,7 @@ class candidats extends Model
 
     public function electeur()
     {
-        return $this->belongsTo(electeurs::class);
+        return $this->belongsTo(electeurs::class, 'electeur_id');
     }
     public function parrainages()
     {

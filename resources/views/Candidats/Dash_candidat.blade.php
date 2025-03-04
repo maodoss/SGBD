@@ -174,7 +174,7 @@
 
     <div class="dashboard">
         <div class="dashboard-header">
-            <h1>Bienvenue, [Nom du Candidat]</h1>
+        <h1>Bienvenue,{{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->nom }} {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->prenom }} </h1>
         </div>
 
         <div class="total-parrainages">

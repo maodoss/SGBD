@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Session;
+use App\Models\candidats;
 
-class Candidats extends Controller
+class CandidatController extends Controller
 {
     public function index()
     {
@@ -31,7 +32,7 @@ class Candidats extends Controller
     {
 
         $validatedData = $request->validate([
-            // attributs des candidats solen pare model yi
+            // attributs des candidats 
         ]);
 
 
@@ -178,13 +179,21 @@ class Candidats extends Controller
 
     public function traitement_login_candidat(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        ]);
-        $email = $request->email;
-        $password = $request->password;
-        //je dois avoir l'attribut password pour avance 
+    // Utilisation explicite du modèle avec namespace
+    $candidat = \App\Models\candidats::where('email', $request->email)
+                                     ->where('code_auth', $request->password)
+                                     ->first();
+
+    if ($candidat) {
+        Session::put('candidat_id', $candidat->id);
+        return redirect()->route('dash_candidat');
+    }
+
+    return back()->withErrors(['error' => 'Email ou mot de passe incorrect.']);
     }
 }
