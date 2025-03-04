@@ -201,11 +201,11 @@ class UtilisateurDges extends Controller
 
             // return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
-        $candidatsverif1 = candidats::where('email', $email);
+        $candidatsverif1 = candidats::where('email', $email)->first();
         if ($candidatsverif1) {
             return redirect()->route('Verif_electeur')->with('error', "Erreur l'adresse mail est deja utilise  ");
         }
-        $candidatsverif2 = candidats::where('telephone', $telephone);
+        $candidatsverif2 = candidats::where('telephone', $telephone)->first();
         if ($candidatsverif2) {
             return redirect()->route('Verif_electeur')->with('error', "Erreur le numero de telephone est deja utilise  ");
         }
