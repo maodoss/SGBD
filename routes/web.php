@@ -36,6 +36,7 @@ Route::get('ListeCandidatElec', [PostController::class, 'ListeCandidatElec'])->n
 
 Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
+Route::post('/verifcode', [Candidats::class, 'verifcode'])->name('verifcode');
 
 
 //Route pour l'upload de fichier electorale et son traitement 
@@ -57,6 +58,7 @@ Route::post('/candidats/{id}/regenerate-code', [UtilisateurDges::class, 'regener
 
 // Période de parrainage
 Route::post('/periode-parrainage', [PeriodeParrainageController::class, 'setPeriode']) ->name('periode.store');
+
 
 
 
