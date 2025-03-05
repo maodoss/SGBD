@@ -201,4 +201,14 @@ class CandidatController extends Controller
 
         return back()->withErrors(['error' => 'Email ou mot de passe incorrect.']);
     }
+
+    public function View_candidats()
+    {
+        return (view('View_candidats'));
+    }
+
+    public function affiche_periode()
+    {
+        return (view('affiche_periode'));
+    }
 }
