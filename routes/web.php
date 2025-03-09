@@ -26,6 +26,7 @@ Route::get('/Inscription2', [PostController::class, 'Inscription2'])->name('Insc
 Route::get('/Inscription3', [PostController::class, 'Inscription3'])->name('Inscription3');
 Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])->name('dash_candidat');
 Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
+Route::get('/affiche_periode', [PeriodeParrainageController::class, 'affiche_periode'])->name('affiche_periode');
 
 //Parainage d'un candidat
 Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');

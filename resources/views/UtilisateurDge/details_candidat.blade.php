@@ -123,35 +123,35 @@
     }
   </style>
   <script>
-    // Données fictives pour la démonstration, identiques ou plus riches que sur la page liste
-    const candidats = [
-      {
-        numeroElecteur: "100000001",
-        nom: "NDIAYE",
-        prenom: "Abdou",
-        dateNaissance: "1981-07-01",
-        lieuNaissance: "Dakar",
-        email: "abdou.ndiaye@example.com",
-        telephone: "+221770000001",
-        parti: "Parti Exemplar",
-        slogan: "L'espoir d'un pays",
-        couleurs: "Vert, Jaune, Rouge",
-        url: "https://exemple-candidat.sn"
-      },
-      {
-        numeroElecteur: "100000002",
-        nom: "BA",
-        prenom: "Fatou",
-        dateNaissance: "1982-04-12",
-        lieuNaissance: "Thies",
-        email: "fatou.ba@example.com",
-        telephone: "+221770000002",
-        parti: "Union pour la Paix",
-        slogan: "Ensemble, pour le progrès",
-        couleurs: "Bleu, Blanc, Rouge",
-        url: "https://fatou-ba.sn"
-      }
-    ];
+    // // Données fictives pour la démonstration, identiques ou plus riches que sur la page liste
+    // const candidats = [
+    //   {
+    //     numeroElecteur: "100000001",
+    //     nom: "NDIAYE",
+    //     prenom: "Abdou",
+    //     dateNaissance: "1981-07-01",
+    //     lieuNaissance: "Dakar",
+    //     email: "abdou.ndiaye@example.com",
+    //     telephone: "+221770000001",
+    //     parti: "Parti Exemplar",
+    //     slogan: "L'espoir d'un pays",
+    //     couleurs: "Vert, Jaune, Rouge",
+    //     url: "https://exemple-candidat.sn"
+    //   },
+    //   {
+    //     numeroElecteur: "100000002",
+    //     nom: "BA",
+    //     prenom: "Fatou",
+    //     dateNaissance: "1982-04-12",
+    //     lieuNaissance: "Thies",
+    //     email: "fatou.ba@example.com",
+    //     telephone: "+221770000002",
+    //     parti: "Union pour la Paix",
+    //     slogan: "Ensemble, pour le progrès",
+    //     couleurs: "Bleu, Blanc, Rouge",
+    //     url: "https://fatou-ba.sn"
+    //   }
+    // ];
 
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);

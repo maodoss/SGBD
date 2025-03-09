@@ -358,7 +358,7 @@
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>
-                <a href="#" class="service-link">
+                <a href="affiche_periode" class="service-link">
                 <div class="service-card">
                     <i class="fas fa-calendar"></i>
                     <h4>Période de parrainage</h4>

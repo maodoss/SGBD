@@ -53,4 +53,15 @@ class PeriodeParrainageController extends Controller
             Carbon::parse($periode->date_fin)
         );
     }
+
+    public function affiche_periode()
+    {
+        // Récupérer la période de parrainage
+        $periode = periode_parrainages::first();
+
+        // Passer les données à la vue
+        return view('affiche_periode', compact('periode'));
+    }
+
+
 }
