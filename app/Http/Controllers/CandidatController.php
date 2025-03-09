@@ -204,7 +204,8 @@ class CandidatController extends Controller
 
     public function View_candidats()
     {
-        return (view('View_candidats'));
+        $candidats = candidats::all();
+        return (view('View_candidats', compact('candidats')));
     }
 
     public function affiche_periode()
