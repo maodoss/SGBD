@@ -338,7 +338,7 @@
                             Parrainer un candidat
                             <i class="fas fa-chevron-right" style="margin-left: 0.5rem;"></i>
                         </a>
-                        <a href="/candidats" class="btn btn-secondary">
+                        <a href="View_candidats" class="btn btn-secondary">
                             Consulter les candidats
                         </a>
                     </div>
