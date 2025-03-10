@@ -155,8 +155,7 @@ class CandidatController extends Controller
         $code = $request->auth_code;
         $electeur_id = Session::get('id');
 
-        // Récupérer l'électeur avec le code d'authentification
-        // $electeur = electeurs::find($electeur_id);
+        
         $electeur = electeurs::where('id', $electeur_id)->first();
 
         if (!$electeur) {
@@ -172,7 +171,7 @@ class CandidatController extends Controller
             $electeur->save();
             return redirect()->route('Parrainage')->with('status', 'Insciption reussi');
         }
-        // return view('Electeurs.Inscription3');
+        
     }
 
     public function parrainer()
@@ -182,14 +181,14 @@ class CandidatController extends Controller
 
     public function parrainage3(Request $request)
     {
-        // Stocker l'ID du candidat en session
+       
         $request->session()->put('candidat_id', $request->candidat_id);
         
-        // Générer le code de validation
+        
         $code = mt_rand(10000, 99999);
         $request->session()->put('code_validation', $code);
         
-        // Récupérer l'électeur connecté
+       
         $electeur_id = Session::get('id');
         $electeur = electeurs::find($electeur_id);
         
@@ -197,19 +196,19 @@ class CandidatController extends Controller
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
         }
 
-        // Préparer les détails du mail
+        
         $details = [
             'name' => 'Direction Des Elections',
             'subject' => 'Code de validation - Parrainage',
             'message' => 'Votre code de validation pour le parrainage est : ' . $code,
         ];
 
-        // Envoyer le mail
+       
         Mail::to($electeur->email)->send(new TestMail($details));
         
         return view('Electeurs.Parrainage3')->with('success', 'Un code de validation a été envoyé à votre email');
     }
-
+     //traitement de la validation du vote
     public function confirmerVote(Request $request)
     {
         $request->validate([
@@ -217,7 +216,7 @@ class CandidatController extends Controller
             'candidat_id' => 'required'
         ]);
 
-        // Vérifier le code
+       
         if ($request->code_validation != session('code_validation')) {
             return back()->with('error', 'Code de validation incorrect');
         }
@@ -237,7 +236,7 @@ class CandidatController extends Controller
             'password' => 'required',
         ]);
 
-        // Utilisation explicite du modèle avec namespace
+       
         $candidat = \App\Models\candidats::where('email', $request->email)
             ->where('code_auth', $request->password)
             ->first();
