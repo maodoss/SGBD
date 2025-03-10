@@ -155,7 +155,7 @@ class CandidatController extends Controller
         $code = $request->auth_code;
         $electeur_id = Session::get('id');
 
-        
+
         $electeur = electeurs::where('id', $electeur_id)->first();
 
         if (!$electeur) {
@@ -171,7 +171,6 @@ class CandidatController extends Controller
             $electeur->save();
             return redirect()->route('Parrainage')->with('status', 'Insciption reussi');
         }
-        
     }
 
     public function parrainer()
@@ -181,49 +180,58 @@ class CandidatController extends Controller
 
     public function parrainage3(Request $request)
     {
-       
+
         $request->session()->put('candidat_id', $request->candidat_id);
-        
-        
+
+
         $code = mt_rand(10000, 99999);
         $request->session()->put('code_validation', $code);
-        
-       
+
+
         $electeur_id = Session::get('id');
         $electeur = electeurs::find($electeur_id);
-        
+
         if (!$electeur) {
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
         }
 
-        
+
         $details = [
             'name' => 'Direction Des Elections',
             'subject' => 'Code de validation - Parrainage',
             'message' => 'Votre code de validation pour le parrainage est : ' . $code,
         ];
 
-       
+
         Mail::to($electeur->email)->send(new TestMail($details));
-        
+
         return view('Electeurs.Parrainage3')->with('success', 'Un code de validation a été envoyé à votre email');
     }
-     //traitement de la validation du vote
+    //traitement de la validation du vote
     public function confirmerVote(Request $request)
     {
         $request->validate([
             'code_validation' => 'required',
             'candidat_id' => 'required'
         ]);
+        $electeur_id = Session::get('id');
+        $electeur = electeurs::find($electeur_id);
+        if (!$electeur) {
+            return redirect()->back()->with('error', "Vous n'êtes pas connecté");
+        }
 
-       
+
         if ($request->code_validation != session('code_validation')) {
             return back()->with('error', 'Code de validation incorrect');
+        } else {
+            $electeur->aVote = 1;
+            $electeur->save();
         }
+
 
         // Enregistrer le vote
         // TODO: Ajouter votre logique de sauvegarde du vote ici
-        
+
         return redirect()->route('dash_electeur')->with('success', 'Votre vote a été enregistré avec succès');
     }
 
@@ -236,7 +244,7 @@ class CandidatController extends Controller
             'password' => 'required',
         ]);
 
-       
+
         $candidat = \App\Models\candidats::where('email', $request->email)
             ->where('code_auth', $request->password)
             ->first();
