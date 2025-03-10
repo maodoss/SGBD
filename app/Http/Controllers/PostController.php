@@ -129,6 +129,7 @@ class PostController extends Controller
 
     public function dash_candidat()
     {
+
         return view('Candidats/Dash_candidat');
     }
     public function periode_parrainage()

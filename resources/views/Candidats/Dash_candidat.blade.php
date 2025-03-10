@@ -115,6 +115,7 @@
         }
 
         .dashboard-header {
+            
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -124,7 +125,8 @@
 
         .dashboard-header h1 {
             color: rgb(48, 167, 137);
-            font-size: 24px;
+            font-size: 500%;
+            text-align: center;
         }
 
         .total-parrainages, .chart-container {
@@ -174,21 +176,21 @@
 
     <div class="dashboard">
         <div class="dashboard-header">
-        <h1>Bienvenue,{{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->nom }} {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->prenom }} </h1>
+        <h1>Bienvenue {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->nom }} {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->prenom }} </h1>
         </div>
 
         <div class="total-parrainages">
             <h2>Total des parrainages</h2>
-            <div class="total-number">12,458</div>
+            <div class="total-number">{{ \App\Models\candidats::find(Session::get('candidat_id'))->nbr_vote }}</div>
         </div>
 
-        <div class="chart-container">
+        {{-- <div class="chart-container">
             <h2>Évolution journalière des parrainages</h2>
             <canvas id="parrainage-chart"></canvas>
-        </div>
+        </div> --}}
     </div>
 
-    <script>
+    {{-- <script>
         function toggleMenu() {
             let menu = document.getElementById('dropdown-menu');
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
@@ -243,6 +245,6 @@
                 }
             }
         });
-    </script>
+    </script> --}}
 </body>
 </html>
