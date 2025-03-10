@@ -232,7 +232,7 @@ class CandidatController extends Controller
         // Enregistrer le vote
         // TODO: Ajouter votre logique de sauvegarde du vote ici
 
-        return redirect()->route('dash_electeur')->with('success', 'Votre vote a été enregistré avec succès');
+        return redirect()->route('Acceuil')->with('success', 'Votre vote a été enregistré avec succès');
     }
 
     //traitement connexion candidats
