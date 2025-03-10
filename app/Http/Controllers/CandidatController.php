@@ -180,7 +180,53 @@ class CandidatController extends Controller
         return (view('Electeurs/Parrainage'));
     }
 
+    public function parrainage3(Request $request)
+    {
+        // Stocker l'ID du candidat en session
+        $request->session()->put('candidat_id', $request->candidat_id);
+        
+        // Générer le code de validation
+        $code = mt_rand(10000, 99999);
+        $request->session()->put('code_validation', $code);
+        
+        // Récupérer l'électeur connecté
+        $electeur_id = Session::get('id');
+        $electeur = electeurs::find($electeur_id);
+        
+        if (!$electeur) {
+            return redirect()->back()->with('error', "Vous n'êtes pas connecté");
+        }
 
+        // Préparer les détails du mail
+        $details = [
+            'name' => 'Direction Des Elections',
+            'subject' => 'Code de validation - Parrainage',
+            'message' => 'Votre code de validation pour le parrainage est : ' . $code,
+        ];
+
+        // Envoyer le mail
+        Mail::to($electeur->email)->send(new TestMail($details));
+        
+        return view('Electeurs.Parrainage3')->with('success', 'Un code de validation a été envoyé à votre email');
+    }
+
+    public function confirmerVote(Request $request)
+    {
+        $request->validate([
+            'code_validation' => 'required',
+            'candidat_id' => 'required'
+        ]);
+
+        // Vérifier le code
+        if ($request->code_validation != session('code_validation')) {
+            return back()->with('error', 'Code de validation incorrect');
+        }
+
+        // Enregistrer le vote
+        // TODO: Ajouter votre logique de sauvegarde du vote ici
+        
+        return redirect()->route('dash_electeur')->with('success', 'Votre vote a été enregistré avec succès');
+    }
 
     //traitement connexion candidats
 

@@ -225,16 +225,27 @@ body {
     <main class="main-container">
         <div class="step-container">
             <h2 class="step-title">Validation du parrainage</h2>
+            @if (session('success'))
             <div class="alert alert-success">
-                Un code de vérification a été envoyé à votre email et téléphone.
+                {{ session('success') }}
             </div>
-            <form action="/" method="POST" onsubmit="alert('Parrainage enregistré avec succès !'); return false;">
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+            <div class="alert alert-info">
+                Un code de validation à 5 chiffres a été envoyé à votre adresse email.
+            </div>
+            <form action="/confirmer-vote" method="POST">
+                @csrf
+                <input type="hidden" name="candidat_id" value="{{ session('candidat_id') }}">
                 <div class="form-group">
                     <label for="code-validation">Code de validation</label>
-                    <input type="text" id="code-validation" class="verification-code" maxlength="5" required>
+                    <input type="text" id="code-validation" name="code_validation" class="verification-code" maxlength="5" required>
                 </div>
-                <input type="submit" value="Suivant" class="btn">
-                {{-- <button type="button" class="btn" onclick="window.location.href='/ListeCandidatElec'">Valider mon choix</button> --}}
+                <input type="submit" value="Valider mon vote" class="btn">
             </form>
         </div>
     </main>

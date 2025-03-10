@@ -89,3 +89,6 @@ Route::post('/traitement_login_candidat', [CandidatController::class, 'traitemen
 
 // Parrainage
 Route::post('/parrainer', [ParrainageController::class, 'store'])->name('parrainer');
+
+Route::post('/parrainage3', [CandidatController::class, 'parrainage3']);
+Route::post('/confirmer-vote', [CandidatController::class, 'confirmerVote']);

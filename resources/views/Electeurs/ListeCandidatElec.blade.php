@@ -267,9 +267,7 @@
             @endif
 
             <div class="candidate-grid">
-                <form action="/vote/{{$id}}" method="POST">
-                    {{-- <form action="/Parrainage3" method="POST"> --}}
-
+                <form action="/parrainage3" method="POST">
                     @csrf
                     @foreach($candidats as $candidat)
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
@@ -280,11 +278,11 @@
                             <p>{{ $candidat->slogan }}</p>
                             <p><small>{{ $candidat->couleur_parti }}</small></p>
                             <p><small>{{ $candidat->nom_parti }}</small></p>
-                            <input type="radio" name="candidat" value="{{ $candidat->id }}" required>
+                            <input type="radio" name="candidat_id" value="{{ $candidat->id }}" required>
                         </div>
                     </div>
                     @endforeach
-                    <input type="submit" class="btn" value="Parrainer ce candidat">
+                    <input type="submit" class="btn" value="Continuer">
                 </form>
             </div>
         </div>
