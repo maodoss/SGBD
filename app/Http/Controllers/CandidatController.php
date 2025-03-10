@@ -83,11 +83,12 @@ class CandidatController extends Controller
         $bureau_vote = $request->voting_office;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
 
-        if (!$electeur) {
-            return back()->withErrors(['error' => 'Aucun électeur trouvé avec ce numéro.']);
+
+        if (!$electeur || $electeur->cin != $cin || $electeur->prenom != $nom ||  $electeur->bureau_vote != $bureau_vote) {
+            return redirect()->route('inscription')->with('error', 'Informations incorrectes');
         }
         if ($electeur->aUnCompte === 1) {
-            return back()->with('error', 'Vous avez deja un compte ');
+            return redirect()->route('inscription')->with('error', 'Vous avez deja un compte ');
         }
 
 
@@ -122,6 +123,7 @@ class CandidatController extends Controller
 
         $electeur_id = Session::get('id');
         $electeur = electeurs::find($electeur_id);
+        $electeurmm = electeurs::where('telephone', $request->phone);
 
         if (!$electeur) {
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
@@ -199,7 +201,7 @@ class CandidatController extends Controller
             return redirect()->route('dash_candidat');
         }
 
-        return back()->withErrors(['error' => 'Email ou mot de passe incorrect.']);
+        return redirect()->route('login')->with('error', 'Email ou mot de passe incorrect.');
     }
 
     public function View_candidats()

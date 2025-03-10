@@ -354,7 +354,7 @@
                 <a href="inscription" class="service-link">
                     <div class="service-card">
                         <i class="fas fa-user"></i>
-                        <h4>Créer votre profil</h4>
+                        <h4>Activation Compte</h4>
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>

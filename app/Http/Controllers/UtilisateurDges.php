@@ -42,7 +42,7 @@ class UtilisateurDges extends Controller
 
             return view('UtilisateurDge/dashdge');
         } else {
-            return "Connexion non réussie";
+            return redirect()->route('AdminLogin')->with('error', 'Erreur sur le login ou mot de passe');
         }
         // if (auth()->attempt(request()->only(['email', 'password']))) {
         //     return ("Connexion reussie");

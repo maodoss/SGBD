@@ -266,6 +266,8 @@
 
             <div class="candidate-grid">
                 <form action="/vote/{{$id}}" method="POST">
+                    {{-- <form action="/Parrainage3" method="POST"> --}}
+
                     @csrf
                     @foreach($candidats as $candidat)
                     <div class="candidate-card" onclick="this.querySelector('input').checked = true">
