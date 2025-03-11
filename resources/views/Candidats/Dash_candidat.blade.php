@@ -233,11 +233,13 @@
                     </div>
                 @else
                     @foreach($parrainages_par_jour as $parrainage)
-                        <div class="vote-box">
-                            <h3>{{ \Carbon\Carbon::parse($parrainage->date)->locale('fr')->isoFormat('dddd D MMMM YYYY') }}</h3>
-                            <p>{{ $parrainage->total }}</p>
-                            <small>{{ $parrainage->total > 1 ? 'parrainages' : 'parrainage' }} ce jour</small>
-                        </div>
+                        @if($parrainage && $parrainage->date)
+                            <div class="vote-box">
+                                <h3>{{ \Carbon\Carbon::parse($parrainage->date)->locale('fr')->isoFormat('dddd D MMMM YYYY') }}</h3>
+                                <p>{{ $parrainage->total ?? 0 }}</p>
+                                <small>{{ ($parrainage->total ?? 0) > 1 ? 'parrainages' : 'parrainage' }} ce jour</small>
+                            </div>
+                        @endif
                     @endforeach
                 @endif
             </div>

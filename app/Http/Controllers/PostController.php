@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\electeurs;
 use App\Models\parrainages;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -129,8 +130,15 @@ class PostController extends Controller
 
     public function dash_candidat()
     {
+        $candidat_id = Session::get('candidat_id');
+        
+        $parrainages_par_jour = parrainages::where('candidat_id', $candidat_id)
+            ->selectRaw('DATE(date_parrainage) as date, COUNT(*) as total')
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->get();
 
-        return view('Candidats/Dash_candidat');
+        return view('Candidats/Dash_candidat', compact('parrainages_par_jour'));
     }
     public function periode_parrainage()
     {
