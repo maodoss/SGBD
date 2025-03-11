@@ -251,7 +251,7 @@ body {
                 </div>
                 <input type="submit" value="Suivant" class="btn">
                 <label for="creer-compte">Vous n'avez pas de compte ?</label>
-                <a href="/inscription">S'inscrire</a>
+                <a href="/inscription">Créer un compte</a>
                 {{-- <button type="button" class="btn" onclick="window.location.href='/Parrainage2'">Vérifier</button> --}}
             </form>
         </div>

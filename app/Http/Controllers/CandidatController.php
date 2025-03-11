@@ -199,17 +199,17 @@ class CandidatController extends Controller
             return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
         if ($electeur->aUnCompte === 0) {
-            return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
+            return redirect()->back()->with('error', "Vous devez d'abord créer un compte  ");
         }
         if ($electeur->aVote === 1) {
-            return redirect()->back()->with('error', "Vous avez deja parrainé  ");
+            return redirect()->back()->with('error', "Vous avez déjà parrainé  ");
         }
         // dd($electeur, $num_cni, $num_electeur);
         if ($electeur->cin === $num_cni) {
             return (view('Electeurs/Parrainage2', compact('electeur')));
         } else {
             // return ("erreur");
-            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+            return redirect()->back()->with('error', "Erreur le numéro ne correspond pas ");
         }
     }
 
@@ -267,7 +267,7 @@ class CandidatController extends Controller
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
         }
         if ($electeur->aVote == 1) {
-            return redirect()->back()->with('error', "Vous avez deja vote ");
+            return redirect()->back()->with('error', "Vous avez déjà voté ");
         }
 
 

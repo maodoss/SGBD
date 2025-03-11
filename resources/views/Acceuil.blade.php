@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Système de Parrainage - République du Sénégal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -43,7 +42,8 @@
             align-items: center;
             height: 80px;
         }
-            /* logo */
+
+        /* Logo */
         .logo-section {
             display: flex;
             align-items: center;
@@ -128,6 +128,7 @@
         .btn-primary {
             background: var(--primary-green);
             color: white;
+            border: none;
         }
 
         .btn-primary:hover {
@@ -137,6 +138,7 @@
         .btn-secondary {
             background: white;
             color: var(--primary-green);
+            border: 1px solid var(--primary-green);
         }
 
         .btn-secondary:hover {
@@ -267,6 +269,76 @@
             transition: 0.3s;
         }
 
+        /* How it Works Section */
+        .how-it-works {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .how-it-works h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #1A202C;
+        }
+
+        .steps-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--primary-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1A202C;
+        }
+
+        .step-content p {
+            color: #4A5568;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content .note {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-left: 4px solid var(--primary-green);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .divider {
+            width: 2px;
+            height: 40px;
+            background-color: #e2e8f0;
+            margin-left: 24px;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -282,6 +354,23 @@
 
             .services-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .divider {
+                width: 2px;
+                height: 40px;
+                margin-left: 0;
             }
         }
     </style>
@@ -299,6 +388,7 @@
                 </div>
                 <nav class="nav-links">
                     <a href="#Acceuil">Accueil</a>
+                    <a href="#howItWorks">Comment ça marche</a>
                     <a href="#service">Services disponibles</a>
                     <a href="#contact">Contact</a>
                     {{-- <a href="/login" class="login-btn">Se connecter</a>
@@ -330,8 +420,7 @@
                     @endif
                     @if (session('error'))
                     <div class="alert alert-danger">
-                      {{-- {{ $errors->first('error') }} --}}
-                      {{ session('error') }}
+                        {{ session('error') }}
                     </div>
                     @endif
                     <p>Participez au processus démocratique en parrainant votre candidat pour l'élection présidentielle</p>
@@ -349,6 +438,88 @@
         </div>
     </section>
 
+    <!-- Nouvelle section "Comment ça marche" -->
+    <section id="howItWorks" class="how-it-works">
+        <div class="container">
+            <h3>Comment ça marche ?</h3>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Activation de votre compte</h4>
+                        <p>Commencez par activer votre compte en utilisant votre numéro de carte d'électeur, votre numéro de CNI, votre nom de famille et votre bureau de vote.</p>
+                        <p>Une vérification sera effectuée pour confirmer votre identité sur les listes électorales.</p>
+                        <div class="note">
+                            <i class="fas fa-info-circle"></i> Cette étape est nécessaire une seule fois et sécurise le processus de parrainage.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Validation de vos coordonnées</h4>
+                        <p>Renseignez votre numéro de téléphone et votre adresse email.</p>
+                        <p>Un code de validation vous sera envoyé par email pour confirmer votre identité.</p>
+                        <div class="note">
+                            <i class="fas fa-info-circle"></i> Veillez à fournir une adresse email valide que vous consultez régulièrement.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Choix de votre candidat</h4>
+                        <p>Consultez la liste des candidats à l'élection présidentielle et choisissez celui que vous souhaitez parrainer.</p>
+                        <p>Vous ne pouvez parrainer qu'un seul candidat conformément à la loi électorale.</p>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Confirmation du parrainage</h4>
+                        <p>Un nouveau code de validation vous sera envoyé pour confirmer votre parrainage.</p>
+                        <p>Après confirmation, votre parrainage sera officiellement enregistré et ne pourra plus être modifié.</p>
+                        <div class="note">
+                            <i class="fas fa-exclamation-circle"></i> Le parrainage est définitif et ne peut être révoqué ou modifié après validation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="howItWorks" class="services">
+    <div class="container">
+        <h3>Comment ça marche?</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-user-check"></i>
+                <h4>Vérification d'identité</h4>
+                <p>Authentifiez-vous avec votre numéro d'électeur et votre carte d'identité nationale pour garantir la sécurité du processus</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Confirmation par email</h4>
+                <p>Recevez un code de validation unique par email pour sécuriser votre parrainage</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-check-circle"></i>
+                <h4>Choix du candidat</h4>
+                <p>Sélectionnez le candidat que vous souhaitez parrainer et confirmez votre choix</p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
     <section id="service" class="services">
         <div class="container">
             <h3>Services disponibles</h3>
@@ -356,7 +527,7 @@
                 <a href="inscription" class="service-link">
                     <div class="service-card">
                         <i class="fas fa-user"></i>
-                        <h4>Activation Compte</h4>
+                        <h4>Activer son Compte</h4>
                         <p>Inscrivez-vous en tant qu'électeur pour participer au parrainage</p>
                     </div>
                 </a>

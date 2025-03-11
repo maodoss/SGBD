@@ -213,10 +213,12 @@
             font-size: 14px;
         }
         .register-link {
-            text-align: left; /* Pour éviter l'alignement avec le bouton */
-            margin-top: 1rem; /* Ajuste l’espace */
-            padding-top: 0; /* Supprime le padding */
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 0;
             border-top: none;
+            font-size: 14px;
+            color: #555;
         }
 
         .register-link a {
@@ -230,6 +232,71 @@
             text-decoration: underline;
         }
         
+        /* Style pour les alertes */
+        .alert {
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            position: relative;
+            animation: fadeInDown 0.5s ease-out forwards;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Pour faire disparaître l'alerte après quelques secondes */
+        .alert.fade-out {
+            animation: fadeOut 0.5s ease-in forwards;
+        }
+        
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+                display: none;
+            }
+        }
+        
+        /* Style pour le bouton suivant */
+        input[type="submit"].next {
+            background-color: rgb(61, 151, 109);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        input[type="submit"].next:hover {
+            background-color: rgb(44, 134, 95);
+        }
     </style>
 </head>
 <body>
@@ -254,19 +321,19 @@
             <div class="progress-step active">1</div>
             <div class="progress-step">2</div>
             <div class="progress-step">3</div>
-        </div>   
+        </div>
         <h2>Informations d'identification</h2>
-        
-       @if (session('status'))
-        <div class="alert alert-success">
+        @if (session('status'))
+        <div class="alert alert-success" id="successAlert">
             {{session('status')}} 
         </div>
         @endif
         @if (session('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" id="errorAlert">
             {{ session('error') }}
         </div>
         @endif
+      
         <form action="/verification" method="POST">
             @csrf
             <div class="form-group">
@@ -285,14 +352,40 @@
                 <label for="voting_office">Numéro du bureau de vote</label>
                 <input type="text" id="voting_office" name="voting_office" required>
             </div>
+            <div class="register-link">
+                Vous avez déjà un compte? <a href="{{ route('Parrainage') }}">Parrainez</a>
+            </div>
             <div class="button-group">
-                {{-- <div class="register-link">
-                    Vous avez un compte ?<a href="{{ route('login') }}">Se connecter</a>
-                </div> --}}
-                
+                <div></div> <!-- Élément vide pour maintenir l'espacement -->
                 <input type="submit" value="Suivant" class="next">
             </div>
         </form>
     </div>
+
+    <script>
+        // Script pour faire disparaître les alertes après 5 secondes
+        document.addEventListener('DOMContentLoaded', function() {
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            if (successAlert) {
+                setTimeout(function() {
+                    successAlert.classList.add('fade-out');
+                    setTimeout(function() {
+                        successAlert.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            }
+            
+            if (errorAlert) {
+                setTimeout(function() {
+                    errorAlert.classList.add('fade-out');
+                    setTimeout(function() {
+                        errorAlert.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>

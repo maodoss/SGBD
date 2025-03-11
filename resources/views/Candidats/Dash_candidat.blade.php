@@ -115,7 +115,6 @@
         }
 
         .dashboard-header {
-            
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -129,7 +128,7 @@
             text-align: center;
         }
 
-        .total-parrainages, .chart-container {
+        .total-parrainages, .history-container {
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -144,9 +143,48 @@
             margin: 10px 0;
         }
 
+        .votes-history {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .vote-box {
+            background-color: #f1f9f6;
+            border-left: 4px solid rgb(44, 155, 103);
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .vote-box h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .vote-box p {
+            margin: 5px 0 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(44, 155, 103);
+        }
+
+        .vote-box small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 12px;
+        }
+
         @media (max-width: 768px) {
             .total-number {
                 font-size: 36px;
+            }
+            
+            .votes-history {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -160,7 +198,7 @@
                     <h1>République du Sénégal</h1>
                     <p>Système de Parrainage Électoral</p>
                 </div>
-    </div>
+            </div>
 
             <!-- Menu de profil avec icône -->
             <div class="profile-menu">
@@ -176,7 +214,7 @@
 
     <div class="dashboard">
         <div class="dashboard-header">
-        <h1>Bienvenue {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->nom }} {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->prenom }} </h1>
+            <h1>Bienvenue {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->nom }} {{ \App\Models\candidats::find(Session::get('candidat_id'))->electeur->prenom }} </h1>
         </div>
 
         <div class="total-parrainages">
@@ -184,13 +222,29 @@
             <div class="total-number">{{ \App\Models\candidats::find(Session::get('candidat_id'))->nbr_vote }}</div>
         </div>
 
-        {{-- <div class="chart-container">
-            <h2>Évolution journalière des parrainages</h2>
-            <canvas id="parrainage-chart"></canvas>
-        </div> --}}
+        <div class="history-container">
+            <h2>Historique des parrainages récents</h2>
+            <div class="votes-history">
+                @if($parrainages_par_jour->isEmpty())
+                    <div class="vote-box">
+                        <h3>Aucun parrainage enregistré</h3>
+                        <p>0</p>
+                        <small>Aucune donnée disponible</small>
+                    </div>
+                @else
+                    @foreach($parrainages_par_jour as $parrainage)
+                        <div class="vote-box">
+                            <h3>{{ \Carbon\Carbon::parse($parrainage->date)->locale('fr')->isoFormat('dddd D MMMM YYYY') }}</h3>
+                            <p>{{ $parrainage->total }}</p>
+                            <small>{{ $parrainage->total > 1 ? 'parrainages' : 'parrainage' }} ce jour</small>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
     </div>
 
-    {{-- <script>
+    <script>
         function toggleMenu() {
             let menu = document.getElementById('dropdown-menu');
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
@@ -205,46 +259,6 @@
                 menu.style.display = 'none';
             }
         });
-
-        // Configuration du graphique
-        const ctx = document.getElementById('parrainage-chart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['1 Jan', '2 Jan', '3 Jan', '4 Jan', '5 Jan', '6 Jan', '7 Jan'],
-                datasets: [{
-                    label: 'Parrainages par jour',
-                    data: [150, 230, 180, 0, 210, 290, 310],
-                    fill: true,
-                    borderColor: '#1a73e8',
-                    backgroundColor: 'rgba(26, 115, 232, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Nombre de parrainages'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    }
-                }
-            }
-        });
-    </script> --}}
+    </script>
 </body>
 </html>
