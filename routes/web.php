@@ -93,5 +93,6 @@ Route::post('verification_parrain', [CandidatController::class, 'verification_pa
 
 Route::get('Parrainage2', [CandidatController::class, 'Parrainage2'])->name('Parrainage2');
 
+Route::get('/parrainage3', [CandidatController::class, 'showParrainage3'])->name('parrainage3');
 Route::post('/parrainage3', [CandidatController::class, 'parrainage3']);
 Route::post('/confirmer-vote', [CandidatController::class, 'confirmerVote']);

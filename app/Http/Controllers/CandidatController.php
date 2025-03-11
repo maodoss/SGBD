@@ -259,42 +259,55 @@ class CandidatController extends Controller
             'code_validation' => 'required',
             'candidat_id' => 'required'
         ]);
+
         $electeur_id = Session::get('id');
         $candidat_id = Session::get('candidat_id');
         $candidat = candidats::find($candidat_id);
         $electeur = electeurs::find($electeur_id);
+
         if (!$electeur) {
-            return redirect()->back()->with('error', "Vous n'êtes pas connecté");
-        }
-        if ($electeur->aVote == 1) {
-            return redirect()->back()->with('error', "Vous avez déjà voté ");
+            return back()->withErrors(['error' => "Vous n'êtes pas connecté"]);
         }
 
+        if ($electeur->aVote == 1) {
+            return back()->withErrors(['error' => "Vous avez déjà voté"]);
+        }
 
         if ($request->code_validation != $electeur->code_auth) {
-
-            // return redirect()->back()->with('error', "Erreur sur le code ");
-
-            return view('Electeurs.parrainage3')->with('error', 'Erreur !!! les codes ne correspondent pas');
-        } else {
-            $parrainage = parrainages::create([
-                'electeur_id' => $electeur_id,
-                'candidat_id' => $candidat_id,
-                'date_parrainage' =>  Carbon::now(),
-                'periode_id' => 1,
-            ]);
-            $candidat->nbr_vote++;
-            $electeur->aVote = 1;
-            $electeur->save();
-            $parrainage->save();
-            $candidat->save();
+            return back()->withErrors(['error' => "Le code de validation est incorrect"]);
         }
 
+        // Si tout est OK, on procède au vote
+        $parrainage = parrainages::create([
+            'electeur_id' => $electeur_id,
+            'candidat_id' => $candidat_id,
+            'date_parrainage' =>  Carbon::now(),
+            'periode_id' => 1,
+        ]);
 
-        // Enregistrer le vote
-        // TODO: Ajouter votre logique de sauvegarde du vote ici
+        $candidat->nbr_vote++;
+        $electeur->aVote = 1;
+        $electeur->save();
+        $parrainage->save();
+        $candidat->save();
 
         return redirect()->route('Acceuil')->with('success', 'Votre vote a été enregistré avec succès');
+    }
+
+    public function showParrainage3()
+    {
+        $electeur_id = Session::get('id');
+        $electeur = electeurs::find($electeur_id);
+
+        if (!$electeur) {
+            return redirect()->route('login')->withErrors(['error' => "Vous n'êtes pas connecté"]);
+        }
+
+        if ($electeur->aVote == 1) {
+            return redirect()->route('Acceuil')->withErrors(['error' => "Vous avez déjà voté"]);
+        }
+
+        return view('Electeurs.Parrainage3');
     }
 
     //traitement connexion candidats

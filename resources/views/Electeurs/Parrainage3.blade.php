@@ -227,15 +227,20 @@ body {
             <h2 class="step-title">Validation du parrainage</h2>
             @if (session('status'))
                 <div class="alert alert-success">
-                    {{session('status')}} 
-         </div>
-         @endif
-         @if (session('error'))
-            <div class="alert alert-danger">
-           {{-- {{ $errors->first('error') }} --}}
-                {{ session('error') }}
-            </div>
-         @endif
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="alert alert-info">
                 Un code de validation à 5 chiffres a été envoyé à votre adresse email.
             </div>

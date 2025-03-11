@@ -398,6 +398,26 @@
         </div>
     </header>
 
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 80px;">
+            <div class="container">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 80px;">
+            <div class="container">
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    @endif
+
     <section class="hero" id="Acceuil">
         <div class="container">
             @if (session('status'))
@@ -580,5 +600,7 @@
             </div>
         </footer>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
