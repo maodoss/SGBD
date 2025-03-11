@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Session;
 use App\Models\candidats;
+use App\Models\parrainages;
+use Illuminate\Support\Carbon;
 
 class CandidatController extends Controller
 {
@@ -177,6 +179,48 @@ class CandidatController extends Controller
     {
         return (view('Electeurs/Parrainage'));
     }
+    public function verification_parrain(Request $request)
+    {
+        // dd();
+        $request->validate([
+            'num_electeur' => 'required',
+            'num_cni' => 'required',
+
+        ]);
+
+        $num_electeur = $request->num_electeur;
+        $num_cni = $request->num_cni;
+
+        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+        $request->session()->put('id', $electeur->id);
+
+        if (!$electeur) {
+            // return ("Erreur le numero ne correspond pas ");
+            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+        }
+        if ($electeur->aUnCompte === 0) {
+            return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
+        }
+        if ($electeur->aVote === 1) {
+            return redirect()->back()->with('error', "Vous avez deja parrainé  ");
+        }
+        // dd($electeur, $num_cni, $num_electeur);
+        if ($electeur->cin === $num_cni) {
+            return (view('Electeurs/Parrainage2', compact('electeur')));
+        } else {
+            // return ("erreur");
+            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+        }
+    }
+
+
+    public function Parrainage2()
+    {
+        $electeur_id = Session::get('id');
+        $electeur = electeurs::find($electeur_id);
+
+        return view('Electeurs/Parrainage2');
+    }
 
     public function parrainage3(Request $request)
     {
@@ -185,12 +229,13 @@ class CandidatController extends Controller
 
 
         $code = mt_rand(10000, 99999);
-        $request->session()->put('code_validation', $code);
+        // $request->session()->put('code_validation', $code);
 
 
         $electeur_id = Session::get('id');
         $electeur = electeurs::find($electeur_id);
-
+        $electeur->code_auth = $code;
+        $electeur->save();
         if (!$electeur) {
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
         }
@@ -215,24 +260,41 @@ class CandidatController extends Controller
             'candidat_id' => 'required'
         ]);
         $electeur_id = Session::get('id');
+        $candidat_id = Session::get('candidat_id');
+        $candidat = candidats::find($candidat_id);
         $electeur = electeurs::find($electeur_id);
         if (!$electeur) {
             return redirect()->back()->with('error', "Vous n'êtes pas connecté");
         }
+        if ($electeur->aVote == 1) {
+            return redirect()->back()->with('error', "Vous avez deja vote ");
+        }
 
 
-        if ($request->code_validation != session('code_validation')) {
-            return back()->with('error', 'Code de validation incorrect');
+        if ($request->code_validation != $electeur->code_auth) {
+
+            // return redirect()->back()->with('error', "Erreur sur le code ");
+
+            return view('Electeurs.parrainage3')->with('error', 'Erreur !!! les codes ne correspondent pas');
         } else {
+            $parrainage = parrainages::create([
+                'electeur_id' => $electeur_id,
+                'candidat_id' => $candidat_id,
+                'date_parrainage' =>  Carbon::now(),
+                'periode_id' => 1,
+            ]);
+            $candidat->nbr_vote++;
             $electeur->aVote = 1;
             $electeur->save();
+            $parrainage->save();
+            $candidat->save();
         }
 
 
         // Enregistrer le vote
         // TODO: Ajouter votre logique de sauvegarde du vote ici
 
-        return redirect()->route('dash_electeur')->with('success', 'Votre vote a été enregistré avec succès');
+        return redirect()->route('Acceuil')->with('success', 'Votre vote a été enregistré avec succès');
     }
 
     //traitement connexion candidats

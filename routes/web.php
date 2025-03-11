@@ -30,12 +30,12 @@ Route::get('/affiche_periode', [PeriodeParrainageController::class, 'affiche_per
 
 //Parainage d'un candidat
 Route::get('Parrainage', [PostController::class, 'Parrainage'])->name('Parrainage');
-Route::post('verification_parrain', [PostController::class, 'verification_parrain'])->name('verification_parrain');
+// Route::post('verification_parrain', [PostController::class, 'verification_parrain'])->name('verification_parrain');
 
-Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
+// Route::get('Parrainage2', [PostController::class, 'Parrainage2'])->name('Parrainage2');
 Route::get('ListeCandidatElec/{id}', [PostController::class, 'ListeCandidatElec'])->name('ListeCandidatElec');
 Route::post('/vote/{id}', [PostController::class, 'vote'])->name('vote');
-Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
+// Route::get('Parrainage3', [PostController::class, 'Parrainage3'])->name('Parrainage3');
 Route::get('dash_electeur', [PostController::class, 'dash_electeur'])->name('dash_electeur');
 
 
@@ -88,7 +88,10 @@ Route::post('/verifcode', [CandidatController::class, 'verifcode'])->name('verif
 Route::post('/traitement_login_candidat', [CandidatController::class, 'traitement_login_candidat'])->name('traitement_login_candidat');
 
 // Parrainage
-Route::post('/parrainer', [ParrainageController::class, 'store'])->name('parrainer');
+// Route::post('/parrainer', [ParrainageController::class, 'store'])->name('parrainer');
+Route::post('verification_parrain', [CandidatController::class, 'verification_parrain'])->name('verification_parrain');
+
+Route::get('Parrainage2', [CandidatController::class, 'Parrainage2'])->name('Parrainage2');
 
 Route::post('/parrainage3', [CandidatController::class, 'parrainage3']);
 Route::post('/confirmer-vote', [CandidatController::class, 'confirmerVote']);

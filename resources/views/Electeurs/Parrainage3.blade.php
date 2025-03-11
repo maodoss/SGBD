@@ -225,16 +225,17 @@ body {
     <main class="main-container">
         <div class="step-container">
             <h2 class="step-title">Validation du parrainage</h2>
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-            @if (session('error'))
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{session('status')}} 
+         </div>
+         @endif
+         @if (session('error'))
             <div class="alert alert-danger">
+           {{-- {{ $errors->first('error') }} --}}
                 {{ session('error') }}
             </div>
-            @endif
+         @endif
             <div class="alert alert-info">
                 Un code de validation à 5 chiffres a été envoyé à votre adresse email.
             </div>

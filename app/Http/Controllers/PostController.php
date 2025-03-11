@@ -41,34 +41,34 @@ class PostController extends Controller
         return view('Electeurs/Parrainage');
     }
 
-    public function verification_parrain(Request $request)
-    {
-        // dd();
-        $request->validate([
-            'num_electeur' => 'required',
-            'num_cni' => 'required',
+    // public function verification_parrain(Request $request)
+    // {
+    //     // dd();
+    //     $request->validate([
+    //         'num_electeur' => 'required',
+    //         'num_cni' => 'required',
 
-        ]);
+    //     ]);
 
-        $num_electeur = $request->num_electeur;
-        $num_cni = $request->num_cni;
+    //     $num_electeur = $request->num_electeur;
+    //     $num_cni = $request->num_cni;
 
-        $electeur = electeurs::where('num_electeur', $num_electeur)->first();
-        if (!$electeur) {
-            // return ("Erreur le numero ne correspond pas ");
-            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
-        }
-        if ($electeur->aUnCompte === 0) {
-            return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
-        }
-        // dd($electeur, $num_cni, $num_electeur);
-        if ($electeur->cin === $num_cni) {
-            return (view('Electeurs/Parrainage2', compact('electeur')));
-        } else {
-            // return ("erreur");
-            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
-        }
-    }
+    //     $electeur = electeurs::where('num_electeur', $num_electeur)->first();
+    //     if (!$electeur) {
+    //         // return ("Erreur le numero ne correspond pas ");
+    //         return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+    //     }
+    //     if ($electeur->aUnCompte === 0) {
+    //         return redirect()->back()->with('error', "Vous devez dabord creer un compte  ");
+    //     }
+    //     // dd($electeur, $num_cni, $num_electeur);
+    //     if ($electeur->cin === $num_cni) {
+    //         return (view('Electeurs/Parrainage2', compact('electeur')));
+    //     } else {
+    //         // return ("erreur");
+    //         return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+    //     }
+    // }
 
 
 
@@ -112,10 +112,10 @@ class PostController extends Controller
         return redirect()->back()->with('status', 'Votre vote a ete enregistré ');
     }
 
-    public function Parrainage2()
-    {
-        return view('Electeurs/Parrainage2');
-    }
+    // public function Parrainage2()
+    // {
+    //     return view('Electeurs/Parrainage2');
+    // }
     public function Parrainage3()
     {
         return view('Electeurs/Parrainage3');
