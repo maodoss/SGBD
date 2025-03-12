@@ -1,0 +1,1 @@
+<a href="{{ route('candidat.logout') }}" class="btn btn-danger">Déconnexion</a> 

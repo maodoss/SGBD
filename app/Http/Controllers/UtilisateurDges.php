@@ -14,9 +14,15 @@ use App\Models\candidats;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use PhpParser\Node\Stmt\Foreach_;
+use Illuminate\Support\Facades\Session;
 
 class UtilisateurDges extends Controller
 {
+    public function __construct()
+    {
+        // Applique le middleware à toutes les méthodes sauf login et traitement_login
+        $this->middleware('dge')->except(['AdminLogin', 'traitement_login']);
+    }
 
     public function dashdge()
     {
@@ -27,28 +33,31 @@ class UtilisateurDges extends Controller
         return view('UtilisateurDge/AdminLogin');
     }
 
-    public function traitement_login()
+    public function traitement_login(Request $request)
     {
-        validator(request()->all(), [
-            'email' => ['required'],
-            'password' => ['required']
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        ])->validate();
-        $user = utilisateur_dges::where('email', request('email'))->first();
+        $utilisateur = UtilisateurDge::where('email', $request->email)
+            ->where('password', $request->password)
+            ->first();
 
-        if ($user && $user->password === request('password')) {
-            // Authentifier manuellement l'utilisateur
-            auth()->login($user);
-
-            return view('UtilisateurDge/dashdge');
-        } else {
-            return redirect()->route('AdminLogin')->with('error', 'Erreur sur le login ou mot de passe');
+        if ($utilisateur) {
+            Session::put('utilisateur_dge_id', $utilisateur->id);
+            return redirect()->route('dashdge');
         }
-        // if (auth()->attempt(request()->only(['email', 'password']))) {
-        //     return ("Connexion reussie");
-        // } else {
-        //     return ("Connexion non reussie");
-        // }
+
+        return redirect()->route('AdminLogin')
+            ->with('error', 'Email ou mot de passe incorrect.');
+    }
+
+    public function logout()
+    {
+        Session::forget('utilisateur_dge_id');
+        return redirect()->route('AdminLogin')
+            ->with('success', 'Vous avez été déconnecté avec succès.');
     }
 
     //traitement upload 
@@ -248,7 +257,7 @@ class UtilisateurDges extends Controller
         if (!$candidats) {
             return ("Il y'a pas encore de candidats "); //a gerer apres
         }
-        return view('Liste_candidat', compact('candidats'));
+        return view('UtilisateurDge.Liste_candidat', compact('candidats'));
     }
 
     public function details_candidat()

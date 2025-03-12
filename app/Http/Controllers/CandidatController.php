@@ -319,8 +319,7 @@ class CandidatController extends Controller
             'password' => 'required',
         ]);
 
-
-        $candidat = \App\Models\candidats::where('email', $request->email)
+        $candidat = candidats::where('email', $request->email)
             ->where('code_auth', $request->password)
             ->first();
 
@@ -341,5 +340,11 @@ class CandidatController extends Controller
     public function affiche_periode()
     {
         return (view('affiche_periode'));
+    }
+
+    public function logout()
+    {
+        Session::forget('candidat_id');
+        return redirect()->route('login')->with('success', 'Vous avez été déconnecté avec succès.');
     }
 }
