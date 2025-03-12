@@ -212,6 +212,15 @@
             margin-top: 20px;
             font-size: 14px;
         }
+        
+        /* Assurez-vous que les étapes sont bien alignées horizontalement */
+        .progress-bar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -258,7 +267,7 @@
             <p class="message">Un code d'authentification a été envoyé sur votre téléphone et email.</p>
             <div class="button-group">
                 <button type="button" class="previous" onclick="window.location.href='/Inscription2'">Précédent</button>
-                <input type="submit" value="Finaliser l'incription">
+                <input type="submit" value="Finaliser l'inscription" class="next">
                 {{-- <button type="submit" class="next">Finaliser l'inscription</button> --}}
             </div>
         </form>
