@@ -142,17 +142,17 @@ class PostController extends Controller
     }
     public function periode_parrainage()
     {
-        return view('UtilisateurDge/periode_parrainage');
+        return view('UtilisateurDges/periode_parrainage');
     }
 
 
 
     public function Liste_candidat()
     {
-        return view('Liste_candidat');
+        return view('UtilisateurDges/Liste_candidat');
     }
     public function details_candidat()
     {
-        return view('UtilisateurDge/details_candidat');
+        return view('UtilisateurDges/details_candidat');
     }
 }

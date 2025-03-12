@@ -26,11 +26,11 @@ class UtilisateurDges extends Controller
 
     public function dashdge()
     {
-        return view('UtilisateurDge/Dashdge');
+        return view('UtilisateurDges/Dashdge');
     }
     public function AdminLogin()
     {
-        return view('UtilisateurDge/AdminLogin');
+        return view('UtilisateurDges/AdminLogin');
     }
 
     public function traitement_login(Request $request)
@@ -40,7 +40,7 @@ class UtilisateurDges extends Controller
             'password' => 'required',
         ]);
 
-        $utilisateur = UtilisateurDge::where('email', $request->email)
+        $utilisateur = utilisateur_dges::where('email', $request->email)
             ->where('password', $request->password)
             ->first();
 
@@ -63,7 +63,7 @@ class UtilisateurDges extends Controller
     //traitement upload 
     public function Upload()
     {
-        return view('UtilisateurDge/Upload');
+        return view('UtilisateurDges/Upload');
     } //renvoie le formulaire 
     public function traitement_upload(Request $request)
     {
@@ -153,7 +153,7 @@ class UtilisateurDges extends Controller
 
     public function Verif_electeur()
     {
-        return view('UtilisateurDge/Verif_electeur');
+        return view('UtilisateurDges/Verif_electeur');
     }
 
 
@@ -174,10 +174,10 @@ class UtilisateurDges extends Controller
         }
         // return $candidat->nom;
         if (!$candidat) {
-            return view('UtilisateurDge/Verif_electeur');
+            return view('UtilisateurDges/Verif_electeur');
             # code...
         }
-        return view('UtilisateurDge/saisie_candidat', compact('candidat'));
+        return view('UtilisateurDges/saisie_candidat', compact('candidat'));
     }
 
     public function traitement_saisie_candidat(Request $request)
@@ -248,7 +248,7 @@ class UtilisateurDges extends Controller
         ];
         Mail::to($email)->send(new TestMail($details));
 
-        return view('UtilisateurDge/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
+        return view('UtilisateurDges/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
     }
 
     public function Liste_candidat()
@@ -257,12 +257,12 @@ class UtilisateurDges extends Controller
         if (!$candidats) {
             return ("Il y'a pas encore de candidats "); //a gerer apres
         }
-        return view('UtilisateurDge.Liste_candidat', compact('candidats'));
+        return view('UtilisateurDges.Liste_candidat', compact('candidats'));
     }
 
     public function details_candidat()
     {
-        return view('UtilisateurDge/details_candidat');
+        return view('UtilisateurDges/details_candidat');
     }
     // Génération du nouveau code
     public function regenerateCode($id)

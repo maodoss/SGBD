@@ -24,9 +24,12 @@ Route::get('/login', [PostController::class, 'login'])->name('login');
 Route::get('/inscription', [PostController::class, 'inscription'])->name('inscription');
 Route::get('/Inscription2', [PostController::class, 'Inscription2'])->name('Inscription2');
 Route::get('/Inscription3', [PostController::class, 'Inscription3'])->name('Inscription3');
+
+// Route protégée pour le tableau de bord candidat
 Route::get('/dash_candidat', [PostController::class, 'dash_candidat'])
     ->name('dash_candidat')
     ->middleware('candidat');
+
 Route::get('/periode_parrainage', [PostController::class, 'periode_parrainage'])->name('periode_parrainage');
 Route::get('/affiche_periode', [PeriodeParrainageController::class, 'affiche_periode'])->name('affiche_periode');
 
