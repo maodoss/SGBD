@@ -517,29 +517,6 @@
         </div>
     </section>
 
-    <!-- <section id="howItWorks" class="services">
-    <div class="container">
-        <h3>Comment ça marche?</h3>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-user-check"></i>
-                <h4>Vérification d'identité</h4>
-                <p>Authentifiez-vous avec votre numéro d'électeur et votre carte d'identité nationale pour garantir la sécurité du processus</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-envelope"></i>
-                <h4>Confirmation par email</h4>
-                <p>Recevez un code de validation unique par email pour sécuriser votre parrainage</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-check-circle"></i>
-                <h4>Choix du candidat</h4>
-                <p>Sélectionnez le candidat que vous souhaitez parrainer et confirmez votre choix</p>
-            </div>
-        </div>
-    </div>
-</section> -->
-
     <section id="service" class="services">
         <div class="container">
             <h3>Services disponibles</h3>
