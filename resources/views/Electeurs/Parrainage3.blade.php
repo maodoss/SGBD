@@ -212,7 +212,7 @@ body {
 <body>
     <header class="header">
         <div class="header-content">
-            <a href="/dash_electeur" class="logo-section">
+            <a href="/" class="logo-section">
                 <img src="image/presi.jpg" alt="Logo République du Sénégal" width="50" height="50" />
                 <div class="logo-text">
                     <h1>République du Sénégal</h1>
