@@ -125,10 +125,14 @@ class CandidatController extends Controller
 
         $electeur_id = Session::get('id');
         $electeur = electeurs::find($electeur_id);
-        $electeurmm = electeurs::where('telephone', $request->phone);
+        $electeurmm = electeurs::where('telephone', $request->phone)->first();
+        $electeurmm2 = electeurs::where('email', $request->email)->first();
+        if ($electeurmm || $electeurmm2) {
+            return redirect()->route('Inscription2')->with('error', "Cette numéro ou email existe déjà");
+        }
 
         if (!$electeur) {
-            return redirect()->back()->with('error', "Vous n'êtes pas connecté");
+            return redirect()->route('Inscription2')->with('error', "L'utilisateur n'existe pas");
         }
 
 
