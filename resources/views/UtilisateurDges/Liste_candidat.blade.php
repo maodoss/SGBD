@@ -184,7 +184,7 @@
         </a>
         <nav class="nav-links">
           <a href="/dashdge">Dashboard</a>
-          <a href="/Verif_electeur">Ajouter candidat</a>
+          <a href="/Verif_electeur">Ajouter Candidat</a>
           <a href="/AdminLogin" class="logout-btn">Se déconnecter</a>
         </nav>
       </div>
@@ -197,7 +197,6 @@
     <table>
       <thead>
         <tr>
-          <th>Position</th>
           <th>Numéro Électeur</th>
           <th>Nom</th>
           <th>Prénom</th>
@@ -209,9 +208,8 @@
         </tr>
       </thead>
       <tbody id="candidatsBody">
-      @foreach($candidats as $index => $candidat)
+      @foreach($candidats as $candidat)
                     <tr>
-                        <td>{{ $index + 1 }}</td>
                         <td>{{ $candidat->electeur->num_electeur }}</td>
                         <td>{{ $candidat->electeur->nom}}</td>
                         <td>{{ $candidat->electeur->prenom }}</td>

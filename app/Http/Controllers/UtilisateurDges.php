@@ -206,17 +206,17 @@ class UtilisateurDges extends Controller
         $num_electeur = $request->num_electeur;
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
         if (!$electeur) {
-            return redirect()->route('Verif_electeur')->with('status', 'Erreur le numero n\'est pas dans la base de donnee ');
+            return redirect()->route('Verif_electeur')->with('status', 'Erreur le numéro n\'est pas dans la base de donnee ');
 
             // return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
         }
         $candidatsverif1 = candidats::where('email', $email)->first();
         if ($candidatsverif1) {
-            return redirect()->route('Verif_electeur')->with('error', "Erreur l'adresse mail est deja utilise  ");
+            return redirect()->route('Verif_electeur')->with('error', "Erreur l'adresse mail est déjà utilisé  ");
         }
         $candidatsverif2 = candidats::where('telephone', $telephone)->first();
         if ($candidatsverif2) {
-            return redirect()->route('Verif_electeur')->with('error', "Erreur le numero de telephone est deja utilise  ");
+            return redirect()->route('Verif_electeur')->with('error', "Erreur le numéro de téléphone est déjà utilisé  ");
         }
         $cin = $electeur->cin;
         $electeur_id = $electeur->id;
@@ -242,26 +242,18 @@ class UtilisateurDges extends Controller
 
 
         $details = [
-            'name' => 'Direction Generale Des Elections',
-            'subject' => 'Création de votre compte candidat',
-            'message' => "Cher(e) candidat(e),
-
-Nous vous informons que votre compte candidat a été créé avec succès sur la plateforme de la Direction Générale des Elections.
-
-Pour accéder à votre espace candidat, veuillez utiliser le code d'authentification suivant :
-
-" . $code_auth . "
-
-La Direction Générale des Elections",
+            'name' => 'Direction Des Elections ',
+            'subject' => 'Envoi information de connexion sur votre compte candidat',
+            'message' => 'Votre mot de passe est ' . $code_auth  . ' . Bonne chance',
         ];
         Mail::to($email)->send(new TestMail($details));
 
-        return view('UtilisateurDges/Verif_electeur')->with('status', "Le candidat a ete enregistrer ");
+        return view('UtilisateurDges/Verif_electeur')->with('status', "Le candidat a été enregistré ");
     }
 
     public function Liste_candidat()
     {
-        $candidats = candidats::orderBy('nbr_vote', 'desc')->get();
+        $candidats = candidats::all();
         if (!$candidats) {
             return ("Il y'a pas encore de candidats "); //a gerer apres
         }
@@ -286,15 +278,9 @@ La Direction Générale des Elections",
 
 
         Mail::to($candidat->email)->send(new TestMail([
-            'name' => 'Direction Generale Des Elections',
+            'name' => 'Direction Des Elections',
             'subject' => 'Nouveau code d\'authentification',
-            'message' => 'Cher(e) candidat(e),
-
-Nous vous informons qu\'un nouveau code d\'authentification a été généré pour votre compte.
-
-Votre nouveau code d\'authentification est : ' . $new_code . '
-
-La Direction Des Elections'
+            'message' => 'Votre nouveau code est : ' . $new_code
         ]));
 
         return redirect()->back()->with('status', 'Nouveau code envoyé avec succès !');
