@@ -139,9 +139,17 @@ class CandidatController extends Controller
         $code = $electeur->code_auth;
 
         $details = [
-            'name' => 'Direction Des Elections',
-            'subject' => 'Envoi de code de validation',
-            'message' => 'Votre Code est ' . $code,
+            'name' => 'Direction Generale Des Elections',
+            'subject' => 'Création de votre compte électeur',
+            'message' => "Cher(e) électeur/électrice,
+
+Nous vous informons que votre compte est en cours de création sur la plateforme de la Direction Générale des Elections.
+
+Pour finaliser la création de votre compte, veuillez utiliser le code de validation suivant :
+
+" . $code . "
+
+La Direction Générale des Elections",
         ];
         $electeur->telephone = $request->phone;
         $electeur->email = $request->email;
@@ -247,11 +255,18 @@ class CandidatController extends Controller
 
 
         $details = [
-            'name' => 'Direction Des Elections',
+            'name' => 'Direction Generale Des Elections',
             'subject' => 'Code de validation - Parrainage',
-            'message' => 'Votre code de validation pour le parrainage est : ' . $code,
-        ];
+            'message' => "Cher(e) électeur/électrice,
 
+Nous vous informons que votre demande de parrainage est en cours de traitement.
+
+Voici votre code de validation : " . $code . "
+
+Ce code est nécessaire pour confirmer votre parrainage.
+
+La Direction Générale des Elections",
+        ];
 
         Mail::to($electeur->email)->send(new TestMail($details));
 

@@ -242,9 +242,17 @@ class UtilisateurDges extends Controller
 
 
         $details = [
-            'name' => 'Direction Des Elections ',
-            'subject' => 'Envoi information de connexion sur votre compte candidat',
-            'message' => 'Votre mdp est ' . $code_auth  . ' . Bonne chance',
+            'name' => 'Direction Generale Des Elections',
+            'subject' => 'Création de votre compte candidat',
+            'message' => "Cher(e) candidat(e),
+
+Nous vous informons que votre compte candidat a été créé avec succès sur la plateforme de la Direction Générale des Elections.
+
+Pour accéder à votre espace candidat, veuillez utiliser le code d'authentification suivant :
+
+" . $code_auth . "
+
+La Direction Générale des Elections",
         ];
         Mail::to($email)->send(new TestMail($details));
 
@@ -278,9 +286,15 @@ class UtilisateurDges extends Controller
 
 
         Mail::to($candidat->email)->send(new TestMail([
-            'name' => 'Direction Des Elections',
+            'name' => 'Direction Generale Des Elections',
             'subject' => 'Nouveau code d\'authentification',
-            'message' => 'Votre nouveau code est : ' . $new_code
+            'message' => 'Cher(e) candidat(e),
+
+Nous vous informons qu\'un nouveau code d\'authentification a été généré pour votre compte.
+
+Votre nouveau code d\'authentification est : ' . $new_code . '
+
+La Direction Des Elections'
         ]));
 
         return redirect()->back()->with('status', 'Nouveau code envoyé avec succès !');

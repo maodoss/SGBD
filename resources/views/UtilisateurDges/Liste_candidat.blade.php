@@ -184,7 +184,7 @@
         </a>
         <nav class="nav-links">
           <a href="/dashdge">Dashboard</a>
-          <a href="/Verif_electeur">Ajouter electeur</a>
+          <a href="/Verif_electeur">Ajouter candidat</a>
           <a href="/AdminLogin" class="logout-btn">Se déconnecter</a>
         </nav>
       </div>

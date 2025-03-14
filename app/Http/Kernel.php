@@ -63,11 +63,11 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'candidat' => \App\Http\Middleware\CandidatMiddleware::class,
+        'dge' => \App\Http\Middleware\DgeMiddleware::class,
     ];
 
     protected $routeMiddleware = [
         // ... autres middlewares ...
-        'candidat' => \App\Http\Middleware\CandidatMiddleware::class,
-        'dge' => \App\Http\Middleware\DgeMiddleware::class,
     ];
 }
