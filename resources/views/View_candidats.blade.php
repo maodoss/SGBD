@@ -147,7 +147,7 @@
           <p><strong>Parti:</strong> {{ $candidat->nom_parti }}</p>
           <p><small>{{ $candidat->couleur_parti }}</small></p>
           <p><strong>Slogan:</strong> {{ $candidat->slogan }}</p>
-          <p><strong>Infos:</strong>{{ $candidat->urlInfos }}</p>
+          <p><strong>Infos:</strong> {{ $candidat->urlInfos }}</p>
         </div>
       </div>
       @endforeach

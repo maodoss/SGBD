@@ -130,6 +130,32 @@
     .btn-detail:hover {
       background: #337ab7;
     }
+
+    .badge {
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: normal;
+        font-size: 14px;
+        display: inline-block;
+        min-width: 40px;
+        text-align: center;
+        background-color: #f0f0f0; /* Fond gris clair */
+        color: #333; /* Texte gris foncé */
+        border: 1px solid #ddd; /* Bordure légère */
+    }
+
+    .bg-success {
+        background-color: #038d1a;
+        color: white;
+    }
+
+    /* Ajuster l'espacement des colonnes */
+    th, td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ccc;
+        vertical-align: middle; /* Pour aligner verticalement le contenu */
+    }
   </style>
 </head>
 <body>
@@ -171,24 +197,30 @@
     <table>
       <thead>
         <tr>
+          <th>Position</th>
           <th>Numéro Électeur</th>
           <th>Nom</th>
           <th>Prénom</th>
           <th>E-mail</th>
           <th>Telephone</th>
           <th>Nom parti</th>
+          <th>Nombre de parrainages</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody id="candidatsBody">
-      @foreach($candidats as $candidat)
+      @foreach($candidats as $index => $candidat)
                     <tr>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ $candidat->electeur->num_electeur }}</td>
                         <td>{{ $candidat->electeur->nom}}</td>
                         <td>{{ $candidat->electeur->prenom }}</td>
                         <td>{{ $candidat->email }}</td>
                         <td>{{ $candidat->telephone }}</td>
                         <td>{{ $candidat->nom_parti }}</td>
+                        <td>
+                            <span class="badge">{{ $candidat->nbr_vote }}</span>
+                        </td>
                         <td><form action="{{ route('candidats.regenerate', $candidat->id) }}" method="POST">
                              @csrf
                             <button type="submit" class="btn-detail">Générer nouveau code</button></form>
