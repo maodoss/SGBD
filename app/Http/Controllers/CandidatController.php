@@ -128,7 +128,7 @@ class CandidatController extends Controller
         $electeurmm = electeurs::where('telephone', $request->phone)->first();
         $electeurmm2 = electeurs::where('email', $request->email)->first();
         if ($electeurmm || $electeurmm2) {
-            return redirect()->route('Inscription2')->with('error', "Cette numéro ou email existe déjà");
+            return redirect()->route('Inscription2')->with('error', "Le numéro ou email saisi existe déjà");
         }
 
         if (!$electeur) {
@@ -196,24 +196,25 @@ class CandidatController extends Controller
         $num_cni = $request->num_cni;
 
         $electeur = electeurs::where('num_electeur', $num_electeur)->first();
-        $request->session()->put('id', $electeur->id);
 
         if (!$electeur) {
             // return ("Erreur le numero ne correspond pas ");
-            return redirect()->back()->with('error', "Erreur le numero ne correspond pas ");
+            return redirect()->back()->with('error', "Le numero ne correspond pas ");
         }
         if ($electeur->aUnCompte === 0) {
             return redirect()->back()->with('error', "Vous devez d'abord créer un compte  ");
         }
         if ($electeur->aVote === 1) {
-            return redirect()->back()->with('error', "Vous avez déjà parrainé  ");
+            return redirect()->back()->with('error', "Vous avez déjà parrainé un candidat  ");
         }
         // dd($electeur, $num_cni, $num_electeur);
         if ($electeur->cin === $num_cni) {
             return (view('Electeurs/Parrainage2', compact('electeur')));
         } else {
             // return ("erreur");
-            return redirect()->back()->with('error', "Erreur le numéro ne correspond pas ");
+            $request->session()->put('id', $electeur->id);
+
+            return redirect()->back()->with('error', "Le numéro que vous que vous avez fourni n'existe pas ");
         }
     }
 
