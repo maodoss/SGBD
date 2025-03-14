@@ -253,7 +253,7 @@ class UtilisateurDges extends Controller
 
     public function Liste_candidat()
     {
-        $candidats = candidats::all();
+        $candidats = candidats::orderBy('nbr_vote', 'desc')->get();
         if (!$candidats) {
             return ("Il y'a pas encore de candidats "); //a gerer apres
         }

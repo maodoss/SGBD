@@ -133,12 +133,15 @@
 
     .badge {
         padding: 6px 12px;
-        border-radius: 20px;
-        font-weight: bold;
+        border-radius: 4px;
+        font-weight: normal;
         font-size: 14px;
         display: inline-block;
         min-width: 40px;
         text-align: center;
+        background-color: #f0f0f0; /* Fond gris clair */
+        color: #333; /* Texte gris foncé */
+        border: 1px solid #ddd; /* Bordure légère */
     }
 
     .bg-success {
@@ -194,6 +197,7 @@
     <table>
       <thead>
         <tr>
+          <th>Position</th>
           <th>Numéro Électeur</th>
           <th>Nom</th>
           <th>Prénom</th>
@@ -205,8 +209,9 @@
         </tr>
       </thead>
       <tbody id="candidatsBody">
-      @foreach($candidats as $candidat)
+      @foreach($candidats as $index => $candidat)
                     <tr>
+                        <td>{{ $index + 1 }}</td>
                         <td>{{ $candidat->electeur->num_electeur }}</td>
                         <td>{{ $candidat->electeur->nom}}</td>
                         <td>{{ $candidat->electeur->prenom }}</td>
@@ -214,7 +219,7 @@
                         <td>{{ $candidat->telephone }}</td>
                         <td>{{ $candidat->nom_parti }}</td>
                         <td>
-                            <span class="badge bg-success">{{ $candidat->nbr_vote }}</span>
+                            <span class="badge">{{ $candidat->nbr_vote }}</span>
                         </td>
                         <td><form action="{{ route('candidats.regenerate', $candidat->id) }}" method="POST">
                              @csrf
